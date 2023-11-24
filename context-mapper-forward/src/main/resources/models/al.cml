@@ -38,46 +38,27 @@ ContextMap AlNewbankMap {
         implementationTechnology = "REST"
     }
 
-    UserServiceContext -> AccountServiceContext {
+    TransactionServiceContext [C] <- [S] NFCTransactionServiceContext{
         implementationTechnology = "REST"
     }
 
-    CardServiceContext -> AccountServiceContext {
+    TransactionServiceContext [C] <- [S] FriendTransactionServiceContext{
         implementationTechnology = "REST"
     }
 
-    FriendshipServiceContext -> AccountServiceContext {
+    TransactionServiceContext [C] <- [S] ExternalTransactionServiceContext{
         implementationTechnology = "REST"
     }
 
-    FriendshipServiceContext -> UserServiceContext {
+    TransactionServiceContext [D] <- [U] AccountServiceContext{
         implementationTechnology = "REST"
     }
 
-    TransactionServiceContext -> AccountServiceContext {
+    AccountServiceContext [D] <- [U] TransactionServiceContext{
         implementationTechnology = "REST"
     }
 
-    AccountServiceContext -> TransactionServiceContext {
-        implementationTechnology = "REST"
-    }
-
-    FriendTransactionServiceContext -> TransactionServiceContext {
-        implementationTechnology = "REST"
-    }
-
-    NFCTransactionServiceContext -> TransactionServiceContext {
-        implementationTechnology = "REST"
-    }
-
-    NFCTransactionServiceContext -> ExternalTransactionServiceContext {
-        implementationTechnology = "REST"
-    }
-
-    ExternalTransactionServiceContext -> TransactionServiceContext {
-        implementationTechnology = "REST"
-    }
-
+    
 }
 
 BoundedContext UserServiceContext implements UserManagementDomain {
@@ -136,7 +117,6 @@ BoundedContext AccountServiceContext implements UserManagementDomain {
             String rib
             String iban
             Double interestRate
-            - User user
         }
 
         ValueObject SavingAccountId{
@@ -210,16 +190,12 @@ BoundedContext TransactionServiceContext implements TransactionManagementDomain 
         Entity Transaction{
             aggregateRoot
 
-            -TransactionId id
-            -Account accountSender
-            -Account accountReceiver
-            Double amount
-            Date createdAt
-            -Type types
-        }
-
-        ValueObject TransactionId{
-            String transactionId key
+            - FriendTransaction friendTransaction
+            - NFCTransaction nfcTransaction
+            - ExternalTransaction externalTransaction
+            - Type types
+            - Account accountSender
+            - Account accountReceiver
         }
 
         ValueObject Type{
