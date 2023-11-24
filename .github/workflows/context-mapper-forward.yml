@@ -1,10 +1,14 @@
-name: ExecMain
+name: ContextMapperForward
 
 on:
   push:
     branches:
       - milestone1
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - milestone1
+      - main
+  workflow_dispatch: # utile pour lancer le workflow manuellement
 
 jobs:
   build:
