@@ -28,21 +28,8 @@ jobs:
       - name: Run with Maven
         run: mvn -B exec:java --file ./context-mapper-forward/pom.xml
 
-<<<<<<< e23a81ba5a1f00442d51ca422196293f826262bc
-=======
-<<<<<<< ff62dcdd7ef6ab3f5dcbb4d44d72410b2a3cc995
-      - name: Oui
-        run: ls -lair
-
-=======
->>>>>>> Emplacement des images trouvé
->>>>>>> Emplacement des images trouvé
       - name: Upload PNG files as Artifact
         uses: actions/upload-artifact@v2
         with:
           name: generated-png-files
-<<<<<<< ff62dcdd7ef6ab3f5dcbb4d44d72410b2a3cc995
-          path: /src-gen/*_ContextMap.png
-=======
           path: ./src-gen/*.png
->>>>>>> Emplacement des images trouvé
