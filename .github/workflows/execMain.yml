@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: generated-png-files
-          path: context-mapper-forward/src-gen/**/*.png
+          path: context-mapper-forward/src-gen/*_ContextMap.png
