@@ -13,6 +13,31 @@ ContextMap AlNewbankMap {
 
     contains ExternalTransactionServiceContext
 
+
+    UserServiceContext [C] <- [S] AccountServiceContext{
+        implementationTechnology = "REST"
+    }
+
+    CardServiceContext [C] <- [S] AccountServiceContext{
+        implementationTechnology = "REST"
+    }
+
+    FriendshipServiceContext [C] <- [S] UserServiceContext{
+        implementationTechnology = "REST"
+    }
+
+    FriendTransactionServiceContext [C] <- [S] FriendshipServiceContext{
+        implementationTechnology = "REST"
+    }
+
+    NFCTransactionServiceContext [C] <- [S] CardServiceContext{
+        implementationTechnology = "REST"
+    }
+
+    ExternalTransactionServiceContext [C] <- [S] NFCTransactionServiceContext{
+        implementationTechnology = "REST"
+    }
+
     UserServiceContext -> AccountServiceContext {
         implementationTechnology = "REST"
     }
@@ -58,46 +83,197 @@ ContextMap AlNewbankMap {
 BoundedContext UserServiceContext implements UserManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "User Management"
+
+    Aggregate User {
+        Entity User{
+            aggregateRoot
+
+            - UserId id
+            String firstName
+            String lastName
+            String password
+            String phoneNumber
+            Date birthDate
+            - Account account
+            - List<SavingAccount> savingAccounts
+        }
+
+        ValueObject UserId{
+            String userId key
+        }
+    }
 }
 
 BoundedContext AccountServiceContext implements UserManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "Account Management"
+
+    Aggregate Account{
+        Entity Account{
+            aggregateRoot
+
+            -AccountId id
+            Double balance
+            String accountId
+            String rib
+            String iban
+        }
+
+        ValueObject AccountId{
+            String accountId key
+        }
+    }
+
+    Aggregate SavingAccount{
+        Entity SavingAccount{
+            aggregateRoot
+
+            -SavingAccountId id
+            Double balance
+            String accountId
+            String rib
+            String iban
+            Double interestRate
+            - User user
+        }
+
+        ValueObject SavingAccountId{
+            String savingAccountId key
+        }
+    }
 
 }
 
 BoundedContext CardServiceContext implements UserManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "Card Management"
+
+    Aggregate Card{
+        Entity Card{
+            aggregateRoot
+
+            -CardId id
+            String cardNumber
+            String privateCryptogram
+            Date expirationDate
+            -Account account
+            Double spendingLimit
+        }
+
+        ValueObject CardId{
+            String cardId key
+        }
+    }
 
 }
 
 BoundedContext FriendshipServiceContext implements UserManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "Friendship Management"
+
+    Aggregate Friendship{
+        Entity Friendship{
+            aggregateRoot
+
+            -FriendshipId id
+            -User user1
+            -User user2
+        }
+
+        ValueObject FriendshipId{
+            String friendshipId key
+        }
+
+        Entity Request{
+            -RequestId id
+            -User user1
+            -User user2
+        }
+
+        ValueObject RequestId{
+            String requestId key
+        }
+    }
 
 }
 
 BoundedContext TransactionServiceContext implements TransactionManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "Transaction Management"
+
+    Aggregate Transaction{
+        Entity Transaction{
+            aggregateRoot
+
+            -TransactionId id
+            -Account accountSender
+            -Account accountReceiver
+            Double amount
+            Date createdAt
+            -Type types
+        }
+
+        ValueObject TransactionId{
+            String transactionId key
+        }
+
+        ValueObject Type{
+            String types key
+        }
+    }
 
 }
 
 BoundedContext FriendTransactionServiceContext implements TransactionManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "Friend Transaction Management"
 
+    Aggregate FriendTransaction{
+        Entity FriendTransaction{
+            aggregateRoot
+            -Friendship friendship
+            Double amount
+        }
+    }
 }
 
 BoundedContext NFCTransactionServiceContext implements TransactionManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "NFC Transaction Management"
+
+    Aggregate NFCTransaction{
+        Entity NFCTransaction{
+            aggregateRoot
+            -Card cardSender
+            -Card cardReceiver
+            Double amount
+        }
+    }
 
 }
 
 BoundedContext ExternalTransactionServiceContext implements TransactionManagementDomain {
     type = FEATURE
     implementationTechnology = "Java, Spring App"
+    responsibilities = "External Transaction Management"
 
+    Aggregate ExternalTransaction{
+        Entity ExternalTransaction{
+            aggregateRoot
+
+            -NFCTransaction nfcTransaction
+            Date createdAt
+        }
+
+        ValueObject ExternalTransactionId{
+            String externalTransactionId key
+        }
+    }
 }
