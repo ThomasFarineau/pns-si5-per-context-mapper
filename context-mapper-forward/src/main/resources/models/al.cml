@@ -1,0 +1,103 @@
+ContextMap AlNewbankMap {
+	type = SYSTEM_LANDSCAPE
+	state = TO_BE
+
+    contains UserServiceContext
+    contains AccountServiceContext
+    contains CardServiceContext
+    contains FriendshipServiceContext
+
+    contains TransactionServiceContext
+    contains FriendTransactionServiceContext
+    contains NFCTransactionServiceContext
+
+    contains ExternalTransactionServiceContext
+
+    UserServiceContext -> AccountServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    CardServiceContext -> AccountServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    FriendshipServiceContext -> AccountServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    FriendshipServiceContext -> UserServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    TransactionServiceContext -> AccountServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    AccountServiceContext -> TransactionServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    FriendTransactionServiceContext -> TransactionServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    NFCTransactionServiceContext -> TransactionServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    NFCTransactionServiceContext -> ExternalTransactionServiceContext {
+        implementationTechnology = "REST"
+    }
+
+    ExternalTransactionServiceContext -> TransactionServiceContext {
+        implementationTechnology = "REST"
+    }
+
+}
+
+BoundedContext UserServiceContext implements UserManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+}
+
+BoundedContext AccountServiceContext implements UserManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext CardServiceContext implements UserManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext FriendshipServiceContext implements UserManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext TransactionServiceContext implements TransactionManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext FriendTransactionServiceContext implements TransactionManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext NFCTransactionServiceContext implements TransactionManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}
+
+BoundedContext ExternalTransactionServiceContext implements TransactionManagementDomain {
+    type = FEATURE
+    implementationTechnology = "Java, Spring App"
+
+}

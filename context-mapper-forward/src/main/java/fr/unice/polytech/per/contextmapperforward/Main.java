@@ -8,7 +8,7 @@ import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
 public class Main {
     public static void main(String[] args) {
         // get resources path
-        String cmlFilePath = getResoucesPath("models/example.cml");
+        String cmlFilePath = getResoucesPath("models/al.cml");
         System.out.println(cmlFilePath);
 
         // read the cml file and create the model
