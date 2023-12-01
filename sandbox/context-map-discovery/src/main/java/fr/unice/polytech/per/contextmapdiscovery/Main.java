@@ -1,26 +1,38 @@
 package fr.unice.polytech.per.contextmapdiscovery;
 
-import org.contextmapper.dsl.cml.CMLResource;
-import org.contextmapper.dsl.generator.ContextMapGenerator;
-import org.contextmapper.dsl.standalone.ContextMapperStandaloneSetup;
-import org.contextmapper.dsl.standalone.StandaloneContextMapperAPI;
+import org.contextmapper.discovery.ContextMapDiscoverer;
+import org.contextmapper.discovery.ContextMapSerializer;
+import org.contextmapper.discovery.model.ContextMap;
+import org.contextmapper.discovery.strategies.boundedcontexts.SpringBootBoundedContextDiscoveryStrategy;
+import org.contextmapper.discovery.strategies.names.SeparatorToCamelCaseBoundedContextNameMappingStrategy;
+import org.contextmapper.discovery.strategies.relationships.DockerComposeRelationshipDiscoveryStrategy;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        // get resources path
-        String cmlFilePath = getResoucesPath("models/al.cml");
-        System.out.println(cmlFilePath);
+    public static void main(String[] args) throws IOException {
+        // configure the discoverer
+        ContextMapDiscoverer discoverer = new ContextMapDiscoverer()
+                .usingBoundedContextDiscoveryStrategies(
+                        new SpringBootBoundedContextDiscoveryStrategy("com.lakesidemutual"))
+                .usingRelationshipDiscoveryStrategies(
+                        new DockerComposeRelationshipDiscoveryStrategy(
+                                new File(System.getProperty("user.home") + "/source/LakesideMutual/")))
+                .usingBoundedContextNameMappingStrategies(
+                        new SeparatorToCamelCaseBoundedContextNameMappingStrategy("-") {
+                            @Override
+                            public String mapBoundedContextName(String s) {
+                                // remove the "Backend" part of the Docker service names to map correctly...
+                                String name = super.mapBoundedContextName(s);
+                                return name.endsWith("Backend") ? name.substring(0, name.length() - 7) : name;
+                            }
+                        });
 
-        // read the cml file and create the model
-        StandaloneContextMapperAPI contextMapperAPI = ContextMapperStandaloneSetup.getStandaloneAPI();
-        CMLResource cmlResource = contextMapperAPI.loadCML(cmlFilePath);
+        // run the discovery process to get the Context Map
+        ContextMap contextmap = discoverer.discoverContextMap();
 
-        ContextMapGenerator contextMapGenerator = new ContextMapGenerator();
-        contextMapperAPI.callGenerator(cmlResource, contextMapGenerator);
-    }
-
-
-    private static String getResoucesPath(String fileName) {
-        return Main.class.getClassLoader().getResource(fileName).getPath();
+        // serialize the Context Map to CML
+        new ContextMapSerializer().serializeContextMap(contextmap, new File("./src-gen/lakesidemutual.cml"));
     }
 }
