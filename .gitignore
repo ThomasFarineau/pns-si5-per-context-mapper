@@ -3,6 +3,7 @@ src-gen/
 
 .idea/
 
-context-mapper-forward/target/
+sandbox/context-mapper-forward/target/
+sandbox/context-map-discovery/target/
 
 *.iml
