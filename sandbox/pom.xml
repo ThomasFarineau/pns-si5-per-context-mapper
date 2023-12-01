@@ -2,46 +2,19 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>backend</artifactId>
+    <artifactId>sandbox</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>backend</name>
-    <description>backend</description>
+    <name>sandbox</name>
+    <description>sandbox</description>
     <properties>
         <java.version>17</java.version>
     </properties>
     <modules>
         <module>
-            Proxy
+            context-map-discovery
         </module>
         <module>
-            AccountService
-        </module>
-        <module>
-            CardService
-        </module>
-        <module>
-            ExternalBank
-        </module>
-        <module>
-            ExternalTransactionService
-        </module>
-        <module>
-            FriendshipService
-        </module>
-        <module>
-            FriendTransactionService
-        </module>
-        <module>
-            NFCTransactionService
-        </module>
-        <module>
-            TransactionService
-        </module>
-        <module>
-            UserService
-        </module>
-        <module>
-            cmd
+            context-mapper-forward
         </module>
     </modules>
 </project>
