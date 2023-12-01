@@ -10,7 +10,7 @@
 - Les fonctionnalités de Context Mapper et Context Mapper Discovery : 
 L'outil Context Mapper excelle dans l'identification des bounded contexts, des Aggregates associés à ces contextes, ainsi que des relations entre ces bounded contexts, en spécifiant également le type de chaque relation et des précisions supplémentaires sur les services offerts par les Bounded Context. En revanche, l'outil Context Mapper Discovery ne parvient pas à déterminer les types de relations, bien qu'il puisse identifier les Aggregates, les bounded contexts (dans le cadre de Spring Boot), et les relations.
 
-- Les types de relations/services identifiés par Context Mapper sont les suivants :
+- Les [types](https://contextmapper.org/docs/language-reference/) de relations/services identifiés par Context Mapper sont les suivants :
 
   - Partnership : [P]
   - Shared Kernel : [SK]
