@@ -25,4 +25,4 @@ L'outil Context Mapper excelle dans l'identification des bounded contexts, des A
 
 - Cependant nous avons des problèmes lors de l'exécution de context mapper discovery avec notre projet, nous supposons que le problème du fonctionnement est dû aux versions springs différentes entre celle du context mapper discovery et celle de notre projet ( 2.6 pour le discovery et notre projet est en 3.2)
 
-- On a modifié la CI pour générer les images de tous les fichiers cml présents dans le dossier models de notre sandbox/context-mapper-forward, il faudra (lorsque l'on aura réglé le problème du discovery), rajouter une étape dans la CI qui génère ces fichiers cml à partir de discovery
+- On a modifié la CI pour générer les images de tous les fichiers cml présents dans le dossier ![models](https://github.com/DeathStar3-projects/context-mapper-per-23/tree/main/sandbox/context-mapper-forward/src/main/resources/models) de notre sandbox/context-mapper-forward, il faudra (lorsque l'on aura réglé le problème du discovery), rajouter une étape dans la CI qui génère ces fichiers cml à partir de discovery
