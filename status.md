@@ -1,3 +1,25 @@
+# Résumé milestone 3
+
+### Adaptation pour notre projet AL
+
+### Analyse du modèle produisant le CML
+L'objet regroupant les informations qui seront écrites dans le fichier CML possède deux Set d'infos :
+- Les bounded contexts composés de 
+  - Un nom
+  - Une technologie
+  - Des agrégats
+- Les relations composées de
+  - Un contexte Upstream
+  - Un contexte Downstream
+  - Un Set d'agrégats exposés
+  - Un commentaire
+
+C'est tout ce qu'on retrouvait globalement lorsqu'on regardait notre fichier CML et l'image qui en découlait, on retrouve les bounded contexts, leur nom et les relations qui les lient (avec l'étiquette Upstream/Downstream).
+En revanche ce qui attire notre attention ici c'est principalement la notion d'agrégats exposés qu'on retrouve dans le CML mais pas dans les images et qui pourrait nous aider à effectuer les mappings entre les contextes, le problème étant que la stratégie de discovery ajoute juste l'intégralité des agrégats du contexte Upstream pour le moment
+
+`The list of exposed Aggregates may contain Aggregates which are not used by the downstream (discovery strategy simply added all Aggregates).`
+
+
 # Résumé milestone 2 
 
 - Les fonctionnalités de Context Mapper et Context Mapper Discovery : 
