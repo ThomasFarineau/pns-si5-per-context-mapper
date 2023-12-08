@@ -8,3 +8,5 @@ sandbox/context-mapper-forward/target/
 *.iml
 
 /sandbox/context-map-discovery/*/target/
+
+context-mapper-discovery/target/

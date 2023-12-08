@@ -2,6 +2,12 @@
 
 ### Adaptation pour notre projet AL
 
+Mise en place du projet CMD avec Spring 3.2.0, mais plusieurs erreurs sont présentes :
+
+- Les types primitifs ne fonctionnent pas (très probablement responsables de l'erreur Google EMF).
+- Les noms des Contexts sont gérés via le nom de la classe Application (XxxxApplication), ce qui provoquait l'erreur que nous avions auparavant.
+- Les relations ne sont pas générées malgré le Docker Compose présent.
+
 ### Analyse du modèle produisant le CML
 L'objet regroupant les informations qui seront écrites dans le fichier CML possède deux Set d'infos :
 - Les bounded contexts composés de 
