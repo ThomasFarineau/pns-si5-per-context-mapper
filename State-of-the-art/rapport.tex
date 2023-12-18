@@ -1,0 +1,92 @@
+\documentclass{rapport}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{pifont} % Pour les symboles appelés par la macro \ding
+\usepackage{url} % Comme son nom l'indique, pour les url...
+\usepackage{amssymb}
+\usetikzlibrary{positioning} % Bibliothèque tikz pour positionner des nœuds relativement à d'autres
+
+\usepackage[colorlinks, citecolor=red!60!green, linkcolor=blue!60!green, urlcolor=magenta]{hyperref} % Pour que les liens soient cliquables. Les options permettent de mettre les liens en couleur.
+
+\usepackage{mathrsfs}
+\usepackage{pgfplots}
+    
+\usepackage{algorithm}
+\usepackage{algo}
+\usepackage{colorationSyntaxique}
+
+
+% Pour un rapport en français 
+\usepackage[french]{babel} % Commenter pour un rapport en anglais
+\renewcommand\bibsection{\section*{Bibliographie}} % Commenter pour un rapport en anglais
+
+% \englishTitlePage % Décommenter pour une page de titre en anglais
+
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection.\ #1}{}}
+\fancyfoot{}
+
+\fancyhead[LE]{\textsl{\leftmark}}
+\fancyhead[RE, LO]{\textbf{\thepage}}
+\fancyhead[RO]{\textsl{\rightmark}}
+
+\def\Latex{\LaTeX\xspace}
+\def\etc{\textit{etc.}\xspace}
+
+
+
+\title{Extraction automatique de ContextMaps dans des architectures micro-services}
+\author{Thomas FARINEAU, Léo KITABDJIAN, Mohamed MAHJOUB}
+\supervisor{Philippe COLLET}
+\date{Second semestre de l'année 2023-2024}
+
+ \universityname{Université Côte d'Azur} % Nom de l'université.
+ \type{PER} % Type de document
+ \formation{SI5 AL / M2} % Nom de la formation
+
+% Retrouver les autres options possibles dans le document rapport.pdf
+
+\begin{document}
+
+  \maketitle
+
+    \begin{abstract}
+        \begin{itemize}
+            \item ANALYSE DE L'EXISTANT \begin{itemize}
+                \item DDD : Domain-Driven Design \begin{itemize}
+                    \item Analyse de l'intégration de principes DDD dans Context Mapper et dans Context Mapper Discovery.
+                    \item Identification des mécanismes de modélisation DDD pris en charge.
+                    \item Évaluation de la conformité aux bonnes pratiques DDD.
+                \end{itemize}
+                \item Context Mapper ( https://contextmapper.org/docs/home/ ) \begin{itemize}
+                    \item Présentation générale de Context Mapper
+                    \item Explication des principaux concepts et fonctionnalités de Context Mapper.
+                    \item Évaluation de la documentation existante pour déterminer la clarté et l'exhaustivité des informations fournies.
+                \end{itemize}
+                \item Context Mapper Discovery ( https://contextmapper.org/docs/reverse-engineering/ ) \begin{itemize}
+                    \item Présentation de Context Mapper Discovery
+                    \item Identification des types de modèles que Context Mapper Discovery peut générer à partir de code source existant.
+                \end{itemize}
+                \item Rétro-ingénierie \begin{itemize}
+                    \item Compréhension approfondie du processus de rétro-ingénierie appliqué par Context Mapper Discovery.
+                    \item Évaluation de la précision des résultats obtenus par la rétro-ingénierie.
+                \end{itemize}
+            \end{itemize} 
+            \item BENCHMARKING
+
+            \item Révision de la littérature scientifique (mettre des sources) \begin{itemize}
+                \item https://stefan.kapferer.ch/2021/12/17/java-spektrum-article/ ( Explication du DSL + Liaison avec context mapper discovery ) Papier en Allemand
+                \item Aller voir de la lecture sur du DDD (choisir des papiers)
+                \item Aller voir de la lecture sur de la Rétro-Ingénierie 
+                \item Aller voir des papiers de recherche sur des "concurrents à context Mapper Discovery (ou d'autres alternatives) 
+            \end{itemize}
+        \end{itemize}
+    \end{abstract}
+
+  \clearpage
+  \tableofcontents
+
+  \clearpage
+
+\end{document}
