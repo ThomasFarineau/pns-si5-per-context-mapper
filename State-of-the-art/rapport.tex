@@ -77,7 +77,11 @@ Cependant, la décision entre l'enrichissement de Context Mapper Discovery et la
 Au cours de cette recherche, certaines alternatives ne répondaient pas de manière exhaustive à nos besoins spécifiques, tandis que d'autres étaient trop générales, dépassant le cadre de nos exigences. Parmi les solutions qui correspondaient précisément à notre besoin - la validation d'un fichier OpenAPI/Swagger \citet{openapi_spec} et sa transformation en un objet exploitable pour la construction de notre modèle de données - Swagger Parser s'est distingué. Son adoption étendue dans la communauté, sa disponibilité dans plusieurs langages de programmation (Node.js, Java, Python), sa documentation exhaustive et son maintien actif sur GitHub ont consolidé notre choix en tant que solution la plus appropriée pour notre contexte.
 
 Concernant la modélisation des données, la nature des fichiers OpenAPI/Swagger, qui décrivent un service individuel plutôt qu'un ensemble de services et de leurs relations, a suscité une réflexion approfondie. Pour établir les relations entre ces services, nous envisageons d'adopter la méthode de CMD en utilisant un fichier Docker Compose pour définir les communications entre les services. À l'intérieur des fichiers Swagger, les routes du service et, de manière cruciale, les schémas des données transitant sur ces routes, représentent une source d'informations précieuses. Nous projetons d'utiliser ces données pour construire la section relative aux données des contextes limités, voire des agrégats exposés d'un service à un autre, avec une précision accrue par rapport à CMD. Cette approche implique une analyse des schémas similaires entre les services qui communiquent, s'appuyant sur le fichier Docker Compose.\\\\
-METTRE SCHEMA D'ARCHI ICI\\\\
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=15cm]{img/ContextMapper.png}
+        \caption{Architecture prévue pour notre solution}
+    \end{figure}
 
 
 
