@@ -12,13 +12,15 @@ public class Main {
         // get resources path
         File folder = new File(getResourcesPath("models"));
         for (File file : folder.listFiles()) {
-            // read the cml file and create the model
-            System.out.println(file.getPath());
-            StandaloneContextMapperAPI contextMapperAPI = ContextMapperStandaloneSetup.getStandaloneAPI();
-            CMLResource cmlResource = contextMapperAPI.loadCML(getResourcesPath("models/" + file.getName()));
+            if (file.isFile() && file.getName().endsWith(".cml")) {
+                // read the cml file and create the model
+                System.out.println(file.getPath());
+                StandaloneContextMapperAPI contextMapperAPI = ContextMapperStandaloneSetup.getStandaloneAPI();
+                CMLResource cmlResource = contextMapperAPI.loadCML(getResourcesPath("models/" + file.getName()));
 
-            ContextMapGenerator contextMapGenerator = new ContextMapGenerator();
-            contextMapperAPI.callGenerator(cmlResource, contextMapGenerator);
+                ContextMapGenerator contextMapGenerator = new ContextMapGenerator();
+                contextMapperAPI.callGenerator(cmlResource, contextMapGenerator);
+            }
         }
     }
 
