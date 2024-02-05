@@ -4,9 +4,9 @@ ContextMap alnewbankContextMap {
 
 	contains NewBankAPIExternalBankServiceContext 
 
-	contains NewBankAPIAccountServiceContext 
-
 	contains NewBankAPIExternalTransactionServiceContext 
+
+	contains NewBankAPIAccountServiceContext 
 
 	contains NewBankAPIFriendshipServiceContext 
 
@@ -30,10 +30,10 @@ Domain alnewbankDomain {
 	SubDomain NewBankAPIExternalBankServiceDomain {
 	}
 
-	SubDomain NewBankAPIAccountServiceDomain {
+	SubDomain NewBankAPIExternalTransactionServiceDomain {
 	}
 
-	SubDomain NewBankAPIExternalTransactionServiceDomain {
+	SubDomain NewBankAPIAccountServiceDomain {
 	}
 
 	SubDomain NewBankAPIFriendshipServiceDomain {
@@ -62,10 +62,10 @@ BoundedContext NewBankAPICardServiceContext implements NewBankAPICardServiceDoma
 BoundedContext NewBankAPIExternalBankServiceContext implements NewBankAPIExternalBankServiceDomain  {
 }
 
-BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
+BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
 }
 
-BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
+BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
 }
 
 BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
