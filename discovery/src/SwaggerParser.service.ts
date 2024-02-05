@@ -11,7 +11,7 @@ import * as SwaggerParser from '@apidevtools/swagger-parser';
  *
  * @see https://apidevtools.org/swagger-parser/docs/swagger-parser.html
  */
-class SwaggerParserService {
+export class SwaggerParserService {
     /**
      * Fonction d'initialisation de la classe
      *
@@ -25,5 +25,3 @@ class SwaggerParserService {
         console.log('classe de parsing des swaggers');
     }
 }
-
-export default new SwaggerParserService();

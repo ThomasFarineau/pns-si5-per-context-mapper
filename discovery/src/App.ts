@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
-import SwaggerParserService from "./SwaggerParser.service";
-import DockerComposeParserService from "./DockerComposeParser.service";
+import {dockerComposeParser, swaggerParser} from "./util";
 dotenv.config();
 
 /**
@@ -16,9 +15,8 @@ dotenv.config();
 export const main = async (): Promise<void> => {
     console.log('C\'est ici que la magie opère !');
 
-    // On instancie les services en singleton pour que plus tard, on puisse faciliter l'accès à ces services et faire les liens entre les objets
-    SwaggerParserService.init();
-    DockerComposeParserService.init();
+    swaggerParser.init();
+    dockerComposeParser.init();
 };
 
 if(process.env.APP_ENV === 'DEVELOPMENT') {

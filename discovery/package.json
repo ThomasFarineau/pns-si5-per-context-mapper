@@ -5,7 +5,7 @@
   "scripts": {
     "start": "dotenv -e .env.dev -- ts-node src/App.ts",
     "dev": "dotenv -e .env.dev -- nodemon",
-    "build:docs": "typedoc src",
+    "build:docs": "typedoc",
     "build:dist": "tsc",
     "build": "npm run build:dist && npm run build:docs",
     "exec:windows": "node ./bin/app"

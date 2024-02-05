@@ -7,7 +7,7 @@
  * @author Thomas Farineau
  * @date 05/02/2024
  */
-class DockerComposeParserService {
+export class DockerComposeParserService {
     /**
      * Fonction d'initialisation de la classe
      *
@@ -20,5 +20,3 @@ class DockerComposeParserService {
         console.log('classe de parsing du docker-compose');
     }
 }
-
-export default new DockerComposeParserService();

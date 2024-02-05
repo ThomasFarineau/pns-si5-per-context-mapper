@@ -11,6 +11,7 @@
   "include": ["src/**/*"],
   "typedocOptions": {
     "out": "docs",
+    "entryPoints": ["src/**/*"],
     "exclude": "**/*+(index|.spec|.test).ts",
     "theme": "default",
     "readme": "none",
