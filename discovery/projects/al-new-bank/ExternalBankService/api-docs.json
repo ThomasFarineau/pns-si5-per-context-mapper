@@ -1,0 +1,1 @@
+{"openapi":"3.0.1","info":{"title":"NewBank API - External Bank Service","description":"Service de la Bank Exterieur.","version":"1.0"},"servers":[{"url":"http://localhost:8081","description":"Generated server url"}],"paths":{},"components":{"schemas":{}}}
