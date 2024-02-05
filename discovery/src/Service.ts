@@ -1,5 +1,5 @@
 /**
- * Représente un modèle de données
+ * Représente un Service
  *
  * @property {string} name - Le nom du service
  */

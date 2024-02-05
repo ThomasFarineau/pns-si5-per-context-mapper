@@ -1,4 +1,4 @@
-import {dockerComposeParser, swaggerParser} from "./util";
+import {dockerComposeParser, scanner, swaggerParser} from "./util";
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -14,10 +14,10 @@ dotenv.config();
  */
 
 export const main = async (): Promise<void> => {
-    console.log('C\'est ici que la magie opère !');
-
-    swaggerParser.init();
-    dockerComposeParser.init();
+    scanner.init().then((projects) => {
+        swaggerParser.init(projects);
+        dockerComposeParser.init();
+    });
 };
 
 if(process.env.APP_ENV === 'DEVELOPMENT') {
