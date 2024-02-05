@@ -1,0 +1,24 @@
+{
+    "swaggerDoc": {
+      "swagger": "2.0",
+      "info": {
+        "version": "1.0.0",
+        "title": "Payload API",
+        "description": ""
+      },
+      "host": "localhost:3007",
+      "basePath": "/",
+      "schemes": [
+        "http",
+        "https"
+      ],
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "paths": {}
+    },
+    "customOptions": {}
+}
