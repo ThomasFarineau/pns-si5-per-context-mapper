@@ -4,6 +4,9 @@ import SwaggerParser from "@apidevtools/swagger-parser";
 import {Project} from "./Project";
 import {DataModel} from "./DataModel";
 import {Service} from "./Service";
+import * as path from "path";
+import {CMLCreator} from "./CMLCreator";
+import * as fs from "fs";
 
 dotenv.config();
 
@@ -12,9 +15,6 @@ dotenv.config();
  *
  * @class SwaggerParserService
  * @name SwaggerParserService
- *
- * @author Thomas Farineau
- * @date 05/02/2024
  *
  * @see https://apidevtools.org/swagger-parser/docs/swagger-parser.html
  */
@@ -43,23 +43,34 @@ export class SwaggerParserService {
         let promises = swaggerFiles.map(async swaggerFile => {
             try {
                 let api = await SwaggerParser.validate(swaggerFile);
-                console.log("API name: %s, Version: %s", api.info.title, api.info.version);
                 apis.push(api);
             } catch (err) {
                 console.error(err);
             }
         })
         Promise.all(promises).then(() => {
-            this.buildDataModel(apis);
+            let dataModel = this.buildDataModel(apis, project.name);
+            console.log(dataModel);
+            this.createCMLFile(dataModel);
         })
     }
 
-    buildDataModel(apis: any[]) {
-        console.log(apis.length);
-        let dataModel: DataModel = new DataModel();
+    buildDataModel(apis: any[], projectName: string): DataModel {
+        let dataModel: DataModel = new DataModel(projectName);
         for (let api of apis) {
             dataModel.addService(new Service(api.info.title));
         }
-        console.log(dataModel.services);
+        return dataModel;
+    }
+
+    createCMLFile(dataModel: DataModel): void {
+        let cmlCreator: CMLCreator = new CMLCreator(dataModel);
+        fs.writeFile(path.join(__dirname, '..', 'output', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log("File writen successfully");
+            }
+        });
     }
 }
