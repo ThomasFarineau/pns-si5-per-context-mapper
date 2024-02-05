@@ -33,13 +33,15 @@ jobs:
       - name: Install Graphviz
         run: sudo apt-get install graphviz
 
-      - name: Build with Maven
-        run: mvn -B package --file ./sandbox/context-mapper-forward/pom.xml
+      - name: Build and Run Java Project
+        run: |
+          cd sandbox/context-mapper-forward
+          mvn clean package
+          mvn exec:java
+          cd ../..
 
-      - name: Run with Maven
-        run: mvn -B exec:java --file ./sandbox/context-mapper-forward/pom.xml
-
-      - uses: actions/upload-artifact@v3  # Mise à jour à la dernière version
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: generated-png-files
-          path: ./src-gen/*.png
+          name: png-artifacts
+          path: sandbox/context-mapper-forward/src-gen/*.png
