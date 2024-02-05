@@ -2,7 +2,9 @@
 
 cd discovery
 
-npm start
+npm run build
+
+npm run exec:windows
 
 cd ..
 
