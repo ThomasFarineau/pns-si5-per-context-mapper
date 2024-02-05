@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { main } = require('../dist/App.js');
 
-main().catch(err => {
+main().then().catch(err => {
   console.error("Erreur lors de l'exécution de la fonction main:", err);
   process.exit(1);
 });

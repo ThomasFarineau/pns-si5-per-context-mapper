@@ -20,13 +20,18 @@ export class ScannerService {
      */
     init(): Promise<Project[]> {
         return new Promise((resolve, reject) => {
+            this.initTest().then((projects) => {
+                resolve(projects);
+            })
+            /*
+            @todo: Implementer la logique de scan des projets dans un environnement de production
             if (process.env.APP_ENV === 'DEVELOPMENT') {
                 this.initTest().then((projects) => {
                     resolve(projects);
                 })
             } else {
                 resolve([]);
-            }
+            }*/
         })
     }
 

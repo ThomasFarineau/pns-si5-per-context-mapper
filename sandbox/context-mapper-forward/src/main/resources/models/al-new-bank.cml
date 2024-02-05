@@ -1,88 +1,88 @@
 ContextMap alnewbankContextMap {
 
-	contains NewBankAPIExternalBankServiceContext 
-
 	contains NewBankAPICardServiceContext 
 
-	contains NewBankAPIFriendshipServiceContext 
+	contains NewBankAPIExternalBankServiceContext 
 
-	contains NewBankAPINFCTransactionServiceContext 
-
-	contains NewBankAPIFriendTransactionServiceContext 
+	contains NewBankAPIAccountServiceContext 
 
 	contains NewBankAPIExternalTransactionServiceContext 
 
-	contains NewBankAPIUserServiceContext 
+	contains NewBankAPIFriendshipServiceContext 
 
-	contains NewBankAPITransactionServiceContext 
+	contains NewBankAPIFriendTransactionServiceContext 
+
+	contains NewBankAPINFCTransactionServiceContext 
 
 	contains OpenAPIdefinitionContext 
 
-	contains NewBankAPIAccountServiceContext 
+	contains NewBankAPITransactionServiceContext 
+
+	contains NewBankAPIUserServiceContext 
 
 }
 
 Domain alnewbankDomain {
 
-	SubDomain NewBankAPIExternalBankServiceDomain {
-	}
-
 	SubDomain NewBankAPICardServiceDomain {
 	}
 
-	SubDomain NewBankAPIFriendshipServiceDomain {
-	}
-
-	SubDomain NewBankAPINFCTransactionServiceDomain {
-	}
-
-	SubDomain NewBankAPIFriendTransactionServiceDomain {
-	}
-
-	SubDomain NewBankAPIExternalTransactionServiceDomain {
-	}
-
-	SubDomain NewBankAPIUserServiceDomain {
-	}
-
-	SubDomain NewBankAPITransactionServiceDomain {
-	}
-
-	SubDomain OpenAPIdefinitionDomain {
+	SubDomain NewBankAPIExternalBankServiceDomain {
 	}
 
 	SubDomain NewBankAPIAccountServiceDomain {
 	}
 
-}
+	SubDomain NewBankAPIExternalTransactionServiceDomain {
+	}
 
-BoundedContext NewBankAPIExternalBankServiceContext implements NewBankAPIExternalBankServiceDomain  {
+	SubDomain NewBankAPIFriendshipServiceDomain {
+	}
+
+	SubDomain NewBankAPIFriendTransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPINFCTransactionServiceDomain {
+	}
+
+	SubDomain OpenAPIdefinitionDomain {
+	}
+
+	SubDomain NewBankAPITransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPIUserServiceDomain {
+	}
+
 }
 
 BoundedContext NewBankAPICardServiceContext implements NewBankAPICardServiceDomain  {
 }
 
-BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
+BoundedContext NewBankAPIExternalBankServiceContext implements NewBankAPIExternalBankServiceDomain  {
 }
 
-BoundedContext NewBankAPINFCTransactionServiceContext implements NewBankAPINFCTransactionServiceDomain  {
-}
-
-BoundedContext NewBankAPIFriendTransactionServiceContext implements NewBankAPIFriendTransactionServiceDomain  {
+BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
 }
 
 BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
 }
 
-BoundedContext NewBankAPIUserServiceContext implements NewBankAPIUserServiceDomain  {
+BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
 }
 
-BoundedContext NewBankAPITransactionServiceContext implements NewBankAPITransactionServiceDomain  {
+BoundedContext NewBankAPIFriendTransactionServiceContext implements NewBankAPIFriendTransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPINFCTransactionServiceContext implements NewBankAPINFCTransactionServiceDomain  {
 }
 
 BoundedContext OpenAPIdefinitionContext implements OpenAPIdefinitionDomain  {
 }
 
-BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
+BoundedContext NewBankAPITransactionServiceContext implements NewBankAPITransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPIUserServiceContext implements NewBankAPIUserServiceDomain  {
 }
 

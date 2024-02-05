@@ -1,156 +1,75 @@
 {
-    "swaggerDoc": {
-      "openapi": "3.0.0",
-      "paths": {
-        "/health": {
-          "get": {
-            "operationId": "HealthController_check",
-            "parameters": [],
-            "responses": {
-              "200": {
-                "description": "The Health Check is successful",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "ok"
-                        },
-                        "info": {
-                          "type": "object",
-                          "example": {
-                            "database": {
-                              "status": "up"
-                            }
-                          },
-                          "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
-                              "type": "string"
-                            }
-                          },
-                          "nullable": true
-                        },
-                        "error": {
-                          "type": "object",
-                          "example": {},
-                          "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
-                              "type": "string"
-                            }
-                          },
-                          "nullable": true
-                        },
-                        "details": {
-                          "type": "object",
-                          "example": {
-                            "database": {
-                              "status": "up"
-                            }
-                          },
-                          "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
-                              "type": "string"
-                            }
+  "swaggerDoc": {
+    "openapi": "3.0.0",
+    "paths": {
+      "/health": {
+        "get": {
+          "operationId": "HealthController_check",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "The Health Check is successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "ok"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
                           }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "503": {
-                "description": "The Health Check is not successful",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "example": "error"
                         },
-                        "info": {
+                        "additionalProperties": {
                           "type": "object",
-                          "example": {
-                            "database": {
-                              "status": "up"
-                            }
-                          },
-                          "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
+                          "properties": {
+                            "status": {
                               "type": "string"
                             }
                           },
-                          "nullable": true
-                        },
-                        "error": {
-                          "type": "object",
-                          "example": {
-                            "redis": {
-                              "status": "down",
-                              "message": "Could not connect"
-                            }
-                          },
                           "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {},
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
                               "type": "string"
                             }
                           },
-                          "nullable": true
+                          "additionalProperties": {
+                            "type": "string"
+                          }
                         },
-                        "details": {
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
                           "type": "object",
-                          "example": {
-                            "database": {
-                              "status": "up"
-                            },
-                            "redis": {
-                              "status": "down",
-                              "message": "Could not connect"
+                          "properties": {
+                            "status": {
+                              "type": "string"
                             }
                           },
                           "additionalProperties": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": {
-                              "type": "string"
-                            }
+                            "type": "string"
                           }
                         }
                       }
@@ -159,671 +78,752 @@
                 }
               }
             },
-            "tags": [
-              "health"
-            ]
-          }
-        },
-        "/tables": {
-          "get": {
-            "operationId": "TablesController_listAllTables",
-            "parameters": [],
-            "responses": {
-              "200": {
-                "description": "",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableWithOrderDto"
+            "503": {
+              "description": "The Health Check is not successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          },
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
                       }
                     }
                   }
                 }
               }
-            },
-            "tags": [
-              "tables"
-            ]
+            }
           },
-          "post": {
-            "operationId": "TablesController_addTable",
-            "parameters": [],
-            "requestBody": {
-              "required": true,
+          "tags": [
+            "health"
+          ]
+        }
+      },
+      "/tables": {
+        "get": {
+          "operationId": "TablesController_listAllTables",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/AddTableDto"
-                  }
-                }
-              }
-            },
-            "responses": {
-              "201": {
-                "description": "The table has been successfully added.",
-                "content": {
-                  "application/json": {
-                    "schema": {
+                    "type": "array",
+                    "items": {
                       "$ref": "#/components/schemas/TableWithOrderDto"
                     }
                   }
                 }
-              },
-              "409": {
-                "description": "Table already exists",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableAlreadyExistsException"
-                    }
-                  }
-                }
               }
-            },
-            "tags": [
-              "tables"
-            ]
-          }
-        },
-        "/tables/{tableNumber}": {
-          "get": {
-            "operationId": "TablesController_getTableByNumber",
-            "parameters": [
-              {
-                "name": "tableNumber",
-                "required": true,
-                "in": "path",
-                "schema": {
-                  "type": "number"
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableWithOrderDto"
-                    }
-                  }
-                }
-              },
-              "404": {
-                "description": "Table not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableNumberNotFoundException"
-                    }
-                  }
-                }
-              }
-            },
-            "tags": [
-              "tables"
-            ]
-          }
-        },
-        "/tableOrders": {
-          "get": {
-            "operationId": "TableOrdersController_listAllTableOrders",
-            "parameters": [],
-            "responses": {
-              "200": {
-                "description": "",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableOrder"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "tags": [
-              "tableOrders"
-            ]
+            }
           },
-          "post": {
-            "operationId": "TableOrdersController_openTable",
-            "parameters": [],
-            "requestBody": {
-              "required": true,
+          "tags": [
+            "tables"
+          ]
+        },
+        "post": {
+          "operationId": "TablesController_addTable",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddTableDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "The table has been successfully added.",
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/StartOrderingDto"
+                    "$ref": "#/components/schemas/TableWithOrderDto"
                   }
                 }
               }
             },
-            "responses": {
-              "201": {
-                "description": "The table has been successfully opened.",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrder"
-                    }
-                  }
-                }
-              },
-              "404": {
-                "description": "Table not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableNumberNotFoundException"
-                    }
-                  }
-                }
-              },
-              "422": {
-                "description": "Table is already taken",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableAlreadyTakenException"
-                    }
-                  }
-                }
-              }
-            },
-            "tags": [
-              "tableOrders"
-            ]
-          }
-        },
-        "/tableOrders/{tableOrderId}": {
-          "get": {
-            "operationId": "TableOrdersController_getTableOrderById",
-            "parameters": [
-              {
-                "name": "tableOrderId",
-                "required": true,
-                "in": "path",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrder"
-                    }
-                  }
-                }
-              },
-              "404": {
-                "description": "Table order not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderIdNotFoundException"
-                    }
-                  }
-                }
-              }
-            },
-            "tags": [
-              "tableOrders"
-            ]
-          },
-          "post": {
-            "operationId": "TableOrdersController_addMenuItemToTableOrder",
-            "parameters": [
-              {
-                "name": "tableOrderId",
-                "required": true,
-                "in": "path",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            ],
-            "requestBody": {
-              "required": true,
+            "409": {
+              "description": "Table already exists",
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/AddMenuItemDto"
+                    "$ref": "#/components/schemas/TableAlreadyExistsException"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "tables"
+          ]
+        }
+      },
+      "/tables/{tableNumber}": {
+        "get": {
+          "operationId": "TablesController_getTableByNumber",
+          "parameters": [
+            {
+              "name": "tableNumber",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableWithOrderDto"
                   }
                 }
               }
             },
-            "responses": {
-              "201": {
-                "description": "The menu item has been successfully added to the table order.",
-                "content": {
-                  "application/json": {
-                    "schema": {
+            "404": {
+              "description": "Table not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableNumberNotFoundException"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "tables"
+          ]
+        }
+      },
+      "/tableOrders": {
+        "get": {
+          "operationId": "TableOrdersController_listAllTableOrders",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
                       "$ref": "#/components/schemas/TableOrder"
                     }
                   }
                 }
-              },
-              "404": {
-                "description": "Table order not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderIdNotFoundException"
-                    }
-                  }
-                }
-              },
-              "422": {
-                "description": "TableOrder is already billed",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
-                    }
-                  }
-                }
               }
-            },
-            "tags": [
-              "tableOrders"
-            ]
-          }
+            }
+          },
+          "tags": [
+            "tableOrders"
+          ]
         },
-        "/tableOrders/{tableOrderId}/prepare": {
-          "post": {
-            "operationId": "TableOrdersController_prepareTableOrder",
-            "parameters": [
-              {
-                "name": "tableOrderId",
-                "required": true,
-                "in": "path",
+        "post": {
+          "operationId": "TableOrdersController_openTable",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/StartOrderingDto"
                 }
               }
-            ],
-            "responses": {
-              "201": {
-                "description": "The menu items have been successfully sent for preparation.",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/PreparationDto"
-                      }
-                    }
-                  }
-                }
-              },
-              "404": {
-                "description": "Table order not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderIdNotFoundException"
-                    }
-                  }
-                }
-              },
-              "422": {
-                "description": "TableOrder is already billed",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
-                    }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "The table has been successfully opened.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrder"
                   }
                 }
               }
             },
-            "tags": [
-              "tableOrders"
-            ]
-          }
-        },
-        "/tableOrders/{tableOrderId}/bill": {
-          "post": {
-            "operationId": "TableOrdersController_billTableOrder",
-            "parameters": [
-              {
-                "name": "tableOrderId",
-                "required": true,
-                "in": "path",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "The table has been successfully billed.",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrder"
-                    }
-                  }
-                }
-              },
-              "404": {
-                "description": "Table order not found",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderIdNotFoundException"
-                    }
-                  }
-                }
-              },
-              "422": {
-                "description": "TableOrder is already billed",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
-                    }
+            "404": {
+              "description": "Table not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableNumberNotFoundException"
                   }
                 }
               }
             },
-            "tags": [
-              "tableOrders"
-            ]
-          }
+            "422": {
+              "description": "Table is already taken",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableAlreadyTakenException"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "tableOrders"
+          ]
         }
       },
-      "info": {
-        "title": "Micro-Service Restaurant: Dining Service",
-        "description": "Dining Service Open API definition",
-        "contact": {}
-      },
-      "tags": [],
-      "servers": [
-        {
-          "url": "/",
-          "description": "Without gateway"
+      "/tableOrders/{tableOrderId}": {
+        "get": {
+          "operationId": "TableOrdersController_getTableOrderById",
+          "parameters": [
+            {
+              "name": "tableOrderId",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrder"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Table order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderIdNotFoundException"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "tableOrders"
+          ]
         },
-        {
-          "url": "/dining",
-          "description": "Through gateway"
+        "post": {
+          "operationId": "TableOrdersController_addMenuItemToTableOrder",
+          "parameters": [
+            {
+              "name": "tableOrderId",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddMenuItemDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "The menu item has been successfully added to the table order.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrder"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Table order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderIdNotFoundException"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "TableOrder is already billed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "tableOrders"
+          ]
         }
-      ],
-      "components": {
-        "schemas": {
-          "TableWithOrderDto": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "number": {
-                "type": "number",
-                "minimum": 1
-              },
-              "taken": {
-                "type": "boolean"
-              },
-              "tableOrderId": {
+      },
+      "/tableOrders/{tableOrderId}/prepare": {
+        "post": {
+          "operationId": "TableOrdersController_prepareTableOrder",
+          "parameters": [
+            {
+              "name": "tableOrderId",
+              "required": true,
+              "in": "path",
+              "schema": {
                 "type": "string"
               }
-            },
-            "required": [
-              "_id",
-              "number",
-              "taken",
-              "tableOrderId"
-            ]
-          },
-          "TableNumberNotFoundException": {
-            "type": "object",
-            "properties": {
-              "error": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "error",
-              "details"
-            ]
-          },
-          "AddTableDto": {
-            "type": "object",
-            "properties": {
-              "number": {
-                "type": "number",
-                "minimum": 1
-              }
-            },
-            "required": [
-              "number"
-            ]
-          },
-          "TableAlreadyExistsException": {
-            "type": "object",
-            "properties": {
-              "error": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "error",
-              "details"
-            ]
-          },
-          "OrderingItem": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "shortName": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "_id",
-              "shortName"
-            ]
-          },
-          "OrderingLine": {
-            "type": "object",
-            "properties": {
-              "item": {
-                "$ref": "#/components/schemas/OrderingItem"
-              },
-              "howMany": {
-                "type": "number"
-              },
-              "sentForPreparation": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "item",
-              "howMany",
-              "sentForPreparation"
-            ]
-          },
-          "PreparedItemDto": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "shortName": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "_id",
-              "shortName"
-            ]
-          },
-          "PreparationDto": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "shouldBeReadyAt": {
-                "type": "string"
-              },
-              "preparedItems": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/PreparedItemDto"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "The menu items have been successfully sent for preparation.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PreparationDto"
+                    }
+                  }
                 }
               }
             },
-            "required": [
-              "_id",
-              "shouldBeReadyAt",
-              "preparedItems"
-            ]
-          },
-          "TableOrder": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "tableNumber": {
-                "type": "number"
-              },
-              "customersCount": {
-                "type": "number"
-              },
-              "opened": {
-                "format": "date-time",
-                "type": "string"
-              },
-              "lines": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OrderingLine"
+            "404": {
+              "description": "Table order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderIdNotFoundException"
+                  }
                 }
-              },
-              "preparations": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/PreparationDto"
+              }
+            },
+            "422": {
+              "description": "TableOrder is already billed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
+                  }
                 }
-              },
-              "billed": {
-                "format": "date-time",
-                "type": "string"
               }
-            },
-            "required": [
-              "_id",
-              "tableNumber",
-              "customersCount",
-              "opened",
-              "lines",
-              "preparations",
-              "billed"
-            ]
+            }
           },
-          "StartOrderingDto": {
-            "type": "object",
-            "properties": {
-              "tableNumber": {
-                "type": "number",
-                "minimum": 1
-              },
-              "customersCount": {
-                "type": "number",
-                "minimum": 1
+          "tags": [
+            "tableOrders"
+          ]
+        }
+      },
+      "/tableOrders/{tableOrderId}/bill": {
+        "post": {
+          "operationId": "TableOrdersController_billTableOrder",
+          "parameters": [
+            {
+              "name": "tableOrderId",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The table has been successfully billed.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrder"
+                  }
+                }
               }
             },
-            "required": [
-              "tableNumber",
-              "customersCount"
-            ]
+            "404": {
+              "description": "Table order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderIdNotFoundException"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "TableOrder is already billed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TableOrderAlreadyBilledException"
+                  }
+                }
+              }
+            }
           },
-          "TableAlreadyTakenException": {
-            "type": "object",
-            "properties": {
-              "error": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "error",
-              "details"
-            ]
-          },
-          "TableOrderIdNotFoundException": {
-            "type": "object",
-            "properties": {
-              "error": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "error",
-              "details"
-            ]
-          },
-          "AddMenuItemDto": {
-            "type": "object",
-            "properties": {
-              "menuItemId": {
-                "type": "string"
-              },
-              "menuItemShortName": {
-                "type": "string"
-              },
-              "howMany": {
-                "type": "number",
-                "minimum": 1
-              }
-            },
-            "required": [
-              "menuItemId",
-              "menuItemShortName",
-              "howMany"
-            ]
-          },
-          "TableOrderAlreadyBilledException": {
-            "type": "object",
-            "properties": {
-              "error": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "error",
-              "details"
-            ]
-          }
+          "tags": [
+            "tableOrders"
+          ]
         }
       }
     },
-    "customOptions": {}
-  }
+    "info": {
+      "title": "Micro-Service Restaurant: Dining Service",
+      "description": "Dining Service Open API definition",
+      "contact": {}
+    },
+    "tags": [],
+    "servers": [
+      {
+        "url": "/",
+        "description": "Without gateway"
+      },
+      {
+        "url": "/dining",
+        "description": "Through gateway"
+      }
+    ],
+    "components": {
+      "schemas": {
+        "TableWithOrderDto": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "number": {
+              "type": "number",
+              "minimum": 1
+            },
+            "taken": {
+              "type": "boolean"
+            },
+            "tableOrderId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "_id",
+            "number",
+            "taken",
+            "tableOrderId"
+          ]
+        },
+        "TableNumberNotFoundException": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error",
+            "details"
+          ]
+        },
+        "AddTableDto": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "number"
+          ]
+        },
+        "TableAlreadyExistsException": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error",
+            "details"
+          ]
+        },
+        "OrderingItem": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "shortName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "_id",
+            "shortName"
+          ]
+        },
+        "OrderingLine": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "$ref": "#/components/schemas/OrderingItem"
+            },
+            "howMany": {
+              "type": "number"
+            },
+            "sentForPreparation": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "item",
+            "howMany",
+            "sentForPreparation"
+          ]
+        },
+        "PreparedItemDto": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "shortName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "_id",
+            "shortName"
+          ]
+        },
+        "PreparationDto": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "shouldBeReadyAt": {
+              "type": "string"
+            },
+            "preparedItems": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PreparedItemDto"
+              }
+            }
+          },
+          "required": [
+            "_id",
+            "shouldBeReadyAt",
+            "preparedItems"
+          ]
+        },
+        "TableOrder": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "tableNumber": {
+              "type": "number"
+            },
+            "customersCount": {
+              "type": "number"
+            },
+            "opened": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "lines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OrderingLine"
+              }
+            },
+            "preparations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PreparationDto"
+              }
+            },
+            "billed": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "required": [
+            "_id",
+            "tableNumber",
+            "customersCount",
+            "opened",
+            "lines",
+            "preparations",
+            "billed"
+          ]
+        },
+        "StartOrderingDto": {
+          "type": "object",
+          "properties": {
+            "tableNumber": {
+              "type": "number",
+              "minimum": 1
+            },
+            "customersCount": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "tableNumber",
+            "customersCount"
+          ]
+        },
+        "TableAlreadyTakenException": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error",
+            "details"
+          ]
+        },
+        "TableOrderIdNotFoundException": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error",
+            "details"
+          ]
+        },
+        "AddMenuItemDto": {
+          "type": "object",
+          "properties": {
+            "menuItemId": {
+              "type": "string"
+            },
+            "menuItemShortName": {
+              "type": "string"
+            },
+            "howMany": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "menuItemId",
+            "menuItemShortName",
+            "howMany"
+          ]
+        },
+        "TableOrderAlreadyBilledException": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error",
+            "details"
+          ]
+        }
+      }
+    }
+  },
+  "customOptions": {}
+}

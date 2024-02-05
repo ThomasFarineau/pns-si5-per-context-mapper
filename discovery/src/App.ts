@@ -17,7 +17,7 @@ export const main = async (): Promise<void> => {
     scanner.init().then((projects) => {
         swaggerParser.init(projects);
         dockerComposeParser.init();
-    });
+    })
 };
 
 if(process.env.APP_ENV === 'DEVELOPMENT') {
