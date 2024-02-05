@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import * as SwaggerParser from '@apidevtools/swagger-parser';
+import SwaggerParser from "@apidevtools/swagger-parser";
 import * as fs from "fs";
 import util from 'util';
 const readdir = util.promisify(fs.readdir);
