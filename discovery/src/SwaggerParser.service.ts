@@ -60,6 +60,8 @@ export class SwaggerParserService {
         for (let api of apis) {
             dataModel.addService(new Service(api.info.title));
         }
+        dataModel.alphaNumeric();
+        dataModel.sortServices();
         return dataModel;
     }
 

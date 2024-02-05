@@ -1,18 +1,18 @@
 ContextMap alnewbankContextMap {
 
-	contains NewBankAPIExternalTransactionServiceContext 
-
 	contains NewBankAPIAccountServiceContext 
 
 	contains NewBankAPICardServiceContext 
 
 	contains NewBankAPIExternalBankServiceContext 
 
-	contains NewBankAPINFCTransactionServiceContext 
+	contains NewBankAPIExternalTransactionServiceContext 
+
+	contains NewBankAPIFriendshipServiceContext 
 
 	contains NewBankAPIFriendTransactionServiceContext 
 
-	contains NewBankAPIFriendshipServiceContext 
+	contains NewBankAPINFCTransactionServiceContext 
 
 	contains NewBankAPITransactionServiceContext 
 
@@ -24,9 +24,6 @@ ContextMap alnewbankContextMap {
 
 Domain alnewbankDomain {
 
-	SubDomain NewBankAPIExternalTransactionServiceDomain {
-	}
-
 	SubDomain NewBankAPIAccountServiceDomain {
 	}
 
@@ -36,13 +33,16 @@ Domain alnewbankDomain {
 	SubDomain NewBankAPIExternalBankServiceDomain {
 	}
 
-	SubDomain NewBankAPINFCTransactionServiceDomain {
+	SubDomain NewBankAPIExternalTransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPIFriendshipServiceDomain {
 	}
 
 	SubDomain NewBankAPIFriendTransactionServiceDomain {
 	}
 
-	SubDomain NewBankAPIFriendshipServiceDomain {
+	SubDomain NewBankAPINFCTransactionServiceDomain {
 	}
 
 	SubDomain NewBankAPITransactionServiceDomain {
@@ -56,9 +56,6 @@ Domain alnewbankDomain {
 
 }
 
-BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
-}
-
 BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
 }
 
@@ -68,13 +65,16 @@ BoundedContext NewBankAPICardServiceContext implements NewBankAPICardServiceDoma
 BoundedContext NewBankAPIExternalBankServiceContext implements NewBankAPIExternalBankServiceDomain  {
 }
 
-BoundedContext NewBankAPINFCTransactionServiceContext implements NewBankAPINFCTransactionServiceDomain  {
+BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
 }
 
 BoundedContext NewBankAPIFriendTransactionServiceContext implements NewBankAPIFriendTransactionServiceDomain  {
 }
 
-BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
+BoundedContext NewBankAPINFCTransactionServiceContext implements NewBankAPINFCTransactionServiceDomain  {
 }
 
 BoundedContext NewBankAPITransactionServiceContext implements NewBankAPITransactionServiceDomain  {

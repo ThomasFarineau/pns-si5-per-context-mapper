@@ -30,9 +30,9 @@ export class CMLCreator {
 
     appendContextMap(): void {
         let contextMap: string = "";
-        contextMap += "ContextMap " + this.keepOnlyAlphaNumeric(this.dataModel.name) + "ContextMap" + " {\n\n";
+        contextMap += "ContextMap " + this.dataModel.name + "ContextMap" + " {\n\n";
         for (let service of this.dataModel.services) {
-            contextMap += "\tcontains " + this.keepOnlyAlphaNumeric(service.name) + "Context" + " \n\n";
+            contextMap += "\tcontains " + service.name + "Context" + " \n\n";
         }
         contextMap += "}\n";
         this.fileContent += contextMap;
@@ -40,9 +40,9 @@ export class CMLCreator {
 
     appendDomains(): void {
         let domains: string = "";
-        domains += "\nDomain " + this.keepOnlyAlphaNumeric(this.dataModel.name) + "Domain" + " {\n\n";
+        domains += "\nDomain " + this.dataModel.name + "Domain" + " {\n\n";
         for (let service of this.dataModel.services) {
-            domains += "\tSubDomain " + this.keepOnlyAlphaNumeric(service.name) + "Domain" + " {\n";
+            domains += "\tSubDomain " + service.name + "Domain" + " {\n";
             domains += "\t}\n\n";
         }
         domains += "}\n\n";
@@ -52,14 +52,10 @@ export class CMLCreator {
     appendContexts(): void {
         let contexts: string = "";
         for (let service of this.dataModel.services) {
-            let alphaNumeric = this.keepOnlyAlphaNumeric(service.name);
+            let alphaNumeric = service.name;
             contexts += "BoundedContext " + alphaNumeric + "Context implements " + alphaNumeric + "Domain " + " {\n";
             contexts += "}\n\n";
         }
         this.fileContent += contexts;
-    }
-
-    keepOnlyAlphaNumeric(str: string): string {
-        return str.replace(/[^a-z0-9]/gi, '');
     }
 }

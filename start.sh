@@ -2,7 +2,7 @@
 
 cd discovery
 
-npm run build
+npm run build:dist
 
 npm run exec:windows
 
