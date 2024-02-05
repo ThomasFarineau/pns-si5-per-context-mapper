@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/DeathStar3-projects/context-mapper-per-23/tree/main/discovery#readme",
   "dependencies": {
-    "dotenv": "^16.4.1",
-    "swagger-parser": "^10.0.3"
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "dotenv": "^16.4.1"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",

@@ -1,5 +1,6 @@
-import * as dotenv from 'dotenv';
 import {dockerComposeParser, swaggerParser} from "./util";
+
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 /**
