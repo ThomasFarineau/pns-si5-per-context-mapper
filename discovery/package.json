@@ -1,0 +1,35 @@
+{
+  "name": "discovery",
+  "version": "1.0.0",
+  "description": "Discovery is an app to parse services swagger into cml file",
+  "scripts": {
+    "start": "dotenv -e .env.dev -- ts-node ./src/index.ts",
+    "dev": "dotenv -e .env.dev -- nodemon",
+    "build:docs": "typedoc src",
+    "build:dist": "tsc",
+    "build": "npm run build:dist && npm run build:docs",
+    "exec:windows": "node ./bin/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeathStar3-projects/context-mapper-per-23.git"
+  },
+  "author": "Thomas Farineau, Léo Kitabdjian, Mohamed Mahjoub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeathStar3-projects/context-mapper-per-23/issues"
+  },
+  "homepage": "https://github.com/DeathStar3-projects/context-mapper-per-23/tree/main/discovery#readme",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "swagger-parser": "^10.0.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "dotenv-cli": "^7.3.0",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.25.7",
+    "typescript": "^5.3.3"
+  }
+}

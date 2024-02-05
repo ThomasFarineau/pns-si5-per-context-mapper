@@ -10,3 +10,7 @@ sandbox/context-mapper-forward/target/
 /sandbox/context-map-discovery/*/target/
 
 context-mapper-discovery/target/
+
+discovery/dist
+discovery/node_modules
+discovery/docs
