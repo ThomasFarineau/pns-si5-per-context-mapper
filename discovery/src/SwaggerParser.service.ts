@@ -65,7 +65,7 @@ export class SwaggerParserService {
 
     createCMLFile(dataModel: DataModel): void {
         let cmlCreator: CMLCreator = new CMLCreator(dataModel);
-        fs.writeFile(path.join(__dirname, '..', 'output', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
+        fs.writeFile(path.join(__dirname, '..', '..', 'sandbox', 'context-mapper-forward', 'src', 'main', 'resources', 'models', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
             if (err) {
                 console.error(err);
             } else {

@@ -1,0 +1,88 @@
+ContextMap alnewbankContextMap {
+
+	contains NewBankAPIExternalBankServiceContext 
+
+	contains NewBankAPICardServiceContext 
+
+	contains NewBankAPIFriendshipServiceContext 
+
+	contains NewBankAPINFCTransactionServiceContext 
+
+	contains NewBankAPIFriendTransactionServiceContext 
+
+	contains NewBankAPIExternalTransactionServiceContext 
+
+	contains NewBankAPIUserServiceContext 
+
+	contains NewBankAPITransactionServiceContext 
+
+	contains OpenAPIdefinitionContext 
+
+	contains NewBankAPIAccountServiceContext 
+
+}
+
+Domain alnewbankDomain {
+
+	SubDomain NewBankAPIExternalBankServiceDomain {
+	}
+
+	SubDomain NewBankAPICardServiceDomain {
+	}
+
+	SubDomain NewBankAPIFriendshipServiceDomain {
+	}
+
+	SubDomain NewBankAPINFCTransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPIFriendTransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPIExternalTransactionServiceDomain {
+	}
+
+	SubDomain NewBankAPIUserServiceDomain {
+	}
+
+	SubDomain NewBankAPITransactionServiceDomain {
+	}
+
+	SubDomain OpenAPIdefinitionDomain {
+	}
+
+	SubDomain NewBankAPIAccountServiceDomain {
+	}
+
+}
+
+BoundedContext NewBankAPIExternalBankServiceContext implements NewBankAPIExternalBankServiceDomain  {
+}
+
+BoundedContext NewBankAPICardServiceContext implements NewBankAPICardServiceDomain  {
+}
+
+BoundedContext NewBankAPIFriendshipServiceContext implements NewBankAPIFriendshipServiceDomain  {
+}
+
+BoundedContext NewBankAPINFCTransactionServiceContext implements NewBankAPINFCTransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPIFriendTransactionServiceContext implements NewBankAPIFriendTransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPIExternalTransactionServiceContext implements NewBankAPIExternalTransactionServiceDomain  {
+}
+
+BoundedContext NewBankAPIUserServiceContext implements NewBankAPIUserServiceDomain  {
+}
+
+BoundedContext NewBankAPITransactionServiceContext implements NewBankAPITransactionServiceDomain  {
+}
+
+BoundedContext OpenAPIdefinitionContext implements OpenAPIdefinitionDomain  {
+}
+
+BoundedContext NewBankAPIAccountServiceContext implements NewBankAPIAccountServiceDomain  {
+}
+
