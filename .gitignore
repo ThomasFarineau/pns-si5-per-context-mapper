@@ -16,4 +16,4 @@ discovery/node_modules
 
 discovery/package-lock.json
 
-sandbox/context-mapper-forward/src/main/resources/models/
+sandbox/context-mapper-forward/src/main/resources/models/*.cml
