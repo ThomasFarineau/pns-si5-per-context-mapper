@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import SwaggerParserService from "./SwaggerParser.service";
 dotenv.config();
 
 /**
@@ -13,6 +14,7 @@ dotenv.config();
 
 export const main = async (): Promise<void> => {
     console.log('C\'est ici que la magie opère !');
+    SwaggerParserService.init();
 };
 
 if(process.env.APP_ENV === 'DEVELOPMENT') {

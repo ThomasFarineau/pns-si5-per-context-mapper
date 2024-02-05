@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-require('../dist/index.js');
-const { main } = require('../dist/index.js');
+const { main } = require('../dist/App.js');
 
 main().catch(err => {
   console.error("Erreur lors de l'exécution de la fonction main:", err);
