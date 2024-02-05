@@ -1,29 +1,31 @@
 /**
  * Représente un projet
  *
- * @property {string[]} files - Les fichiers swagger du projet
+ * @property {string[]} swaggerFiles - Les fichiers swagger du projet
  * @property {string} name - Le nom du projet
  */
 
 export class Project {
-  files: string[] = [];
+    swaggerFiles: string[] = [];
+    dockerComposeFiles: string[] = [];
 
-  constructor(public name: string) {}
+    constructor(public name: string) {
+    }
 
-  /**
-   * Ajoute un fichier swagger au projet
-   * @param file
-   */
-  addSwaggerFile(file: string): void {
-    this.files.push(file);
-  }
+    /**
+     * Ajoute un fichier swagger au projet
+     * @param file
+     */
+    addSwaggerFile(file: string): void {
+        this.swaggerFiles.push(file);
+    }
 
-  /**
-   * Retourne les fichiers swagger du projet
-   *
-   * @returns {string[]}
-   */
-  get swaggerFiles(): string[] {
-    return this.files;
-  }
+    /**
+     * Ajoute un fichier docker-compose au projet
+     *
+     * @param file
+     */
+    addDockerComposeFile(file: string): void {
+        this.dockerComposeFiles.push(file);
+    }
 }

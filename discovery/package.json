@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Discovery is an app to parse services swagger into cml file",
   "scripts": {
-    "start": "dotenv -e .env.dev -- ts-node src/App.ts",
-    "dev": "dotenv -e .env.dev -- nodemon",
+    "start": "ts-node -r ./load-env.ts ./src/App.ts",
+    "dev": "nodemon",
     "build:docs": "typedoc",
     "build:dist": "tsc",
     "build": "npm run build:dist && npm run build:docs",
