@@ -4,6 +4,7 @@
  * @property {string[]} files - Les fichiers swagger du projet
  * @property {string} name - Le nom du projet
  */
+
 export class Project {
   files: string[] = [];
 

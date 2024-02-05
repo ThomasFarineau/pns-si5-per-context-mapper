@@ -98,9 +98,7 @@ export class SwaggerParserService {
             Promise.all(promises).then(() => {
                 projects.forEach(project => {
                     console.log(project)
-                    /*
-                    @todo : pour chaque projet, parser les fichiers swagger
-                     */
+                    this.parseSwaggerFiles(project);
                 })
             }).catch(err => {
                 console.error("Erreur lors de la récupération des projets: ", err);
@@ -108,5 +106,18 @@ export class SwaggerParserService {
         }).catch(err => {
             console.error("Erreur lors de la lecture du répertoire ./projects: ", err);
         });
+    }
+
+    parseSwaggerFiles(project: Project): void {
+        let swaggerFiles = project.swaggerFiles;
+        for (let swaggerFile of swaggerFiles) {
+            SwaggerParser.validate(swaggerFile, (err, api) => {
+                if (err) {
+                    console.error(err);
+                } else if (api) {
+                    console.log("API name: %s, Version: %s", api.info.title, api.info.version);
+                }
+            })
+        }
     }
 }
