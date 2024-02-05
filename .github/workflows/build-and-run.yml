@@ -1,0 +1,45 @@
+name: Build and Run
+
+on:
+  push:
+    branches: ["milestone5"]
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3  # Mise à jour à la dernière version
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies and Build Discovery
+        run: |
+          cd discovery
+          npm install
+          npm run build:dist
+          npm run exec:windows
+          cd ..
+
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3  # Mise à jour à la dernière version
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+
+      - name: Install Graphviz
+        run: sudo apt-get install graphviz
+
+      - name: Build with Maven
+        run: mvn -B package --file ./sandbox/context-mapper-forward/pom.xml
+
+      - name: Run with Maven
+        run: mvn -B exec:java --file ./sandbox/context-mapper-forward/pom.xml
+
+      - uses: actions/upload-artifact@v3  # Mise à jour à la dernière version
+        with:
+          name: generated-png-files
+          path: ./src-gen/*.png
