@@ -1,6 +1,7 @@
 import {dockerComposeParser, scanner, swaggerParser} from "./util";
 
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 /**
@@ -19,7 +20,7 @@ export const main = async (): Promise<void> => {
     })
 };
 
-if(process.env.APP_ENV === 'DEVELOPMENT') {
+if (process.env.APP_ENV === 'DEVELOPMENT') {
     main().catch(err => {
         console.error("Erreur lors de l'exécution de la fonction main:", err);
         process.exit(1);

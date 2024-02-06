@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 const { main } = require('../dist/App.js');
 
+const args = process.argv.slice(2);
+const isDevMode = args.includes('--dev');
+
+process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
+
 main().then().catch(err => {
   console.error("Erreur lors de l'exécution de la fonction main:", err);
   process.exit(1);

@@ -1,6 +1,7 @@
 import {Project} from "./Project";
 import * as fs from "fs";
 import util from 'util';
+import * as Path from "path";
 
 const readdir = util.promisify(fs.readdir);
 
@@ -20,33 +21,16 @@ export class ScannerService {
      */
     init(): Promise<Project[]> {
         return new Promise((resolve, reject) => {
-            this.initTest().then((projects) => {
-                resolve(projects);
-            })
-            /*
-            @todo: Implementer la logique de scan des projets dans un environnement de production
             if (process.env.APP_ENV === 'DEVELOPMENT') {
-                this.initTest().then((projects) => {
+                this.initDev().then((projects) => {
                     resolve(projects);
                 })
             } else {
-                resolve([]);
-            }*/
+                this.initProd().then((project) => {
+                    resolve([project]);
+                })
+            }
         })
-    }
-
-    /**
-     * Vérifie si le fichier est un fichier swagger basé sur nos critères de nommage
-     *
-     * @param file {string} - Le fichier à vérifier
-     * @returns {boolean} - true si le fichier est un fichier swagger, false sinon
-     */
-    isSwaggerFile(file: string): boolean {
-        let includes = process.env.OPEN_API_INCLUDES ?? '';
-        let excludes = process.env.OPEN_API_EXCLUDES ?? '';
-        let extensions = process.env.OPEN_API_EXTENSIONS ?? '';
-
-        return this.isNamingConventionCompliant(file, includes, excludes, extensions);
     }
 
     /**
@@ -58,7 +42,7 @@ export class ScannerService {
      *
      * @returns {boolean} - true si le fichier est conforme à la convention de nommage, false sinon
      */
-    isNamingConventionCompliant(file: string, includes: string, excludes: string, extensions: string): boolean {
+    private isNamingConventionCompliant(file: string, includes: string, excludes: string, extensions: string): boolean {
         let includesArray = includes.split(',');
         let excludesArray = excludes.split(',');
         let extensionsArray = extensions.split(',');
@@ -74,7 +58,7 @@ export class ScannerService {
      * @param file {string} - Le fichier à vérifier
      * @returns {boolean} - true si le fichier doit être ignoré, false sinon
      */
-    shouldIgnoreFile(file: string): boolean {
+    private shouldIgnoreFile(file: string): boolean {
         let ignores = process.env.SCAN_IGNORES ?? '';
         let ignoresArray = ignores.split(',');
 
@@ -89,7 +73,7 @@ export class ScannerService {
      *
      * @returns {Promise<void>}
      */
-    async fileScanner(path: string, project: Project): Promise<void> {
+    private async fileScanner(path: string, project: Project): Promise<void> {
         const entries = await readdir(path);
         for (const entry of entries) {
             if (this.shouldIgnoreFile(entry)) continue;
@@ -106,21 +90,21 @@ export class ScannerService {
     }
 
     /**
-     * Fonction de test pour l'initialisation des projets dans ./projects dans un environnement de développement
+     * Fonction pour l'initialisation en mode DEVELOPMENT des projets dans ./projects dans un environnement de développement
      *
-     * @returns {void}
-     *
+     * @returns {Promise<Project[]>} - Les projets initialisés
      */
-    initTest(): Promise<Project[]> {
+    private initDev(): Promise<Project[]> {
+        let devDir = './projects';
         return new Promise((resolve, reject) => {
             let projects: Project[] = [];
-            readdir('./projects').then(directories => {
+            readdir(devDir).then(directories => {
                 // Créer un tableau de promesses pour chaque dossier trouvé
                 let promises = directories.map(async directory => {
                     try {
-                        await readdir(`./projects/${directory}`);
+                        await readdir(devDir + Path.sep + directory);
                         let project = new Project(directory);
-                        await this.fileScanner(`./projects/${directory}`, project);
+                        await this.fileScanner(devDir + Path.sep + directory, project);
                         projects.push(project);
                     } catch (ignoredError) {
                     }
@@ -137,6 +121,34 @@ export class ScannerService {
         })
     }
 
+    /**
+     * Fonction pour l'initialisation en mode PRODUCTION des projets dans ../
+     *
+     * @returns {Promise<Project>} - Le projet initialisé
+     */
+    private initProd(): Promise<Project> {
+        let prodDir = '../..';
+        return new Promise((resolve, reject) => {
+            let project: Project = new Project('project');
+            readdir(prodDir).then(directories => {
+                // Créer un tableau de promesses pour chaque dossier trouvé
+                let promises = directories.map(async directory => {
+                    try {
+                        await readdir(prodDir + Path.sep + directory);
+                        await this.fileScanner(prodDir + Path.sep + directory, project);
+                    } catch (ignoredError) {
+                    }
+                });
+                Promise.all(promises).then(() => {
+                    return resolve(project);
+                }).catch(err => {
+                    console.error("Erreur lors de la récupération des service du projets: ", err);
+                });
+            }).catch(err => {
+                console.error("Erreur lors de la lecture du répertoire ../: ", err);
+            });
+        })
+    }
 
     /**
      * Vérifie si le fichier est un fichier docker-compose basé sur nos critères de nommage
@@ -144,10 +156,24 @@ export class ScannerService {
      * @param file {string} - Le fichier à vérifier
      * @returns {boolean} - true si le fichier est un fichier docker-compose, false sinon
      */
-    isDockerComposeFile(file: string): boolean {
+    private isDockerComposeFile(file: string): boolean {
         let includes = process.env.DOCKER_COMPOSE_INCLUDES ?? '';
         let excludes = process.env.DOCKER_COMPOSE_EXCLUDES ?? '';
         let extensions = process.env.DOCKER_COMPOSE_EXTENSIONS ?? '';
+
+        return this.isNamingConventionCompliant(file, includes, excludes, extensions);
+    }
+
+    /**
+     * Vérifie si le fichier est un fichier swagger basé sur nos critères de nommage
+     *
+     * @param file {string} - Le fichier à vérifier
+     * @returns {boolean} - true si le fichier est un fichier swagger, false sinon
+     */
+    private isSwaggerFile(file: string): boolean {
+        let includes = process.env.OPEN_API_INCLUDES ?? '';
+        let excludes = process.env.OPEN_API_EXCLUDES ?? '';
+        let extensions = process.env.OPEN_API_EXTENSIONS ?? '';
 
         return this.isNamingConventionCompliant(file, includes, excludes, extensions);
     }
