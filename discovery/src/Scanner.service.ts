@@ -127,13 +127,16 @@ export class ScannerService {
      * @returns {Promise<Project>} - Le projet initialisé
      */
     private initProd(): Promise<Project> {
-        let prodDir = '../..';
+        let prodDir = '..';
+        let currentDir = process.cwd().split(Path.sep).pop()
         return new Promise((resolve, reject) => {
             let project: Project = new Project('project');
             readdir(prodDir).then(directories => {
+                console.log(directories)
                 // Créer un tableau de promesses pour chaque dossier trouvé
                 let promises = directories.map(async directory => {
                     try {
+                        if(directory === currentDir) return;
                         await readdir(prodDir + Path.sep + directory);
                         await this.fileScanner(prodDir + Path.sep + directory, project);
                     } catch (ignoredError) {
