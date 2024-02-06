@@ -33,8 +33,9 @@ export class SwaggerParserService {
     }
 
     /**
-     * Fonction transformant les fichiers OpenAPI en objets
+     * Fonction transformant les fichiers OpenAPI en objets parsables
      *
+     * @property {Project} project - Le projet utilisé
      * @returns {void}
      */
     parseSwaggerFiles(project: Project): void {
@@ -55,6 +56,13 @@ export class SwaggerParserService {
         })
     }
 
+    /**
+     * Fonction construisant notre modèle de données à partir de l'objet parsable issu du fichier OpenAPI
+     *
+     * @property {string} projectName - Le nom du projet
+     * @property {any[]} apis - Les objets d'api parsables
+     * @returns {DataModel}
+     */
     buildDataModel(apis: any[], projectName: string): DataModel {
         let dataModel: DataModel = new DataModel(projectName);
         for (let api of apis) {
@@ -65,6 +73,12 @@ export class SwaggerParserService {
         return dataModel;
     }
 
+    /**
+     * Fonction créant le fichier CML à partir du modèle de données
+     *
+     * @property {DataModel} dataModel - Le modèle de données à transformer en fichier CML
+     * @returns {void}
+     */
     createCMLFile(dataModel: DataModel): void {
         let cmlCreator: CMLCreator = new CMLCreator(dataModel);
         fs.writeFile(path.join(__dirname, '..', '..', 'sandbox', 'context-mapper-forward', 'src', 'main', 'resources', 'models', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
