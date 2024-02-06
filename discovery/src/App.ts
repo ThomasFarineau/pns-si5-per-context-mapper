@@ -12,7 +12,6 @@ dotenv.config();
  * @name main
  * @example await main()
  */
-
 export const main = async (): Promise<void> => {
     scanner.init().then((projects) => {
         swaggerParser.init(projects);

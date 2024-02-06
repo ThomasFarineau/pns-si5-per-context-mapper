@@ -3,7 +3,7 @@ name: Deploy Docs to Pages
 on:
   push:
     paths:
-      - 'discovery/**'
+      - 'discovery/src/**'
   workflow_dispatch:
 
 permissions:
