@@ -35,7 +35,6 @@ export class ScannerService {
         })
     }
 
-
     /**
      * Vérifie si le fichier est un fichier swagger basé sur nos critères de nommage
      *
