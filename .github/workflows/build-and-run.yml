@@ -24,7 +24,7 @@ jobs:
         run: |
           cd discovery
           npm install
-          npm run build:dist
+          npm run build
           npm run exec:windows -- --dev
           cd ..
 
