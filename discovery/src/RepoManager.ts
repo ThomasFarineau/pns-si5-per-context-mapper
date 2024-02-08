@@ -26,6 +26,10 @@ class RepoManager {
         return new Promise((resolve) => {
             console.log('Cloning repository from ' + url + ' into ' + tmp + '...');
             clone(url, tmp, {checkout: 'master'}).then(() => {
+                console.log('Repository cloned successfully');
+            }).catch(err => {
+                console.error('Error while cloning repository: ', err);
+            }).finally(() => {
                 let toRemove = ['.git', '.github', '.gitignore', '.gitattributes'];
                 let promises = toRemove.map(async (file) => {
                     return rm('./temp/' + file, {recursive: true}).then(() => {
