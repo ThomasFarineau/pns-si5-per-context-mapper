@@ -27,10 +27,10 @@ export class SwaggerParserService {
      * @example SwaggerParserService.init()
      *
      */
-    init(projects: Project[]): Promise<boolean> {
+    init(projects: Project[], outputFolder: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
             let promises = projects.map(async (project) => {
-                await this.parseSwaggerFiles(project)
+                await this.parseSwaggerFiles(project, outputFolder)
             })
             Promise.all(promises).then(() => resolve(true))
         })
@@ -42,7 +42,7 @@ export class SwaggerParserService {
      * @property {Project} project - Le projet utilisé
      * @returns {Promise<void>}
      */
-    async parseSwaggerFiles(project: Project): Promise<void> {
+    async parseSwaggerFiles(project: Project, outputFolder: string): Promise<void> {
         return new Promise((resolve, reject) => {
             let swaggerFiles = project.swaggerFiles;
             let apis: any[] = [];
@@ -60,7 +60,7 @@ export class SwaggerParserService {
                 console.log("Building model...");
                 let dataModel = this.buildDataModel(apis, project.name);
                 console.log(dataModel);
-                this.createCMLFile(dataModel).then(() => resolve()).catch(() => reject());
+                this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
             }).catch(err => {
                 console.error(err);
                 reject(err);
@@ -91,10 +91,10 @@ export class SwaggerParserService {
      * @property {DataModel} dataModel - Le modèle de données à transformer en fichier CML
      * @returns {void}
      */
-    async createCMLFile(dataModel: DataModel): Promise<void> {
+    async createCMLFile(dataModel: DataModel, outputFolder: string): Promise<void> {
         return new Promise((resolve, reject) => {
             let cmlCreator: CMLCreator = new CMLCreator(dataModel);
-            fs.writeFile(path.join(__dirname, '..', '..', 'sandbox', 'context-mapper-forward', 'src', 'main', 'resources', 'models', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
+            fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
                 if (err) {
                     console.error(err);
                     reject();
