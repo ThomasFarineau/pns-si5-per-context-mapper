@@ -25,7 +25,7 @@ jobs:
           cd discovery
           npm install
           npm run build:dist
-          npm run exec:windows
+          npm run exec:windows -- --dev
           cd ..
 
       - name: Set up JDK 19
