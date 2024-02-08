@@ -10,23 +10,27 @@ const readdir = util.promisify(fs.readdir);
  *
  */
 export class ScannerService {
+    skipNaming: boolean = false;
 
     /**
      * Fonction d'initialisation de la classe
      * @returns {Promise<Project[]>} - Les projets initialisés
      * @function init
+     * @param {string} url - L'url à scanner (optionnel)
+     * @param {boolean} skipNaming - Si true, ignore la convention de nommage
      * @name init
      * @example ScannerService.init()
      * @async
      */
-    init(): Promise<Project[]> {
+    init(url: string = "", skipNaming: boolean = false): Promise<Project[]> {
+        this.skipNaming = skipNaming;
         return new Promise((resolve, reject) => {
             if (process.env.APP_ENV === 'DEVELOPMENT') {
                 this.initDev().then((projects) => {
                     resolve(projects);
                 })
             } else {
-                this.initProd().then((project) => {
+                this.initProd(url).then((project) => {
                     resolve([project]);
                 })
             }
@@ -46,6 +50,10 @@ export class ScannerService {
         let includesArray = includes.split(',');
         let excludesArray = excludes.split(',');
         let extensionsArray = extensions.split(',');
+
+        if(this.skipNaming) {
+            extensionsArray.some(extension => file.endsWith(extension));
+        }
 
         if (excludesArray.includes('')) excludesArray = [];
         if (excludesArray.some(ignore => file.includes(ignore))) return false;
@@ -77,7 +85,7 @@ export class ScannerService {
         const entries = await readdir(path);
         for (const entry of entries) {
             if (this.shouldIgnoreFile(entry)) continue;
-            const fullPath = `${path}/${entry}`;
+            const fullPath = path + Path.sep + entry;
             const entryStats = fs.statSync(fullPath);
             if (entryStats.isDirectory()) {
                 await this.fileScanner(fullPath, project);
@@ -124,19 +132,22 @@ export class ScannerService {
     /**
      * Fonction pour l'initialisation en mode PRODUCTION des projets dans ../
      *
+     * @param url {string} - L'url à scanner (optionnel)
      * @returns {Promise<Project>} - Le projet initialisé
      */
-    private initProd(): Promise<Project> {
+    private initProd(url: string = ""): Promise<Project> {
         let prodDir = '..';
+        if (url !== "") {
+            prodDir = url;
+        }
         let currentDir = process.cwd().split(Path.sep).pop()
         return new Promise((resolve, reject) => {
             let project: Project = new Project('project');
             readdir(prodDir).then(directories => {
                 console.log(directories)
-                // Créer un tableau de promesses pour chaque dossier trouvé
                 let promises = directories.map(async directory => {
                     try {
-                        if(directory === currentDir) return;
+                        if (directory === currentDir) return;
                         await readdir(prodDir + Path.sep + directory);
                         await this.fileScanner(prodDir + Path.sep + directory, project);
                     } catch (ignoredError) {

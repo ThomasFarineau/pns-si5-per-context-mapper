@@ -1,12 +1,43 @@
 #!/usr/bin/env node
-const { main } = require('../dist/App.js');
+const {main} = require('../dist/App.js');
+const {cloneRepo, deleteRepo} = require("../dist/RepoManager.js");
+
+
+const exec = (dir, skipNaming = false) => {
+    return new Promise((resolve, reject) => {
+        main(dir, skipNaming).then(() => {
+            console.log("[INFO] Application executed successfully.")
+            resolve(true)
+        }).catch(err => {
+            console.error("Erreur lors de l'exécution de la fonction main:", err);
+            reject(false);
+            process.exit(1);
+        })
+    })
+}
 
 const args = process.argv.slice(2);
-const isDevMode = args.includes('--dev');
 
+const isDevMode = args.includes('--dev') || args.includes('-d');
 process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
 
-main().then().catch(err => {
-  console.error("Erreur lors de l'exécution de la fonction main:", err);
-  process.exit(1);
-});
+if (args.length > 1 && isDevMode) {
+    console.warn("[INFO] You enable dev mode, other arguments will be ignored.")
+    exec().finally(() => {
+        process.exit(1);
+    });
+}
+
+const repoArg = args.find(arg => arg.startsWith('--repo=') || arg.startsWith('-r='));
+const skipNaming = args.includes('--skip-naming') || args.includes('-sn');
+if (repoArg) {
+    let repoUrl = repoArg.replace('--repo=', '').replace('-r=', '');
+    console.log("[INFO] Using repository:", repoUrl);
+    cloneRepo(repoUrl).then((url) => {
+        console.log("[INFO] Repository cloned successfully.");
+        exec(url, skipNaming).finally(() => {
+            deleteRepo()
+            process.exit(1);
+        })
+    })
+}

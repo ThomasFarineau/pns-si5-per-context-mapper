@@ -10,19 +10,21 @@ dotenv.config();
  * @returns {Promise<void>}
  * @async
  * @function main
+ * @param {string} url - Dossier a scanner (optionnel)
+ * @param skipNaming {boolean} - Si true, ignore la convention de nommage
  * @name main
  * @example await main()
  */
-export const main = async (): Promise<void> => {
-    scanner.init().then((projects) => {
-        swaggerParser.init(projects);
-        dockerComposeParser.init();
+export const main = async (url: string = "", skipNaming: boolean = false): Promise<void> => new Promise((resolve) => {
+    scanner.init(url, skipNaming).then((projects) => {
+        swaggerParser.init(projects).then(() => {
+            dockerComposeParser.init();
+            resolve();
+        })
     })
-};
+});
 
-if (process.env.APP_ENV === 'DEVELOPMENT') {
-    main().catch(err => {
-        console.error("Erreur lors de l'exécution de la fonction main:", err);
-        process.exit(1);
-    });
-}
+if (process.env.APP_ENV === 'DEVELOPMENT') main().catch(err => {
+    console.error("Erreur lors de l'exécution de la fonction main:", err);
+    process.exit(1);
+});

@@ -14,6 +14,7 @@ context-mapper-discovery/target/
 discovery/dist
 discovery/node_modules
 discovery/docs
+discovery/temp
 
 discovery/package-lock.json
 

@@ -25,34 +25,46 @@ export class SwaggerParserService {
      * @function init
      * @name init
      * @example SwaggerParserService.init()
-     * @returns {void}
      *
      */
-    init(projects: Project[]): void {
-        projects.forEach(project => this.parseSwaggerFiles(project))
+    init(projects: Project[]): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            let promises = projects.map(async (project) => {
+                await this.parseSwaggerFiles(project)
+            })
+            Promise.all(promises).then(() => resolve(true))
+        })
     }
 
     /**
      * Fonction transformant les fichiers OpenAPI en objets parsables
      *
      * @property {Project} project - Le projet utilisé
-     * @returns {void}
+     * @returns {Promise<void>}
      */
-    parseSwaggerFiles(project: Project): void {
-        let swaggerFiles = project.swaggerFiles;
-        let apis: any[] = [];
-        let promises = swaggerFiles.map(async swaggerFile => {
-            try {
-                let api = await SwaggerParser.validate(swaggerFile);
-                apis.push(api);
-            } catch (err) {
+    async parseSwaggerFiles(project: Project): Promise<void> {
+        return new Promise((resolve, reject) => {
+            let swaggerFiles = project.swaggerFiles;
+            let apis: any[] = [];
+            let promises = swaggerFiles.map(async swaggerFile => {
+                try {
+                    console.log("Parsing " + swaggerFile + "...");
+                    const api = await SwaggerParser.validate(swaggerFile);
+                    console.log(api.info.title + " parsed");
+                    apis.push(api);
+                } catch (err: any) {
+                    console.error(err.message);
+                }
+            });
+            Promise.all(promises).then(() => {
+                let dataModel = this.buildDataModel(apis, project.name);
+                console.log(dataModel);
+                this.createCMLFile(dataModel);
+                resolve();
+            }).catch(err => {
                 console.error(err);
-            }
-        })
-        Promise.all(promises).then(() => {
-            let dataModel = this.buildDataModel(apis, project.name);
-            console.log(dataModel);
-            this.createCMLFile(dataModel);
+                reject(err);
+            });
         })
     }
 
