@@ -60,8 +60,7 @@ export class SwaggerParserService {
                 console.log("Building model...");
                 let dataModel = this.buildDataModel(apis, project.name);
                 console.log(dataModel);
-                this.createCMLFile(dataModel);
-                resolve();
+                this.createCMLFile(dataModel).then(() => resolve()).catch(() => reject());
             }).catch(err => {
                 console.error(err);
                 reject(err);
@@ -92,14 +91,18 @@ export class SwaggerParserService {
      * @property {DataModel} dataModel - Le modèle de données à transformer en fichier CML
      * @returns {void}
      */
-    createCMLFile(dataModel: DataModel): void {
-        let cmlCreator: CMLCreator = new CMLCreator(dataModel);
-        fs.writeFile(path.join(__dirname, '..', '..', 'sandbox', 'context-mapper-forward', 'src', 'main', 'resources', 'models', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log("File writen successfully");
-            }
-        });
+    async createCMLFile(dataModel: DataModel): Promise<void> {
+        return new Promise((resolve, reject) => {
+            let cmlCreator: CMLCreator = new CMLCreator(dataModel);
+            fs.writeFile(path.join(__dirname, '..', '..', 'sandbox', 'context-mapper-forward', 'src', 'main', 'resources', 'models', dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
+                if (err) {
+                    console.error(err);
+                    reject();
+                } else {
+                    console.log("File writen successfully");
+                    resolve();
+                }
+            });
+        })
     }
 }
