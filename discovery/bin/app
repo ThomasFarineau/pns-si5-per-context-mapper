@@ -25,7 +25,9 @@ process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
 
 if (isDevMode) {
     console.warn("[INFO] You enable dev mode, other arguments will be ignored.")
-    exec().finally(() => {
+    exec().then(() => {
+        process.exit(0);
+    }).catch(() => {
         process.exit(1);
     });
 }
