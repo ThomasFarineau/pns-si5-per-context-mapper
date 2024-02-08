@@ -52,7 +52,7 @@ export class ScannerService {
         let extensionsArray = extensions.split(',');
 
         if(this.skipNaming) {
-            extensionsArray.some(extension => file.endsWith(extension));
+            return extensionsArray.some(extension => file.endsWith(extension));
         }
 
         if (excludesArray.includes('')) excludesArray = [];

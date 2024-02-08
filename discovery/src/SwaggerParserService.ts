@@ -57,6 +57,7 @@ export class SwaggerParserService {
                 }
             });
             Promise.all(promises).then(() => {
+                console.log("Building model...");
                 let dataModel = this.buildDataModel(apis, project.name);
                 console.log(dataModel);
                 this.createCMLFile(dataModel);
