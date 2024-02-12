@@ -6,9 +6,9 @@
     "start": "ts-node -r ./load-env.ts ./src/App.ts",
     "dev": "nodemon",
     "build:docs": "typedoc",
-    "build:dist": "tsc",
-    "build": "npm run build:dist && npm run build:docs",
-    "exec:windows": "node ./bin/app"
+    "build": "tsc",
+    "exec:windows": "node ./bin/app",
+    "test": "node ./bin/app --dev"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,12 @@
   "homepage": "https://github.com/DeathStar3-projects/context-mapper-per-23/tree/main/discovery#readme",
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
-    "dotenv": "^16.4.1"
+    "dotenv": "^16.4.1",
+    "git-clone": "^0.2.0"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
+    "@types/git-clone": "^0.2.3",
     "dotenv-cli": "^7.3.0",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",

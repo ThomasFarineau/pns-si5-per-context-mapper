@@ -2,9 +2,9 @@
 
 cd discovery
 
-npm run build:dist
+npm run build
 
-npm run exec:windows
+npm run test
 
 cd ..
 
