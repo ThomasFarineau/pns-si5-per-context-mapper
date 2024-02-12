@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+const {main} = require('../dist/App.js');
+const {cloneRepo, deleteRepo} = require("../dist/RepoManager.js");
+const fs = require("fs");
+const path = require("path");
+
+
+const exec = (dir, skipNaming = false, outputFolder) => {
+    return new Promise((resolve, reject) => {
+        main(dir, skipNaming, outputFolder).then(() => {
+            console.log("[INFO] Application executed successfully.")
+            resolve(true)
+        }).catch(err => {
+            console.error("Erreur lors de l'exécution de la fonction main:", err);
+            reject(false);
+            process.exit(1);
+        })
+    })
+}
+
+const args = process.argv.slice(2);
+
+const isDevMode = args.includes('--dev') || args.includes('-d');
+process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
+
+if (isDevMode) {
+    console.warn("[INFO] You enable dev mode, other arguments will be ignored.")
+    exec().then(() => {
+        process.exit(0);
+    }).catch(() => {
+        process.exit(1);
+    });
+}
+
+const repoArg = args.find(arg => arg.startsWith('--repo=') || arg.startsWith('-r='));
+const skipNaming = args.includes('--skip-naming') || args.includes('-sn');
+const outputFolderArg = args.find(arg => arg.startsWith('--output-folder') || arg.startsWith('-of'));
+let outputFolder = outputFolderArg ? outputFolderArg.slice(outputFolderArg.indexOf("=") + 1) : process.env.OUTPUT_FOLDER;
+
+let stats;
+try {
+    stats = fs.statSync(outputFolder);
+
+} catch (e) {
+    console.error(e);
+    process.exit(1);
+}
+
+if (!stats.isDirectory()) {
+    console.error("Output folder is actually not a folder");
+    process.exit(1);
+}
+
+const outputFolderAbsolute = path.resolve(outputFolder);
+if (repoArg) {
+    let repoUrl = repoArg.replace('--repo=', '').replace('-r=', '');
+    console.log("[INFO] Using repository:", repoUrl);
+    cloneRepo(repoUrl).then((url) => {
+        console.log("[INFO] Repository cloned successfully.");
+        exec(url, skipNaming, outputFolderAbsolute).finally(() => {
+            deleteRepo()
+            process.exit(1);
+        })
+    })
+}

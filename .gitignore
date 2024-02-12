@@ -10,3 +10,12 @@ sandbox/context-mapper-forward/target/
 /sandbox/context-map-discovery/*/target/
 
 context-mapper-discovery/target/
+
+discovery/dist
+discovery/node_modules
+discovery/docs
+discovery/temp
+
+discovery/package-lock.json
+
+sandbox/context-mapper-forward/src/main/resources/models/*.cml

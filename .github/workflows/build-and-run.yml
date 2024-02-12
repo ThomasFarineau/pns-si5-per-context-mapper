@@ -1,0 +1,51 @@
+name: Build and Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # utile pour lancer le workflow manuellement
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3  # Mise à jour à la dernière version
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies and Build Discovery
+        run: |
+          cd discovery
+          npm install
+          npm run build
+          npm run exec:windows -- --dev
+          cd ..
+
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3  # Mise à jour à la dernière version
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+
+      - name: Install Graphviz
+        run: sudo apt-get install graphviz
+
+      - name: Build and Run Java Project
+        run: |
+          cd sandbox/context-mapper-forward
+          mvn clean package
+          mvn exec:java
+          cd ../..
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: png-artifacts
+          path: sandbox/context-mapper-forward/src-gen/*.png

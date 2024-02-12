@@ -1,0 +1,240 @@
+version: "3.7"
+services:
+  proxy:
+    build:
+      context: ./Proxy
+      dockerfile: Dockerfile
+    volumes:
+      - maven-repo:/root/.m2
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=mongodb://services-database:27017/services
+    depends_on:
+      - services-database
+    networks:
+      - app
+
+  user-service:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    ports:
+      - "3009"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - DATABASE_URL=mongodb://app-database:27017/users
+    volumes:
+      - maven-repo:/root/.m2
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  friendship-service:
+    build:
+      context: ./FriendshipService
+      dockerfile: Dockerfile
+    ports:
+      - "3001"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - DATABASE_URL=mongodb://app-database:27017/friendships
+    volumes:
+      - maven-repo:/root/.m2    
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  transaction-service:
+    build:
+      context: ./TransactionService
+      dockerfile: Dockerfile
+    ports:
+      - "3002"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - DATABASE_URL=mongodb://app-database:27017/transactions
+    volumes:
+      - maven-repo:/root/.m2
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  card-service:
+    build:
+      context: ./CardService
+      dockerfile: Dockerfile
+    ports:
+      - "3003"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - DATABASE_URL=mongodb://app-database:27017/cards
+    volumes:
+      - maven-repo:/root/.m2
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  account-service:
+    build:
+      context: ./AccountService
+      dockerfile: Dockerfile
+    ports:
+      - "3004"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - DATABASE_URL=mongodb://app-database:27017/accounts
+    volumes:
+      - maven-repo:/root/.m2    
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  friend-transaction-service:
+    build:
+      context: ./FriendTransactionService
+      dockerfile: Dockerfile
+    ports:
+      - "3005"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+    volumes:
+      - maven-repo:/root/.m2    
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  nfc-transaction-service:
+    build:
+      context: ./NFCTransactionService
+      dockerfile: Dockerfile
+    ports:
+      - "3006"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+    volumes:
+      - maven-repo:/root/.m2        
+    depends_on:
+      - proxy
+      - app-database
+    networks:
+      - app
+
+  external-transaction-service:
+    build:
+      context: ./ExternalTransactionService
+      dockerfile: Dockerfile
+    ports:
+      - "3007"
+    environment:
+      - PROXY_URL=http://proxy:8080/
+      - EXTERNAL_BANK_URL=http://external-bank-service:8081/
+      - DATABASE_URL=mongodb://app-database:27017/transactions
+    volumes:
+      - maven-repo:/root/.m2    
+    depends_on:
+      - rabbitmq
+      - proxy
+      - app-database
+      - redis-cache
+    networks:
+      - rabbit
+      - app
+
+  external-bank-service:
+    build:
+      context: ./ExternalBank
+      dockerfile: Dockerfile
+    volumes:
+      - maven-repo:/root/.m2
+    ports:
+      - "8081:8081"
+    depends_on:
+      - rabbitmq
+    networks:
+      - rabbit
+      - app
+
+  app-database:
+    image: mongo:4.4.18
+    restart: on-failure
+    ports:
+      - '27017:27017'
+    volumes:
+      - app_database:/data/db
+    networks:
+      - app
+
+  services-database:
+    image: mongo:4.4.18
+    restart: on-failure
+    ports:
+      - '27018:27017'
+    volumes:
+      - services_database:/data/db
+    networks:
+      - app
+
+  prometheus:
+    image: prom/prometheus:v2.44.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus
+    networks:
+      - app
+
+  grafana:
+    image: grafana/grafana:9.5.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - app
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    networks:
+      - rabbit
+
+
+  redis-cache:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - app
+
+
+volumes:
+  app_database:
+  services_database:
+  maven-repo:
+
+
+networks:
+  rabbit:
+  app:

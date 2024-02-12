@@ -1,0 +1,120 @@
+ContextMap projectContextMap {
+
+	contains CatalogProductsContext 
+
+	contains InvoicesContext 
+
+	contains OrdersContext 
+
+	contains OrdersContext 
+
+	contains PartnerReferralsContext 
+
+	contains PartnerReferralsContext 
+
+	contains PaymentExperienceWebProfilesContext 
+
+	contains PaymentMethodTokensContext 
+
+	contains PaymentsContext 
+
+	contains PayoutsContext 
+
+	contains ShipmentTrackingContext 
+
+	contains SubscriptionsContext 
+
+	contains TransactionSearchContext 
+
+	contains WebhooksManagementContext 
+
+}
+
+Domain projectDomain {
+
+	SubDomain CatalogProductsDomain {
+	}
+
+	SubDomain InvoicesDomain {
+	}
+
+	SubDomain OrdersDomain {
+	}
+
+	SubDomain OrdersDomain {
+	}
+
+	SubDomain PartnerReferralsDomain {
+	}
+
+	SubDomain PartnerReferralsDomain {
+	}
+
+	SubDomain PaymentExperienceWebProfilesDomain {
+	}
+
+	SubDomain PaymentMethodTokensDomain {
+	}
+
+	SubDomain PaymentsDomain {
+	}
+
+	SubDomain PayoutsDomain {
+	}
+
+	SubDomain ShipmentTrackingDomain {
+	}
+
+	SubDomain SubscriptionsDomain {
+	}
+
+	SubDomain TransactionSearchDomain {
+	}
+
+	SubDomain WebhooksManagementDomain {
+	}
+
+}
+
+BoundedContext CatalogProductsContext implements CatalogProductsDomain  {
+}
+
+BoundedContext InvoicesContext implements InvoicesDomain  {
+}
+
+BoundedContext OrdersContext implements OrdersDomain  {
+}
+
+BoundedContext OrdersContext implements OrdersDomain  {
+}
+
+BoundedContext PartnerReferralsContext implements PartnerReferralsDomain  {
+}
+
+BoundedContext PartnerReferralsContext implements PartnerReferralsDomain  {
+}
+
+BoundedContext PaymentExperienceWebProfilesContext implements PaymentExperienceWebProfilesDomain  {
+}
+
+BoundedContext PaymentMethodTokensContext implements PaymentMethodTokensDomain  {
+}
+
+BoundedContext PaymentsContext implements PaymentsDomain  {
+}
+
+BoundedContext PayoutsContext implements PayoutsDomain  {
+}
+
+BoundedContext ShipmentTrackingContext implements ShipmentTrackingDomain  {
+}
+
+BoundedContext SubscriptionsContext implements SubscriptionsDomain  {
+}
+
+BoundedContext TransactionSearchContext implements TransactionSearchDomain  {
+}
+
+BoundedContext WebhooksManagementContext implements WebhooksManagementDomain  {
+}
+
