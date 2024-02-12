@@ -4,7 +4,7 @@ cd discovery
 
 npm run build
 
-npm run test
+npm run exec:windows -- -sn
 
 cd ..
 

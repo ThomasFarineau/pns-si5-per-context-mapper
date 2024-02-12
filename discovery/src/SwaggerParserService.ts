@@ -53,7 +53,7 @@ export class SwaggerParserService {
                     console.log(api.info.title + " parsed");
                     apis.push(api);
                 } catch (err: any) {
-                    console.error(err.message);
+                    console.error(swaggerFile, err.message);
                 }
             });
             Promise.all(promises).then(() => {

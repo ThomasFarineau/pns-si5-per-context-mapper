@@ -25,7 +25,7 @@ export class ScannerService {
     init(url: string = "", skipNaming: boolean = false): Promise<Project[]> {
         this.skipNaming = skipNaming;
         return new Promise((resolve, reject) => {
-            if (process.env.APP_ENV === 'DEVELOPMENT') {
+            if (process.env.APP_ENV === 'LOCAL') {
                 this.initDev().then((projects) => {
                     resolve(projects);
                 })
