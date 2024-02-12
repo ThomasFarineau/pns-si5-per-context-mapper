@@ -17,5 +17,6 @@ discovery/docs
 discovery/temp
 
 discovery/package-lock.json
+discovery/output/*
 
 sandbox/context-mapper-forward/src/main/resources/models/*.cml

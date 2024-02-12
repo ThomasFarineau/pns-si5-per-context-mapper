@@ -1,4 +1,5 @@
 import {DataModel} from "./DataModel";
+import { Service } from "./Service";
 
 /**
  * Classe de création du fichier CML
@@ -19,6 +20,7 @@ export class CMLCreator {
      * @returns {string}
      */
     getCMLFileContent(): string {
+        
         this.appendContextMap();
 
         this.appendDomains();
@@ -54,8 +56,18 @@ export class CMLCreator {
         for (let service of this.dataModel.services) {
             let alphaNumeric = service.name;
             contexts += "BoundedContext " + alphaNumeric + "Context implements " + alphaNumeric + "Domain " + " {\n";
+            contexts += this.appendAggregates(service)
             contexts += "}\n\n";
         }
         this.fileContent += contexts;
+    }
+
+    appendAggregates(service : Service): String {
+        let contexts: string = "";
+        for (let key in service.components.schemas) {
+            contexts += "\t " + service.components.schemas[key] + "\n";
+            
+        }
+        return contexts;
     }
 }
