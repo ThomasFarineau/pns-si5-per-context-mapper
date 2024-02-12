@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
-    private static final String JAVA_JAR = "java -jar generator.jar";
+    private static final String JAVA_JAR = "java -jar parser-1.0-jar-with-dependencies.jar";
 
     public static void main(String... args) {
         ArgParser argParser = new ArgParser();
