@@ -1,6 +1,11 @@
 name: Build and Run
 
 on:
+  workflow_run:
+    workflows: ["Build Parser"]
+    branches: [main]
+    types:
+      - completed
   push:
     branches:
       - main
@@ -37,17 +42,23 @@ jobs:
       - name: Install Graphviz
         run: sudo apt-get install graphviz
 
-      - name: Build and Run Java Project
+      - name: Download Parser JAR
+        uses: actions/download-artifact@v3
+        with:
+          name: jar-artifacts
+
+      - name: Unzip
         run: |
-          cd sandbox/context-mapper-forward
-          mvn clean package
-          mvn exec:java
-          cd ../..
+          mv jar-artifacts/*.jar parser.jar
+
+      - name: Run Parser
+        run: |
+          java -jar parser.jar --inputs=./model --output=./output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: image-artifacts
           path: |
-            sandbox/context-mapper-forward/src-gen/*.png
-            sandbox/context-mapper-forward/src-gen/*.svg
+            output/*.png
+            output/*.svg
