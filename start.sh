@@ -14,8 +14,10 @@ fi
 
 cd ..
 
-cd sandbox/context-mapper-forward
-
+cd parser
 mvn clean package
+mv target/parser-1.0-jar-with-dependencies.jar ../parser-1.0-jar-with-dependencies.jar
+cd ..
+java -jar parser-1.0-jar-with-dependencies.jar --inputs=./models --output=./output
 
-mvn exec:java
+rm parser-1.0-jar-with-dependencies.jar

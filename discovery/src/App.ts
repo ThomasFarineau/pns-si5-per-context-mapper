@@ -5,6 +5,8 @@ import * as path from "path";
 
 dotenv.config();
 
+const defaultPath: string = path.resolve(process.env.OUTPUT_FOLDER ? process.env.OUTPUT_FOLDER : "../models");
+
 /**
  * Fonction point d'entrée de l'application, elle est asynchrone et ne retourne rien
  *
@@ -17,7 +19,7 @@ dotenv.config();
  * @name main
  * @example await main()
  */
-export const main = async (url: string = "", skipNaming: boolean = false, outputFolder: string = path.resolve("../sandbox/context-mapper-forward/src/main/resources/models")): Promise<void> => new Promise((resolve) => {
+export const main = async (url: string = "", skipNaming: boolean = false, outputFolder: string = defaultPath): Promise<void> => new Promise((resolve) => {
     scanner.init(url, skipNaming).then((projects) => {
         swaggerParser.init(projects, outputFolder).then(() => {
             dockerComposeParser.init();
