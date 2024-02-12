@@ -2,8 +2,8 @@ name: Build and Run
 
 on:
   workflow_run:
-    workflows: ["Build Parser"]
-    branches: [main]
+    workflows:
+      - Build Parser
     types:
       - completed
   push:
