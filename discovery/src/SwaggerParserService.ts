@@ -78,7 +78,15 @@ export class SwaggerParserService {
     buildDataModel(apis: any[], projectName: string): DataModel {
         let dataModel: DataModel = new DataModel(projectName);
         for (let api of apis) {
-            dataModel.addService(new Service(api.info.title));
+            let service = new Service(api.info.title);
+            for (const path in api.paths) {
+                const currentPath = api.paths[path];
+                for (const restMethod in currentPath) {
+                    let currentRestMethod = currentPath[restMethod];
+                    service.addRestMethod(restMethod, currentRestMethod);
+                }
+            }
+            dataModel.addService(service);
         }
         dataModel.alphaNumeric();
         dataModel.sortServices();
