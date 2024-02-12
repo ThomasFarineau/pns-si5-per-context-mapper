@@ -1,251 +1,248 @@
 {
-    "swaggerDoc": {
-      "swagger": "2.0",
-      "info": {
-        "version": "1.0.0",
-        "title": "Rocket Status API",
-        "description": ""
-      },
-      "host": "localhost:3001",
-      "basePath": "/",
-      "schemes": [
-        "http",
-        "https"
-      ],
-      "consumes": [
-        "application/json"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "paths": {
-        "/api/launch-readiness": {
-          "get": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
-        "/api/booster-fuel-level": {
-          "post": {
-            "description": "",
-            "parameters": [
-              {
-                "name": "body",
-                "in": "body",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "fuel": {
-                      "example": "any"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "Created"
-              }
-            }
-          }
-        },
-        "/api/data": {
-          "get": {
-            "description": "",
-            "responses": {
-              "default": {
-                "description": ""
-              }
-            }
-          }
-        },
-        "/api/set-anomaly": {
-          "post": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
-        "/api/telemetry/rocket": {
-          "post": {
-            "description": "",
-            "parameters": [
-              {
-                "name": "body",
-                "in": "body",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "example": "any"
-                    },
-                    "altitude": {
-                      "example": "any"
-                    },
-                    "velocity": {
-                      "example": "any"
-                    },
-                    "fuel": {
-                      "example": "any"
-                    },
-                    "payload": {
-                      "example": "any"
-                    },
-                    "hasDetached": {
-                      "example": "any"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          },
-          "get": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "400": {
-                "description": "Bad Request"
-              }
-            }
-          }
-        },
-        "/api/telemetry/rocket/set-anomaly": {
-          "post": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
-        "/api/telemetry/booster": {
-          "post": {
-            "description": "",
-            "parameters": [
-              {
-                "name": "body",
-                "in": "body",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "example": "any"
-                    },
-                    "rocketId": {
-                      "example": "any"
-                    },
-                    "altitude": {
-                      "example": "any"
-                    },
-                    "velocity": {
-                      "example": "any"
-                    },
-                    "trajectory": {
-                      "example": "any"
-                    },
-                    "fuel": {
-                      "example": "any"
-                    },
-                    "landingFuel": {
-                      "example": "any"
-                    },
-                    "angle": {
-                      "example": "any"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "500": {
-                "description": "Internal Server Error"
-              }
-            }
-          },
-          "get": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "400": {
-                "description": "Bad Request"
-              }
-            }
-          }
-        },
-        "/api/telemetry/payload": {
-          "post": {
-            "description": "",
-            "parameters": [
-              {
-                "name": "body",
-                "in": "body",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "example": "any"
-                    },
-                    "rocketId": {
-                      "example": "any"
-                    },
-                    "altitude": {
-                      "example": "any"
-                    },
-                    "temperature": {
-                      "example": "any"
-                    },
-                    "speed": {
-                      "example": "any"
-                    },
-                    "batteryLevel": {
-                      "example": "any"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "500": {
-                "description": "Internal Server Error"
-              }
-            }
-          },
-          "get": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "400": {
-                "description": "Bad Request"
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Rocket Status API",
+    "description": ""
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/launch-readiness": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "customOptions": {}
+    "/api/booster-fuel-level": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fuel": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/data": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/set-anomaly": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telemetry/rocket": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "altitude": {
+                  "example": "any"
+                },
+                "velocity": {
+                  "example": "any"
+                },
+                "fuel": {
+                  "example": "any"
+                },
+                "payload": {
+                  "example": "any"
+                },
+                "hasDetached": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/telemetry/rocket/set-anomaly": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telemetry/booster": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "rocketId": {
+                  "example": "any"
+                },
+                "altitude": {
+                  "example": "any"
+                },
+                "velocity": {
+                  "example": "any"
+                },
+                "trajectory": {
+                  "example": "any"
+                },
+                "fuel": {
+                  "example": "any"
+                },
+                "landingFuel": {
+                  "example": "any"
+                },
+                "angle": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/telemetry/payload": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "rocketId": {
+                  "example": "any"
+                },
+                "altitude": {
+                  "example": "any"
+                },
+                "temperature": {
+                  "example": "any"
+                },
+                "speed": {
+                  "example": "any"
+                },
+                "batteryLevel": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
   }
+}

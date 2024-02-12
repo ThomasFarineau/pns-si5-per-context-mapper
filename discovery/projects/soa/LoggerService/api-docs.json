@@ -1,62 +1,59 @@
 {
-    "swaggerDoc": {
-      "swagger": "2.0",
-      "info": {
-        "version": "1.0.0",
-        "title": "Logger API",
-        "description": ""
-      },
-      "host": "localhost:3008",
-      "basePath": "/",
-      "schemes": [
-        "http",
-        "https"
-      ],
-      "consumes": [
-        "application/json"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "paths": {
-        "/api/": {
-          "get": {
-            "description": "",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
-        "/api/log": {
-          "post": {
-            "description": "",
-            "parameters": [
-              {
-                "name": "body",
-                "in": "body",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "service": {
-                      "example": "any"
-                    },
-                    "message": {
-                      "example": "any"
-                    }
-                  }
-                }
-              }
-            ],
-            "responses": {
-              "500": {
-                "description": "Internal Server Error"
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Logger API",
+    "description": ""
+  },
+  "host": "localhost:3008",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "customOptions": {}
+    "/api/log": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "service": {
+                  "example": "any"
+                },
+                "message": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
   }
+}
