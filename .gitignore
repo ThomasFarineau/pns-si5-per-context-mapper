@@ -13,5 +13,5 @@ discovery/package-lock.json
 
 parser/target/
 
-models
+models/*.cml
 modelsOutput
