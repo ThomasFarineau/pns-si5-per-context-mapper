@@ -17,11 +17,16 @@ export class DataModel {
      * @param service
      */
     addService(service: Service): void {
-        this.services.push(service);
+        if (!this.contains(service))
+            this.services.push(service);
     }
 
     sortServices(): void {
         this.services.sort(this.compareServices);
+    }
+
+    contains(service: Service): boolean {
+        return this.services.some((element) => element.name === service.name);
     }
 
     compareServices(a: Service, b: Service): number {
