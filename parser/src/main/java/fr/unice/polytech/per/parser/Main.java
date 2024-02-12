@@ -10,6 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
+
+    /*
+    todo: trouver un moyen d'afficher le nom du jar
+     */
     private static final String JAVA_JAR = "java -jar parser-1.0-jar-with-dependencies.jar";
 
     public static void main(String... args) {
