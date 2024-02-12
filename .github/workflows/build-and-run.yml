@@ -34,6 +34,7 @@ jobs:
           path: parser/target/*-dependencies.jar
 
   build-and-run:
+    needs: build-parser
     runs-on: ubuntu-latest
 
     steps:
