@@ -47,7 +47,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: png-artifacts
+          name: image-artifacts
           path: |
             sandbox/context-mapper-forward/src-gen/*.png
             sandbox/context-mapper-forward/src-gen/*.svg
