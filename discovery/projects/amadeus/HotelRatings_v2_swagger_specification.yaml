@@ -60,6 +60,9 @@ definitions:
       numberOfRatings:
         type: integer
         example: 350
+      avgHotelAvailabilityResponseTime:
+        type: integer
+        example: 50
       numberOfReviews:
         type: integer
         example: 200
