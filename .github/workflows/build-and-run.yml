@@ -48,4 +48,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: png-artifacts
-          path: sandbox/context-mapper-forward/src-gen/*.png
+          path: |
+            sandbox/context-mapper-forward/src-gen/*.png
+            sandbox/context-mapper-forward/src-gen/*.svg
