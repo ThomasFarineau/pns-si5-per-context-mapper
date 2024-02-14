@@ -58,8 +58,8 @@ jobs:
           java-version: '19'
           distribution: 'adopt'
 
-      #- name: Install Graphviz
-      #  run: sudo apt-get install graphviz
+      - name: Install Graphviz
+        run: sudo apt-get install graphviz
 
       - name: Download Parser JAR
         uses: actions/download-artifact@v3
@@ -68,7 +68,7 @@ jobs:
 
       - name: Run Parser
         run: |
-          java -jar parser-1.0-jar-with-dependencies.jar --inputs=./model --output=./output
+          java -jar parser-1.0-jar-with-dependencies.jar --inputs=./models --output=./output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
