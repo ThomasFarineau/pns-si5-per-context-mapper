@@ -24,12 +24,11 @@ export class SwaggerParserService {
      *
      * @example SwaggerParserService.init(projects, outputFolder)
      * @param projects Les projets à traiter
-     * @param outputFolder Le dossier où les fichiers générés doivent être enregistrés
      * @returns {Promise<Project[]>} Une promesse qui résout avec la liste des modèles de données générés
      */
-    init(projects: Project[], outputFolder: string): Promise<Project[]> {
+    init(projects: Project[]): Promise<Project[]> {
         return new Promise((resolve, reject) => {
-            let promises = projects.map(project => this.parseSwaggerFiles(project, outputFolder));
+            let promises = projects.map(project => this.parseSwaggerFiles(project));
             Promise.all(promises).then(dataModels => {
                 dataModels.forEach(dataModel => {
                     projects.forEach(project => {
@@ -53,7 +52,7 @@ export class SwaggerParserService {
      * @property {Project} project - Le projet utilisé
      * @returns {Promise<DataModel>}
      */
-    async parseSwaggerFiles(project: Project, outputFolder: string): Promise<DataModel> {
+    async parseSwaggerFiles(project: Project): Promise<DataModel> {
         return new Promise((resolve, reject) => {
             let swaggerFiles = project.swaggerFiles;
             let apis: any[] = [];
