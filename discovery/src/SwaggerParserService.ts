@@ -93,6 +93,15 @@ export class SwaggerParserService {
                     const currentSchema = api.components.schemas[schema];
                     components.addSchemas(schema, currentSchema);
                     console.log("Schema added: " + schema , currentSchema);
+
+                    if (currentSchema.type === "object") {
+                        let properties = currentSchema.properties;
+                        for (let property in properties) {
+                            let currentProperty = properties[property];
+                            let entity = new Entity(property, service.name, currentProperty);
+                            dataModel.addEntity(entity);
+                        }
+                    }
                 }
             }
             /*for (const key in service.restMethods) {

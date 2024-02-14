@@ -56,7 +56,7 @@ export class CMLCreator {
         for (let service of this.dataModel.services) {
             let alphaNumeric = service.name;
             contexts += "BoundedContext " + alphaNumeric + "Context implements " + alphaNumeric + "Domain " + " {\n";
-            contexts += this.appendAggregates(service)
+            /*contexts += this.appendAggregates(service)*/
             contexts += "}\n\n";
         }
         this.fileContent += contexts;
