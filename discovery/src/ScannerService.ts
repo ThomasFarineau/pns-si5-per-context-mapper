@@ -114,6 +114,7 @@ export class ScannerService {
                     try {
                         await readdir(scanDir + Path.sep + directory);
                         let project = new Project(mode === 'LOCAL' ? directory : 'project');
+                        project.alphaNumericName();
                         await this.fileScanner(scanDir + Path.sep + directory, project);
                         if (mode === 'DISTANT') {
                             return resolve([project]);

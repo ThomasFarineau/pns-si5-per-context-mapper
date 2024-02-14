@@ -34,4 +34,12 @@ export class Project {
     setDataModel(dataModel: DataModel) {
         this.dataModel = dataModel;
     }
+
+    alphaNumericName(): void {
+        this.name = this.keepOnlyAlphaNumeric(this.name);
+    }
+
+    keepOnlyAlphaNumeric(str: string): string {
+        return str.replace(/[^a-z0-9]/gi, '');
+    }
 }
