@@ -7,6 +7,7 @@ import {Service} from "./Service";
 import * as path from "path";
 import {CMLCreator} from "./CMLCreator";
 import * as fs from "fs";
+import { Entity } from './Entities';
 
 dotenv.config();
 
@@ -91,6 +92,7 @@ export class SwaggerParserService {
                 for (const schema in api.components.schemas) {
                     const currentSchema = api.components.schemas[schema];
                     components.addSchemas(schema, currentSchema);
+                    console.log("Schema added: " + schema , currentSchema);
                 }
             }
             /*for (const key in service.restMethods) {
