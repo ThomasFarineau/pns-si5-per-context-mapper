@@ -68,6 +68,7 @@ jobs:
 
       - name: Unzip
         run: |
+          unzip jar-artifacts/*.jar -d jar-artifacts
           mv jar-artifacts/*.jar parser.jar
 
       - name: Run Parser
