@@ -95,25 +95,4 @@ export class SwaggerParserService {
         dataModel.sortServices();
         return dataModel;
     }
-
-    /**
-     * Fonction créant le fichier CML à partir du modèle de données
-     *
-     * @property {DataModel} dataModel - Le modèle de données à transformer en fichier CML
-     * @returns {void}
-     */
-    async createCMLFile(dataModel: DataModel, outputFolder: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            let cmlCreator: CMLCreator = new CMLCreator(dataModel);
-            fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), cmlCreator.getCMLFileContent(), err => {
-                if (err) {
-                    console.error(err);
-                    reject();
-                } else {
-                    console.log("File writen successfully");
-                    resolve();
-                }
-            });
-        })
-    }
 }

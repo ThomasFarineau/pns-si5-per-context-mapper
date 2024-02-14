@@ -1,4 +1,4 @@
-import {dockerComposeParser, scanner, swaggerParser} from "./util";
+import {cmlCreator, dockerComposeParser, scanner, swaggerParser} from "./util";
 
 import * as dotenv from 'dotenv';
 import * as path from "path";
@@ -22,8 +22,9 @@ const defaultPath: string = path.resolve(process.env.OUTPUT_FOLDER ? process.env
 export const main = async (url: string = "", skipNaming: boolean = false, outputFolder: string = defaultPath): Promise<void> => new Promise((resolve) => {
     scanner.init(url, skipNaming).then((projects) => {
         swaggerParser.init(projects, outputFolder).then((dataModels) => {
-            dockerComposeParser.init(projects, dataModels);
-            resolve();
+            dockerComposeParser.init(projects, dataModels).then((dataModels) => {
+                cmlCreator.createCMLFile(dataModels, outputFolder).then(() => resolve());
+            });
         })
     })
 });
