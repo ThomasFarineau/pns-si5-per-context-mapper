@@ -19,11 +19,14 @@ export class DockerComposeParserService {
      * @example DockerComposeParserService.init()
      * @returns {Promise<DataModel[]>}
      */
-    init(projects: Project[], dataModels: DataModel[]): Promise<DataModel[]> {
+    init(projects: Project[]): Promise<DataModel[]> {
         console.log('classe de parsing du docker-compose');
         console.log(projects)
-        console.log(dataModels)
         return new Promise((resolve, reject) => {
+            let dataModels: DataModel[] = [];
+            projects.forEach(project => {
+                dataModels.push(project.dataModel!);
+            });
             resolve(dataModels);
         })
     }

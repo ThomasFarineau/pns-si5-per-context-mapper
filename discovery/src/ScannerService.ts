@@ -85,9 +85,11 @@ export class ScannerService {
             const entryStats = fs.statSync(fullPath);
             if (entryStats.isDirectory()) {
                 await this.fileScanner(fullPath, project);
-            } else if (this.isSwaggerFile(entry)) {
+            }
+            if (this.isSwaggerFile(entry)) {
                 project.addSwaggerFile(fullPath);
-            } else if (this.isDockerComposeFile(entry)) {
+            }
+            if (this.isDockerComposeFile(entry)) {
                 project.addDockerComposeFile(fullPath);
             }
         }

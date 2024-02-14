@@ -25,19 +25,27 @@ export class SwaggerParserService {
      * @example SwaggerParserService.init(projects, outputFolder)
      * @param projects Les projets à traiter
      * @param outputFolder Le dossier où les fichiers générés doivent être enregistrés
-     * @returns {Promise<DataModel[]>} Une promesse qui résout avec la liste des modèles de données générés
+     * @returns {Promise<Project[]>} Une promesse qui résout avec la liste des modèles de données générés
      */
-    init(projects: Project[], outputFolder: string): Promise<DataModel[]> {
+    init(projects: Project[], outputFolder: string): Promise<Project[]> {
         return new Promise((resolve, reject) => {
             let promises = projects.map(project => this.parseSwaggerFiles(project, outputFolder));
             Promise.all(promises).then(dataModels => {
-                resolve(dataModels);
+                dataModels.forEach(dataModel => {
+                    projects.forEach(project => {
+                        if (project.name === dataModel.name) {
+                            project.setDataModel(dataModel);
+                        }
+                    })
+                })
+                resolve(projects);
             }).catch(err => {
                 console.error("Erreur lors de l'initialisation des projets: ", err);
                 reject(err);
             });
         });
     }
+
 
     /**
      * Fonction transformant les fichiers OpenAPI en objets
@@ -53,10 +61,13 @@ export class SwaggerParserService {
                 try {
                     //console.log("Parsing " + swaggerFile + "...");
                     const api = await SwaggerParser.validate(swaggerFile);
-                    //console.log(api.info.title + " parsed");
+                    if (project.dockerComposeFiles.includes(swaggerFile)) {
+                        project.dockerComposeFiles.splice(project.dockerComposeFiles.indexOf(swaggerFile), 1);
+                    }
                     apis.push(api);
                 } catch (err: any) {
                     console.error(swaggerFile, err.message);
+                    project.swaggerFiles.splice(project.swaggerFiles.indexOf(swaggerFile), 1);
                 }
             });
             Promise.all(promises).then(() => {
