@@ -59,7 +59,7 @@ export class SwaggerParserService {
             Promise.all(promises).then(() => {
                 console.log("Building model...");
                 let dataModel = this.buildDataModel(apis, project.name);
-                console.log(dataModel);
+                //console.log(dataModel);
                 this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
             }).catch(err => {
                 console.error(err);
@@ -92,6 +92,16 @@ export class SwaggerParserService {
                     const currentSchema = api.components.schemas[schema];
                     components.addSchemas(schema, currentSchema);
                 }
+            }
+            /*for (const key in service.restMethods) {
+                for (const value of service.restMethods[key]) {
+                    console.log("VALUE", value.parameters);
+                    if (value.parameters === undefined)
+                        console.log(value)
+                }
+            }*/
+            for (const value of service.restMethods["post"]) {
+                console.log("VALUE", value.parameters);
             }
             dataModel.addService(service);
         }

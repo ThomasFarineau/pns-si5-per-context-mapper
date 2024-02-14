@@ -70,7 +70,7 @@ export class CMLCreator {
             contexts += "\t\t\tEntity " + schemaActuel.title + "Entity {\n";
             if (schemaActuel.properties !== undefined){
                 for (let property in schemaActuel.properties) {
-                    console.log(schemaActuel.properties[property]);
+                    //console.log(schemaActuel.properties[property]);
                     contexts += "\t\t\t\t" + property + " " + schemaActuel.properties[property].type + "\n";
                 }
             }
