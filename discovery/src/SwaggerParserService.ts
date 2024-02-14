@@ -20,29 +20,32 @@ dotenv.config();
  */
 export class SwaggerParserService {
     /**
-     * Fonction d'initialisation de la classe
+     * Fonction d'initialisation de la classe qui traite les fichiers Swagger de chaque projet et construit les modèles de données correspondants.
      *
-     * @function init
-     * @name init
-     * @example SwaggerParserService.init()
-     *
+     * @example SwaggerParserService.init(projects, outputFolder)
+     * @param projects Les projets à traiter
+     * @param outputFolder Le dossier où les fichiers générés doivent être enregistrés
+     * @returns {Promise<DataModel[]>} Une promesse qui résout avec la liste des modèles de données générés
      */
-    init(projects: Project[], outputFolder: string): Promise<boolean> {
+    init(projects: Project[], outputFolder: string): Promise<DataModel[]> {
         return new Promise((resolve, reject) => {
-            let promises = projects.map(async (project) => {
-                await this.parseSwaggerFiles(project, outputFolder)
-            })
-            Promise.all(promises).then(() => resolve(true))
-        })
+            let promises = projects.map(project => this.parseSwaggerFiles(project, outputFolder));
+            Promise.all(promises).then(dataModels => {
+                resolve(dataModels);
+            }).catch(err => {
+                console.error("Erreur lors de l'initialisation des projets: ", err);
+                reject(err);
+            });
+        });
     }
 
     /**
-     * Fonction transformant les fichiers OpenAPI en objets parsables
+     * Fonction transformant les fichiers OpenAPI en objets
      *
      * @property {Project} project - Le projet utilisé
-     * @returns {Promise<void>}
+     * @returns {Promise<DataModel>}
      */
-    async parseSwaggerFiles(project: Project, outputFolder: string): Promise<void> {
+    async parseSwaggerFiles(project: Project, outputFolder: string): Promise<DataModel> {
         return new Promise((resolve, reject) => {
             let swaggerFiles = project.swaggerFiles;
             let apis: any[] = [];
@@ -59,8 +62,8 @@ export class SwaggerParserService {
             Promise.all(promises).then(() => {
                 console.log("Building model...");
                 let dataModel = this.buildDataModel(apis, project.name);
-                console.log(dataModel);
-                this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
+                resolve(dataModel);
+                //this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
             }).catch(err => {
                 console.error(err);
                 reject(err);

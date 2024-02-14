@@ -21,8 +21,8 @@ const defaultPath: string = path.resolve(process.env.OUTPUT_FOLDER ? process.env
  */
 export const main = async (url: string = "", skipNaming: boolean = false, outputFolder: string = defaultPath): Promise<void> => new Promise((resolve) => {
     scanner.init(url, skipNaming).then((projects) => {
-        swaggerParser.init(projects, outputFolder).then(() => {
-            dockerComposeParser.init();
+        swaggerParser.init(projects, outputFolder).then((dataModels) => {
+            dockerComposeParser.init(dataModels);
             resolve();
         })
     })

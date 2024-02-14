@@ -1,3 +1,5 @@
+import {DataModel} from "./DataModel";
+
 /**
  * Classe de parsing du docker-compose
  *
@@ -16,7 +18,8 @@ export class DockerComposeParserService {
      * @example DockerComposeParserService.init()
      * @returns {void}
      */
-    init(): void {
+    init(dataModels: DataModel[]): void {
+        console.log(dataModels)
         console.log('classe de parsing du docker-compose');
     }
 }
