@@ -32,6 +32,7 @@ jobs:
         with:
           name: jar-artifacts
           path: parser/target/*-dependencies.jar
+          retention-days: 1
 
   build-and-run:
     needs: build-parser
