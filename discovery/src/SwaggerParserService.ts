@@ -48,9 +48,9 @@ export class SwaggerParserService {
             let apis: any[] = [];
             let promises = swaggerFiles.map(async swaggerFile => {
                 try {
-                    console.log("Parsing " + swaggerFile + "...");
+                    //console.log("Parsing " + swaggerFile + "...");
                     const api = await SwaggerParser.validate(swaggerFile);
-                    console.log(api.info.title + " parsed");
+                    //console.log(api.info.title + " parsed");
                     apis.push(api);
                 } catch (err: any) {
                     console.error(swaggerFile, err.message);

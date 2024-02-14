@@ -25,15 +25,11 @@ export class ScannerService {
     init(url: string = "", skipNaming: boolean = false): Promise<Project[]> {
         this.skipNaming = skipNaming;
         return new Promise((resolve, reject) => {
-            if (process.env.APP_ENV === 'LOCAL') {
-                this.initDev().then((projects) => {
-                    resolve(projects);
-                })
-            } else {
-                this.initProd(url).then((project) => {
-                    resolve([project]);
-                })
-            }
+            // @ts-ignore
+            let env: 'LOCAL' | 'DISTANT' = process.env.APP_ENV ?? "LOCAL"
+            this.initProjects(env, url).then((projects) => {
+                resolve(projects);
+            })
         })
     }
 
@@ -51,7 +47,7 @@ export class ScannerService {
         let excludesArray = excludes.split(',');
         let extensionsArray = extensions.split(',');
 
-        if(this.skipNaming) {
+        if (this.skipNaming) {
             return extensionsArray.some(extension => file.endsWith(extension));
         }
 
@@ -98,70 +94,45 @@ export class ScannerService {
     }
 
     /**
-     * Fonction pour l'initialisation en mode DEVELOPMENT des projets dans ./projects dans un environnement de développement
+     * Fonction pour l'initialisation des projets en mode DEVELOPMENT ou PRODUCTION
      *
-     * @returns {Promise<Project[]>} - Les projets initialisés
+     * @param mode {string} - Le mode d'initialisation ('LOCAL' ou 'DISTANT')
+     * @param url {string} - L'url à scanner (optionnel, utilisé seulement en mode DISTANT)
+     * @returns {Promise<Project[]>} - Les projets initialisés (un tableau pour LOCAL, un seul objet pour DISTANT)
      */
-    private initDev(): Promise<Project[]> {
-        let devDir = './projects';
-        return new Promise((resolve, reject) => {
-            let projects: Project[] = [];
-            readdir(devDir).then(directories => {
-                // Créer un tableau de promesses pour chaque dossier trouvé
-                let promises = directories.map(async directory => {
-                    try {
-                        await readdir(devDir + Path.sep + directory);
-                        let project = new Project(directory);
-                        await this.fileScanner(devDir + Path.sep + directory, project);
-                        projects.push(project);
-                    } catch (ignoredError) {
-                    }
-                });
-
-                Promise.all(promises).then(() => {
-                    return resolve(projects);
-                }).catch(err => {
-                    console.error("Erreur lors de la récupération des projets: ", err);
-                });
-            }).catch(err => {
-                console.error("Erreur lors de la lecture du répertoire ./projects: ", err);
-            });
-        })
-    }
-
-    /**
-     * Fonction pour l'initialisation en mode PRODUCTION des projets dans ../
-     *
-     * @param url {string} - L'url à scanner (optionnel)
-     * @returns {Promise<Project>} - Le projet initialisé
-     */
-    private initProd(url: string = ""): Promise<Project> {
-        let prodDir = '..';
-        if (url !== "") {
-            prodDir = url;
+    private initProjects(mode: 'LOCAL' | 'DISTANT', url: string = ""): Promise<Project[]> {
+        let scanDir = mode === 'LOCAL' ? './projects' : '..';
+        if (mode === 'DISTANT' && url !== "") {
+            scanDir = url;
         }
-        let currentDir = process.cwd().split(Path.sep).pop()
+        let projects: Project[] = [];
         return new Promise((resolve, reject) => {
-            let project: Project = new Project('project');
-            readdir(prodDir).then(directories => {
-                console.log(directories)
+            readdir(scanDir).then(directories => {
                 let promises = directories.map(async directory => {
                     try {
-                        if (directory === currentDir) return;
-                        await readdir(prodDir + Path.sep + directory);
-                        await this.fileScanner(prodDir + Path.sep + directory, project);
+                        await readdir(scanDir + Path.sep + directory);
+                        let project = new Project(mode === 'LOCAL' ? directory : 'project');
+                        await this.fileScanner(scanDir + Path.sep + directory, project);
+                        if (mode === 'DISTANT') {
+                            return resolve([project]);
+                        } else {
+                            projects.push(project);
+                        }
                     } catch (ignoredError) {
                     }
                 });
-                Promise.all(promises).then(() => {
-                    return resolve(project);
-                }).catch(err => {
-                    console.error("Erreur lors de la récupération des service du projets: ", err);
-                });
+
+                if (mode === 'LOCAL') {
+                    Promise.all(promises).then(() => {
+                        return resolve(projects);
+                    }).catch(err => {
+                        console.error("Erreur lors de la récupération des projets: ", err);
+                    });
+                }
             }).catch(err => {
-                console.error("Erreur lors de la lecture du répertoire ../: ", err);
+                console.error(`Erreur lors de la lecture du répertoire ${scanDir}: `, err);
             });
-        })
+        });
     }
 
     /**
