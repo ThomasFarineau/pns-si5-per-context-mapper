@@ -1,9 +1,0 @@
-name: Build Parser
-
-on:
-  push:
-    paths:
-      - 'parser/**'
-  workflow_dispatch:
-
-jobs:
