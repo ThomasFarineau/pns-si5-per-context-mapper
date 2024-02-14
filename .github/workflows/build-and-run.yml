@@ -66,14 +66,9 @@ jobs:
         with:
           name: jar-artifacts
 
-      - name: Unzip
-        run: |
-          ls -l
-          mv jar-artifacts/*.jar parser.jar
-
       - name: Run Parser
         run: |
-          java -jar parser.jar --inputs=./model --output=./output
+          java -jar parser-1.0-jar-with-dependencies.jar --inputs=./model --output=./output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
