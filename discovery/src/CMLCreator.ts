@@ -65,8 +65,17 @@ export class CMLCreator {
     appendAggregates(service : Service): String {
         let contexts: string = "";
         for (let key in service.components.schemas) {
-            contexts += "\t " + service.components.schemas[key] + "\n";
-            
+            let schemaActuel = service.components.schemas[key];
+            contexts += "\t\tAggregate " + key + "{\n";
+            contexts += "\t\t\tEntity " + schemaActuel.title + "Entity {\n";
+            if (schemaActuel.properties !== undefined){
+                for (let property in schemaActuel.properties) {
+                    console.log(schemaActuel.properties[property]);
+                    contexts += "\t\t\t\t" + property + " " + schemaActuel.properties[property].type + "\n";
+                }
+            }
+            contexts += "\t\t\t}\n";
+            contexts += "\t\t}\n";
         }
         return contexts;
     }

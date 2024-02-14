@@ -87,9 +87,11 @@ export class SwaggerParserService {
                     service.addRestMethod(restMethod, currentRestMethod);
                 }
             }
-            for (const schema in api.components.schemas) {
-                const currentSchema = api.components.schemas[schema];
-                components.addSchemas(schema, currentSchema);
+            if (api.components !== undefined) {
+                for (const schema in api.components.schemas) {
+                    const currentSchema = api.components.schemas[schema];
+                    components.addSchemas(schema, currentSchema);
+                }
             }
             dataModel.addService(service);
         }
