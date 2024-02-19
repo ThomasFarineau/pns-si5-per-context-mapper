@@ -62,19 +62,17 @@ export class SwaggerParserService {
                     //console.log("Parsing " + swaggerFile + "...");
                     const api = await SwaggerParser.validate(swaggerFile);
                     if (project.dockerComposeFiles.includes(swaggerFile)) {
-                        project.dockerComposeFiles.splice(project.dockerComposeFiles.indexOf(swaggerFile), 1);
+                        project.removeDockerComposeFile(swaggerFile);
                     }
                     apis.push(api);
                 } catch (err: any) {
                     console.error(swaggerFile, err.message);
-                    project.swaggerFiles.splice(project.swaggerFiles.indexOf(swaggerFile), 1);
+                    project.removeSwaggerFile(swaggerFile);
                 }
             });
             Promise.all(promises).then(() => {
                 console.log("Building model...");
-                let dataModel = this.buildDataModel(apis, project.name);
-                resolve(dataModel);
-                //this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
+                resolve(this.buildDataModel(apis, project.name));
             }).catch(err => {
                 console.error(err);
                 reject(err);

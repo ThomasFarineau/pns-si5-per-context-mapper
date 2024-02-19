@@ -3,7 +3,7 @@ name: marsy-team-e
 services:
   weather:
     build:
-      context: weather
+      context: WeatherService
       dockerfile: Dockerfile
     container_name: team-e-weather
     ports:
@@ -17,7 +17,7 @@ services:
       - marsy-team-e-network
   rocketstatus:
     build:
-      context: rocketstatus
+      context: RocketStatusService
       dockerfile: Dockerfile
     container_name: team-e-rocketstatus
     depends_on:
@@ -35,7 +35,7 @@ services:
       - marsy-team-e-network
   missioncontrol:
     build:
-      context: missioncontrol
+      context: MisionControlService
       dockerfile: Dockerfile
     container_name: team-e-missioncontrol
     ports:
@@ -48,7 +48,7 @@ services:
       - marsy-team-e-network
   rocketdepartment:
     build:
-      context: rocketdepartment
+      context: RocketDepartementService
       dockerfile: Dockerfile
     container_name: team-e-rocketdepartment
     ports:
@@ -61,7 +61,7 @@ services:
       - marsy-team-e-network
   customercargo:
     build:
-      context: customercargo
+      context: CustomerCargoService
       dockerfile: Dockerfile
     container_name: team-e-customercargo
     ports:
@@ -74,7 +74,7 @@ services:
       - marsy-team-e-network
   rocket:
     build:
-      context: rocket
+      context: RocketService
       dockerfile: Dockerfile
     container_name: team-e-rocket
     ports:
@@ -87,7 +87,7 @@ services:
       - marsy-team-e-network
   booster:
     build:
-      context: booster
+      context: BoosterService
       dockerfile: Dockerfile
     container_name: team-e-booster
     ports:
@@ -100,7 +100,7 @@ services:
       - marsy-team-e-network
   payload:
     build:
-      context: payload
+      context: PayloadService
       dockerfile: Dockerfile
     container_name: team-e-payload
     ports:
@@ -113,7 +113,7 @@ services:
       - marsy-team-e-network
   logger:
     build:
-      context: logger
+      context: LoggerService
       dockerfile: Dockerfile
     container_name: team-e-logger
     ports:
@@ -131,7 +131,7 @@ services:
       - marsy-team-e-network
   streaming:
     build:
-      context: streaming
+      context: StreamingAPIService
       dockerfile: Dockerfile
     container_name: team-e-streaming
     ports:
@@ -144,7 +144,7 @@ services:
       - marsy-team-e-network
   crew:
     build:
-      context: crew
+      context: CrewService
       dockerfile: Dockerfile
     container_name: team-e-crew
     ports:
