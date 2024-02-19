@@ -21,7 +21,7 @@ const exec = (dir, skipNaming = false, outputFolder) => {
 const args = process.argv.slice(2);
 
 const isDevMode = args.includes('--dev') || args.includes('-d');
-process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
+//process.env.APP_ENV = isDevMode ? 'DEVELOPMENT' : 'PRODUCTION';
 
 if (isDevMode) {
     console.warn("[INFO] You enable dev mode, other arguments will be ignored.")
@@ -33,6 +33,9 @@ if (isDevMode) {
 }
 
 const repoArg = args.find(arg => arg.startsWith('--repo=') || arg.startsWith('-r='));
+
+process.env.APP_ENV = repoArg ? 'DISTANT' : 'LOCAL';
+
 const skipNaming = args.includes('--skip-naming') || args.includes('-sn');
 const outputFolderArg = args.find(arg => arg.startsWith('--output-folder') || arg.startsWith('-of'));
 let outputFolder = outputFolderArg ? outputFolderArg.slice(outputFolderArg.indexOf("=") + 1) : process.env.OUTPUT_FOLDER;
@@ -40,7 +43,6 @@ let outputFolder = outputFolderArg ? outputFolderArg.slice(outputFolderArg.index
 let stats;
 try {
     stats = fs.statSync(outputFolder);
-
 } catch (e) {
     console.error(e);
     process.exit(1);
@@ -62,4 +64,11 @@ if (repoArg) {
             process.exit(1);
         })
     })
+} else {
+    console.log("[INFO] Using local files.");
+    exec(null, skipNaming, outputFolderAbsolute).then(() => {
+        process.exit(0);
+    }).catch(() => {
+        process.exit(1);
+    });
 }

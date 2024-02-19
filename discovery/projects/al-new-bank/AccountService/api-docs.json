@@ -1,1 +1,425 @@
-{"openapi":"3.0.1","info":{"title":"NewBank API - Account Service","description":"Service qui permet de gérer les comptes épargnes et courants des clients de NewBank","version":"1.0"},"servers":[{"url":"http://localhost:62567","description":"Generated server url"}],"paths":{"/api/accounts/{id}/add/{amount}":{"put":{"tags":["Accounts"],"operationId":"add","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"amount","in":"path","required":true,"schema":{"type":"number","format":"double"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/AccountDtoOut"}}}}}}},"/api/transaction":{"post":{"tags":["Account transactions"],"operationId":"createTransactionAccount","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TransactionDtoIn"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/TransactionDtoOut"}}}}}}},"/api/transaction/external":{"post":{"tags":["Account transactions"],"operationId":"createTransactionExterne","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TransactionDtoIn"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/TransactionDtoOut"}}}}}}},"/api/savingaccounts":{"get":{"tags":["Saving Accounts"],"operationId":"get","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/SavingAccountDtoOut"}}}}}}},"post":{"tags":["Saving Accounts"],"operationId":"save","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavingAccountDtoIn"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/api/accounts":{"get":{"tags":["Accounts"],"operationId":"get_1","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/AccountDtoOut"}}}}}}},"post":{"tags":["Accounts"],"operationId":"save_1","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Account"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/AccountDtoOut"}}}}}}},"/api/savingaccounts/{id}":{"get":{"tags":["Saving Accounts"],"operationId":"getById","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/AccountOperationsDtoOut"}}}}}}},"/api/accounts/{id}":{"get":{"tags":["Accounts"],"operationId":"getById_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/AccountOperationsDtoOut"}}}}}}}},"components":{"schemas":{"AccountDtoOut":{"type":"object","properties":{"id":{"type":"string"},"balance":{"type":"number","format":"double"},"iban":{"type":"string"},"swift":{"type":"string"}}},"TransactionDtoIn":{"type":"object","properties":{"receiver":{"type":"string"},"sender":{"type":"string"},"amount":{"type":"number","format":"double"},"type":{"type":"string"}}},"TransactionDtoOut":{"type":"object","properties":{"receiver":{"type":"string"},"sender":{"type":"string"},"amount":{"type":"number","format":"double"},"success":{"type":"boolean"},"message":{"type":"string"}}},"SavingAccountDtoIn":{"type":"object","properties":{"userId":{"type":"string"}}},"Account":{"type":"object","properties":{"id":{"type":"string"},"balance":{"type":"number","format":"double"},"accountId":{"type":"string"},"rib":{"type":"string"},"iban":{"type":"string"},"total_IBAN_LENGTH":{"type":"integer","format":"int32"},"country_CODE":{"type":"string"},"control_KEY":{"type":"string"},"bank_CODE":{"type":"string"},"agency_CODE":{"type":"string"},"swift":{"type":"string"}}},"SavingAccountDtoOut":{"type":"object","properties":{"id":{"type":"string"},"balance":{"type":"number","format":"double"},"iban":{"type":"string"},"swift":{"type":"string"},"operations":{"type":"object"},"interestRate":{"type":"number","format":"double"}}},"AccountOperationsDtoOut":{"type":"object","properties":{"id":{"type":"string"},"balance":{"type":"number","format":"double"},"iban":{"type":"string"},"swift":{"type":"string"},"operations":{"type":"object"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBank API - Account Service",
+    "description": "Service qui permet de gérer les comptes épargnes et courants des clients de NewBank",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:62567",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/accounts/{id}/add/{amount}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "add",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transaction": {
+      "post": {
+        "tags": [
+          "Account transactions"
+        ],
+        "operationId": "createTransactionAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transaction/external": {
+      "post": {
+        "tags": [
+          "Account transactions"
+        ],
+        "operationId": "createTransactionExterne",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/savingaccounts": {
+      "get": {
+        "tags": [
+          "Saving Accounts"
+        ],
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SavingAccountDtoOut"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Saving Accounts"
+        ],
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavingAccountDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "get_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountDtoOut"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "save_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/savingaccounts/{id}": {
+      "get": {
+        "tags": [
+          "Saving Accounts"
+        ],
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountOperationsDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/accounts/{id}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "getById_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountOperationsDtoOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountDtoOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "swift": {
+            "type": "string"
+          }
+        }
+      },
+      "TransactionDtoIn": {
+        "type": "object",
+        "properties": {
+          "receiver": {
+            "type": "string"
+          },
+          "sender": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "TransactionDtoOut": {
+        "type": "object",
+        "properties": {
+          "receiver": {
+            "type": "string"
+          },
+          "sender": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SavingAccountDtoIn": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "rib": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "total_IBAN_LENGTH": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country_CODE": {
+            "type": "string"
+          },
+          "control_KEY": {
+            "type": "string"
+          },
+          "bank_CODE": {
+            "type": "string"
+          },
+          "agency_CODE": {
+            "type": "string"
+          },
+          "swift": {
+            "type": "string"
+          }
+        }
+      },
+      "SavingAccountDtoOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "swift": {
+            "type": "string"
+          },
+          "operations": {
+            "type": "object"
+          },
+          "interestRate": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "AccountOperationsDtoOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "swift": {
+            "type": "string"
+          },
+          "operations": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

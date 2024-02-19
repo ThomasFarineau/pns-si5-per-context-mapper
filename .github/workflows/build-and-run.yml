@@ -10,7 +10,32 @@ on:
   workflow_dispatch: # utile pour lancer le workflow manuellement
 
 jobs:
+  build-parser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3  # Mise à jour à la dernière version
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+
+      - name: Build Parser
+        run: |
+          cd parser
+          mvn clean package
+
+      - name: Upload Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: jar-artifacts
+          path: parser/target/*-dependencies.jar
+          retention-days: 1
+
   build-and-run:
+    needs: build-parser
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +50,7 @@ jobs:
           cd discovery
           npm install
           npm run build
-          npm run exec:windows -- --dev
+          npm run exec:windows -- -sn
           cd ..
 
       - name: Set up JDK 19
@@ -37,15 +62,19 @@ jobs:
       - name: Install Graphviz
         run: sudo apt-get install graphviz
 
-      - name: Build and Run Java Project
+      - name: Download Parser JAR
+        uses: actions/download-artifact@v3
+        with:
+          name: jar-artifacts
+
+      - name: Run Parser
         run: |
-          cd sandbox/context-mapper-forward
-          mvn clean package
-          mvn exec:java
-          cd ../..
+          java -jar parser-1.0-jar-with-dependencies.jar --inputs=./models --output=./output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: png-artifacts
-          path: sandbox/context-mapper-forward/src-gen/*.png
+          name: image-artifacts
+          path: |
+            output/*.png
+            output/*.svg

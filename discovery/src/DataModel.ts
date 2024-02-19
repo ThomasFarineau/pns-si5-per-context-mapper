@@ -9,6 +9,7 @@ import {Service} from "./Service";
 
 export class DataModel {
     services: Service[] = [];
+    entities: { [key: string]: any } = {};
 
     constructor(public name: string) {}
 
@@ -17,11 +18,23 @@ export class DataModel {
      * @param service
      */
     addService(service: Service): void {
-        this.services.push(service);
+        if (!this.contains(service))
+            this.services.push(service);
+    }
+
+    addEntity(entity: any): void {
+        if (this.entities[entity.service] === undefined) {
+            this.entities[entity.service] = [];
+        }
+        this.entities[entity.service].push(entity);
     }
 
     sortServices(): void {
         this.services.sort(this.compareServices);
+    }
+
+    contains(service: Service): boolean {
+        return this.services.some((element) => element.name === service.name);
     }
 
     compareServices(a: Service, b: Service): number {

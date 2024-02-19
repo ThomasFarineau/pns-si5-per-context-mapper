@@ -3,19 +3,16 @@ src-gen/
 
 .idea/
 
-sandbox/context-mapper-forward/target/
-
 *.iml
-
-/sandbox/context-map-discovery/*/target/
-
-context-mapper-discovery/target/
 
 discovery/dist
 discovery/node_modules
 discovery/docs
 discovery/temp
-
 discovery/package-lock.json
+discovery/output/*
 
-sandbox/context-mapper-forward/src/main/resources/models/*.cml
+parser/target/
+
+models/*.cml
+output

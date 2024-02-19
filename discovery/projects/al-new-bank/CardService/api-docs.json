@@ -1,1 +1,179 @@
-{"openapi":"3.0.1","info":{"title":"NewBank API - Card Service","description":"Service qui permet de gérer les cartes bancaires.","version":"1.0"},"servers":[{"url":"http://localhost:62573","description":"Generated server url"}],"paths":{"/api/cards":{"get":{"tags":["Cards"],"operationId":"get","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}},"post":{"tags":["Cards"],"operationId":"save","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CardDtoIn"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/api/cards/{id}":{"get":{"tags":["Cards"],"operationId":"getById","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CardDtoOut"}}}}}},"delete":{"tags":["Cards"],"operationId":"deleteById","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK"}}}},"/api/cards/account/{accountId}":{"get":{"tags":["Cards"],"operationId":"getByAccountId","parameters":[{"name":"accountId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}}}},"components":{"schemas":{"CardDtoIn":{"type":"object","properties":{"accountId":{"type":"string"},"spendingLimit":{"type":"number","format":"double"}}},"CardDtoOut":{"type":"object","properties":{"id":{"type":"string"},"cardNumber":{"type":"string"},"privateCryptogram":{"type":"string"},"expirationDate":{"type":"string","format":"date-time"},"account":{"type":"string"},"spendingLimit":{"type":"number","format":"double"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBank API - Card Service",
+    "description": "Service qui permet de gérer les cartes bancaires.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:62573",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/cards": {
+      "get": {
+        "tags": [
+          "Cards"
+        ],
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cards"
+        ],
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/cards/{id}": {
+      "get": {
+        "tags": [
+          "Cards"
+        ],
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardDtoOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cards"
+        ],
+        "operationId": "deleteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/cards/account/{accountId}": {
+      "get": {
+        "tags": [
+          "Cards"
+        ],
+        "operationId": "getByAccountId",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CardDtoIn": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "spendingLimit": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "CardDtoOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "cardNumber": {
+            "type": "string"
+          },
+          "privateCryptogram": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "account": {
+            "type": "string"
+          },
+          "spendingLimit": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}

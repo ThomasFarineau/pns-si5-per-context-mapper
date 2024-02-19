@@ -1,3 +1,6 @@
+import {DataModel} from "./DataModel";
+import {Project} from "./Project";
+
 /**
  * Classe de parsing du docker-compose
  *
@@ -14,9 +17,17 @@ export class DockerComposeParserService {
      * @function init
      * @name init
      * @example DockerComposeParserService.init()
-     * @returns {void}
+     * @returns {Promise<DataModel[]>}
      */
-    init(): void {
+    init(projects: Project[]): Promise<DataModel[]> {
         console.log('classe de parsing du docker-compose');
+        console.log(JSON.stringify(projects, null, 2));
+        return new Promise((resolve, reject) => {
+            let dataModels: DataModel[] = [];
+            projects.forEach(project => {
+                dataModels.push(project.dataModel!);
+            });
+            resolve(dataModels);
+        })
     }
 }

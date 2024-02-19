@@ -1,1 +1,225 @@
-{"openapi":"3.0.1","info":{"title":"NewBank API - External Transaction Service","description":"Service qui permet de gérer les transactions externes.","version":"1.0"},"servers":[{"url":"http://localhost:62572","description":"Generated server url"}],"paths":{"/api/transactions":{"post":{"tags":["Transaction Management"],"operationId":"createTransaction","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ExternalTransactionDto"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/api/transactions/cache":{"get":{"tags":["Transaction Management"],"operationId":"getTransactionsCache","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}},"post":{"tags":["Transaction Management"],"operationId":"createTransactionCache","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ExternalTransactionDto"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/ExternalTransactionCacheDto"}}}}}}},"/api/transactions/cache/{id}":{"get":{"tags":["Transaction Management"],"operationId":"getTransactionCache","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/ExternalTransactionCacheDto"}}}}}},"delete":{"tags":["Transaction Management"],"operationId":"deleteTransactionCache","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int32"}}],"responses":{"200":{"description":"OK"}}}},"/api/transactions/cache/sender/{sender}/receiver/{receiver}/amount/{amount}":{"get":{"tags":["Transaction Management"],"operationId":"getTransactionsCacheWithAttributes","parameters":[{"name":"sender","in":"path","required":true,"schema":{"type":"string"}},{"name":"receiver","in":"path","required":true,"schema":{"type":"string"}},{"name":"amount","in":"path","required":true,"schema":{"type":"number","format":"double"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}}}},"components":{"schemas":{"ExternalTransactionDto":{"type":"object","properties":{"sender":{"type":"string"},"receiver":{"type":"string"},"amount":{"type":"number","format":"double"}}},"ExternalTransactionCacheDto":{"type":"object","properties":{"id":{"type":"integer","format":"int32"},"sender":{"type":"string"},"receiver":{"type":"string"},"amount":{"type":"number","format":"double"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBank API - External Transaction Service",
+    "description": "Service qui permet de gérer les transactions externes.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:62572",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/transactions": {
+      "post": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "createTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalTransactionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/transactions/cache": {
+      "get": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "getTransactionsCache",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "createTransactionCache",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalTransactionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalTransactionCacheDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transactions/cache/{id}": {
+      "get": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "getTransactionCache",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalTransactionCacheDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "deleteTransactionCache",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/transactions/cache/sender/{sender}/receiver/{receiver}/amount/{amount}": {
+      "get": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "getTransactionsCacheWithAttributes",
+        "parameters": [
+          {
+            "name": "sender",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "receiver",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExternalTransactionDto": {
+        "type": "object",
+        "properties": {
+          "sender": {
+            "type": "string"
+          },
+          "receiver": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ExternalTransactionCacheDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sender": {
+            "type": "string"
+          },
+          "receiver": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}
