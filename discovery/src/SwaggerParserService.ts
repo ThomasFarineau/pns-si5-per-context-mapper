@@ -4,10 +4,8 @@ import SwaggerParser from "@apidevtools/swagger-parser";
 import {Project} from "./Project";
 import {DataModel} from "./DataModel";
 import {Service} from "./Service";
-import * as path from "path";
-import {CMLCreator} from "./CMLCreator";
-import * as fs from "fs";
 import { Entity } from './Entities';
+const Diff = require('diff');
 
 dotenv.config();
 
@@ -71,7 +69,7 @@ export class SwaggerParserService {
                 }
             });
             Promise.all(promises).then(() => {
-                console.log("Building model...");
+                console.log("Building model for " + project.name + "...");
                 let dataModel = this.buildDataModel(apis, project.name);
                 resolve(dataModel);
                 //this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
@@ -131,6 +129,45 @@ export class SwaggerParserService {
         }
         dataModel.alphaNumeric();
         dataModel.sortServices();
+
+        for (let service of dataModel.services) {
+            for (let restMethodsKey in service.restMethods) {
+                for (const restMethod of service.restMethods[restMethodsKey]) {
+                    //console.log(JSON.stringify(restMethod, null, 2));
+                    if (restMethod.requestBody) {
+                        //console.log(restMethod.requestBody.content["application/json"].schema);
+                        for (let service2 of dataModel.services) {
+                            if (service.name !== service2.name) {
+                                for (let restMethodsKey2 in service2.restMethods) {
+                                    for (const restMethod2 of service2.restMethods[restMethodsKey2]) {
+                                        if (restMethod2.requestBody) {
+                                            //console.log(restMethod2.requestBody, restMethod.requestBody, "\n");
+                                            if (restMethod.requestBody.content["application/json"] && restMethod2.requestBody.content["application/json"]) {
+                                                const diff = Diff.diffJson(restMethod.requestBody.content["application/json"].schema, restMethod2.requestBody.content["application/json"].schema, {});
+                                                console.log("diff terminée :)");
+                                                let totalCount = 0;
+                                                let equalCount = 0;
+                                                diff.forEach((part: any) => {
+                                                    //console.log(part, "\n");
+                                                    totalCount += part.count;
+                                                    if (!part.added && !part.removed) {
+                                                        equalCount += part.count;
+                                                    }
+                                                })
+                                                if (equalCount / totalCount >= 0.8) {
+                                                    console.log("Service " + service.name + " to service " + service2.name, equalCount, totalCount);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         return dataModel;
     }
 }

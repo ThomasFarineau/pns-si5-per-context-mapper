@@ -21,7 +21,7 @@ export class DockerComposeParserService {
      */
     init(projects: Project[]): Promise<DataModel[]> {
         console.log('classe de parsing du docker-compose');
-        console.log(JSON.stringify(projects, null, 2));
+        //console.log(JSON.stringify(projects, null, 2));
         return new Promise((resolve, reject) => {
             let dataModels: DataModel[] = [];
             projects.forEach(project => {
