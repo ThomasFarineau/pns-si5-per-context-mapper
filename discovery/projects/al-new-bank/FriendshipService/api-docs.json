@@ -1,1 +1,193 @@
-{"openapi":"3.0.1","info":{"title":"NewBank API - Friendship Service","description":"Service qui permet de gérer les amitiés.","version":"1.0"},"servers":[{"url":"http://localhost:62566","description":"Generated server url"}],"paths":{"/api/requests":{"get":{"tags":["Requests"],"operationId":"getRequests","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}},"post":{"tags":["Requests"],"operationId":"request","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FriendRequestDtoIn"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/api/friendships/check":{"post":{"tags":["Friendships"],"operationId":"areFriends","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CheckFriendDtoIn"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"boolean"}}}}}}},"/api/requests/{id}":{"get":{"tags":["Requests"],"operationId":"getRequests_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}}},"/api/friendships":{"get":{"tags":["Friendships"],"operationId":"get","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}}},"/api/friendships/{id}":{"get":{"tags":["Friendships"],"operationId":"get_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"object"}}}}}}}},"components":{"schemas":{"FriendRequestDtoIn":{"type":"object","properties":{"senderId":{"type":"string"},"receiverId":{"type":"string"}}},"CheckFriendDtoIn":{"type":"object","properties":{"user1Id":{"type":"string"},"user2Id":{"type":"string"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBank API - Friendship Service",
+    "description": "Service qui permet de gérer les amitiés.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:62566",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/requests": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "operationId": "getRequests",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Requests"
+        ],
+        "operationId": "request",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FriendRequestDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/friendships/check": {
+      "post": {
+        "tags": [
+          "Friendships"
+        ],
+        "operationId": "areFriends",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckFriendDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/requests/{id}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "operationId": "getRequests_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friendships": {
+      "get": {
+        "tags": [
+          "Friendships"
+        ],
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friendships/{id}": {
+      "get": {
+        "tags": [
+          "Friendships"
+        ],
+        "operationId": "get_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FriendRequestDtoIn": {
+        "type": "object",
+        "properties": {
+          "senderId": {
+            "type": "string"
+          },
+          "receiverId": {
+            "type": "string"
+          }
+        }
+      },
+      "CheckFriendDtoIn": {
+        "type": "object",
+        "properties": {
+          "user1Id": {
+            "type": "string"
+          },
+          "user2Id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

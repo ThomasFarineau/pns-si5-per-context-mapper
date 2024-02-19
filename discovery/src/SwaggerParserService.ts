@@ -105,7 +105,7 @@ export class SwaggerParserService {
                 for (const schema in api.components.schemas) {
                     const currentSchema = api.components.schemas[schema];
                     components.addSchemas(schema, currentSchema);
-                    console.log("Schema added: " + schema , currentSchema);
+                    //console.log("Schema added: " + schema , currentSchema);
 
                     if (currentSchema.type === "object") {
                         let properties = currentSchema.properties;
@@ -124,9 +124,9 @@ export class SwaggerParserService {
                         console.log(value)
                 }
             }*/
-            for (const value of service.restMethods["post"]) {
+            /*for (const value of service.restMethods["post"]) {
                 console.log("VALUE", value.parameters);
-            }
+            }*/
             dataModel.addService(service);
         }
         dataModel.alphaNumeric();

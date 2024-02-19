@@ -34,7 +34,6 @@ export class CMLCreator {
                     });
                 })
             });
-            console.log(promises);
             Promise.all(promises).then(() => {
                 resolve();
             }).catch(err => {

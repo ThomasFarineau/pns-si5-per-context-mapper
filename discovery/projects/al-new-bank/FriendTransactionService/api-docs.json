@@ -1,1 +1,65 @@
-{"openapi":"3.0.1","info":{"title":"NewBank API - Friend Transaction Service","description":"Service qui permet de gérer les transactions.","version":"1.0"},"servers":[{"url":"http://localhost:62571","description":"Generated server url"}],"paths":{"/api/transactions":{"post":{"tags":["Transaction Management"],"operationId":"createTransaction","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TransactionDtoIn"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"type":"boolean"}}}}}}}},"components":{"schemas":{"TransactionDtoIn":{"type":"object","properties":{"receiver":{"type":"string"},"sender":{"type":"string"},"amount":{"type":"number","format":"double"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NewBank API - Friend Transaction Service",
+    "description": "Service qui permet de gérer les transactions.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:62571",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/transactions": {
+      "post": {
+        "tags": [
+          "Transaction Management"
+        ],
+        "operationId": "createTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDtoIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TransactionDtoIn": {
+        "type": "object",
+        "properties": {
+          "receiver": {
+            "type": "string"
+          },
+          "sender": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}
