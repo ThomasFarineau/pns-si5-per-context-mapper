@@ -10,6 +10,7 @@ discovery/node_modules
 discovery/docs
 discovery/temp
 discovery/package-lock.json
+discovery/output/*
 
 parser/target/
 

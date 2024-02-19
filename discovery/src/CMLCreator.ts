@@ -1,6 +1,7 @@
 import {DataModel} from "./DataModel";
 import fs from "fs";
 import path from "path";
+import { Service } from "./Service";
 
 /**
  * Classe de création du fichier CML
@@ -88,9 +89,33 @@ export class CMLCreator {
         for (let service of dataModel.services) {
             let alphaNumeric = service.name;
             contexts += "BoundedContext " + alphaNumeric + "Context implements " + alphaNumeric + "Domain " + " {\n";
+            /*contexts += this.appendAggregates(service)*/
             contexts += "}\n\n";
         }
         fileContent += contexts;
         return fileContent;
+    }
+
+    appendAggregates(service : Service): String {
+        let contexts: string = "";
+        contexts += "\tAggregate {\n";
+        for (let key in service.components.schemas) {
+            let schemaActuel = service.components.schemas[key];
+            
+            contexts += "\t\tEntity " + key + "Entity {\n";
+            if (schemaActuel.properties !== undefined){
+                for (let property in schemaActuel.properties) {
+                    if (schemaActuel.properties[property].type === "array"){
+                        contexts += "\t\t\t" + property + " " + schemaActuel.properties[property].items.type + "[]\n";
+                    } 
+                    else {
+                        contexts += "\t\t\t" + property + " " + schemaActuel.properties[property].type + "\n";
+                    }
+                }
+            }
+            contexts += "\t\t}\n";    
+        }
+        contexts += "\t}\n";
+        return contexts;
     }
 }

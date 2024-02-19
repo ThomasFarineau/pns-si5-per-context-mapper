@@ -6,10 +6,6 @@ ContextMap projectContextMap {
 
 	contains OrdersContext 
 
-	contains OrdersContext 
-
-	contains PartnerReferralsContext 
-
 	contains PartnerReferralsContext 
 
 	contains PaymentExperienceWebProfilesContext 
@@ -39,12 +35,6 @@ Domain projectDomain {
 	}
 
 	SubDomain OrdersDomain {
-	}
-
-	SubDomain OrdersDomain {
-	}
-
-	SubDomain PartnerReferralsDomain {
 	}
 
 	SubDomain PartnerReferralsDomain {
@@ -77,44 +67,4609 @@ Domain projectDomain {
 }
 
 BoundedContext CatalogProductsContext implements CatalogProductsDomain  {
+		Aggregate 400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 401{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 404{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_default{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate product_collection_element{
+			Entity Product ElementEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate product_collection{
+			Entity Product CollectionEntity {
+				undefined array
+				undefined integer
+				undefined integer
+				undefined array
+			}
+		}
+		Aggregate product_category{
+			Entity Product CategoryEntity {
+			}
+		}
+		Aggregate product_request_POST{
+			Entity Create Product RequestEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Product Category string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate product{
+			Entity Product DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Product Category string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate products.create-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate patch{
+			Entity PatchEntity {
+				undefined string
+				undefined string
+				Patch Value undefined
+				undefined string
+			}
+		}
+		Aggregate patch_request{
+			Entity Patch RequestEntity {
+			}
+		}
+		Aggregate products.patch-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate products.patch-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
 }
 
 BoundedContext InvoicesContext implements InvoicesDomain  {
+		Aggregate 400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_default{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate invoice_status{
+			Entity Invoice StatusEntity {
+			}
+		}
+		Aggregate currency_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate file_reference{
+			Entity File ReferenceEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate detail{
+			Entity Invoice_DetailEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate date_no_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate payment_term_type{
+			Entity Payment Term TypeEntity {
+			}
+		}
+		Aggregate payment_term{
+			Entity Payment TermEntity {
+				Payment Term Type string
+			}
+		}
+		Aggregate invoice_payment_term{
+			Entity Invoice Payment TermEntity {
+			}
+		}
+		Aggregate template_metadata{
+			Entity Template MetadataEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate invoice_creation_flow{
+			Entity Invoice Creation FlowEntity {
+			}
+		}
+		Aggregate metadata{
+			Entity MetadataEntity {
+			}
+		}
+		Aggregate invoice_detail{
+			Entity Invoice DetailEntity {
+			}
+		}
+		Aggregate business_name{
+			Entity Business NameEntity {
+				undefined string
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address_portable{
+			Entity Portable Postal Address (Medium-Grained)Entity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Address Details object
+			}
+		}
+		Aggregate contact_name_address{
+			Entity Contact InformationEntity {
+			}
+		}
+		Aggregate email_address{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone_type{
+			Entity Phone TypeEntity {
+			}
+		}
+		Aggregate phone_detail{
+			Entity Phone DetailEntity {
+			}
+		}
+		Aggregate invoicer_info{
+			Entity Invoicer InformationEntity {
+			}
+		}
+		Aggregate language{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate billing_info{
+			Entity Billing InformationEntity {
+			}
+		}
+		Aggregate recipient_info{
+			Entity Recipient InformationEntity {
+				Billing Information object
+				Contact Information object
+			}
+		}
+		Aggregate money{
+			Entity MoneyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate percentage{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate tax{
+			Entity TaxEntity {
+				undefined string
+				undefined string
+				Money object
+			}
+		}
+		Aggregate discount{
+			Entity DiscountEntity {
+				undefined string
+				Money object
+			}
+		}
+		Aggregate unit_of_measure{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate item{
+			Entity Invoice ItemEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Tax object
+				undefined string
+				Discount object
+				undefined string
+			}
+		}
+		Aggregate partial_payment{
+			Entity Partial PaymentEntity {
+				undefined boolean
+				Money object
+			}
+		}
+		Aggregate template_configuration{
+			Entity Template ConfigurationEntity {
+				undefined boolean
+				undefined boolean
+				undefined boolean
+				Partial Payment object
+			}
+		}
+		Aggregate configuration{
+			Entity ConfigurationEntity {
+			}
+		}
+		Aggregate aggregated_discount{
+			Entity Aggregated DiscountEntity {
+				Discount object
+				Money object
+			}
+		}
+		Aggregate shipping_cost{
+			Entity Shipping CostEntity {
+				Money object
+				Tax object
+			}
+		}
+		Aggregate custom_amount{
+			Entity Custom AmountEntity {
+				undefined string
+				Money object
+			}
+		}
+		Aggregate amount_with_breakdown{
+			Entity Amount with BreakdownEntity {
+				Money object
+				Aggregated Discount object
+				Money object
+				Shipping Cost object
+				Custom Amount object
+			}
+		}
+		Aggregate amount_summary_detail{
+			Entity Invoice Amount SummaryEntity {
+				undefined string
+				undefined string
+				Amount with Breakdown object
+			}
+		}
+		Aggregate payment_type{
+			Entity Payment TypeEntity {
+			}
+		}
+		Aggregate payment_method{
+			Entity Payment MethodEntity {
+			}
+		}
+		Aggregate payment_detail{
+			Entity Payment DetailEntity {
+				Payment Type string
+				undefined string
+				undefined string
+				Payment Method string
+				undefined string
+				Money object
+				Contact Information object
+			}
+		}
+		Aggregate payments{
+			Entity PaymentsEntity {
+				Money object
+				undefined array
+			}
+		}
+		Aggregate refund_detail{
+			Entity Refund DetailEntity {
+				Payment Type string
+				undefined string
+				undefined string
+				Money object
+				Payment Method string
+			}
+		}
+		Aggregate refunds{
+			Entity RefundsEntity {
+				Money object
+				undefined array
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate invoice{
+			Entity InvoiceEntity {
+				undefined string
+				undefined string
+				Invoice Status string
+				Invoice Detail object
+				Invoicer Information object
+				undefined array
+				undefined array
+				undefined array
+				Configuration object
+				Invoice Amount Summary object
+				Money object
+				Money object
+				Payments object
+				Refunds object
+				undefined array
+			}
+		}
+		Aggregate invoices{
+			Entity InvoicesEntity {
+				undefined integer
+				undefined integer
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate invoices.create-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate notification{
+			Entity NotificationEntity {
+				undefined string
+				undefined string
+				undefined boolean
+				undefined boolean
+				undefined array
+			}
+		}
+		Aggregate 202-response{
+			Entity Accepted ResponseEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.remind-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.remind-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.cancel-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.cancel-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate payment_reference{
+			Entity Payment ReferenceEntity {
+				undefined string
+			}
+		}
+		Aggregate invoices.payments-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.payments-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.payments-delete-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate refund_reference{
+			Entity Refund Payment ReferenceEntity {
+				undefined string
+			}
+		}
+		Aggregate invoices.refunds-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoices.refunds-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate qr_config{
+			Entity QR ConfigurationEntity {
+				undefined integer
+				undefined integer
+				undefined string
+			}
+		}
+		Aggregate invoices.generate-qr-code-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate invoice_number{
+			Entity Invoice NumberEntity {
+				undefined string
+			}
+		}
+		Aggregate invoices.update-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate amount_range{
+			Entity Amount RangeEntity {
+				Money object
+				Money object
+			}
+		}
+		Aggregate date_range{
+			Entity Date RangeEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate date_time_range{
+			Entity Date and Time RangeEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate search_data{
+			Entity Search DataEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined string
+				undefined string
+				Amount Range object
+				Date Range object
+				Date Range object
+				Date and Time Range object
+				Date and Time Range object
+				undefined boolean
+				undefined array
+			}
+		}
+		Aggregate invoices.search-invoices-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate template_detail{
+			Entity Template DetailEntity {
+			}
+		}
+		Aggregate template_info{
+			Entity Template InformationEntity {
+				Template Detail object
+				Invoicer Information object
+				undefined array
+				undefined array
+				undefined array
+				Template Configuration object
+				Invoice Amount Summary object
+				Money object
+			}
+		}
+		Aggregate template_item_field{
+			Entity Template Item FieldEntity {
+			}
+		}
+		Aggregate template_display_preference{
+			Entity Template Display PreferenceEntity {
+				undefined boolean
+			}
+		}
+		Aggregate template_item_setting{
+			Entity Template Item SettingEntity {
+				Template Item Field string
+				Template Display Preference object
+			}
+		}
+		Aggregate template_subtotal_field{
+			Entity Template Subtotal FieldEntity {
+			}
+		}
+		Aggregate template_subtotal_setting{
+			Entity Template Subtotal SettingEntity {
+				Template Subtotal Field string
+				Template Display Preference object
+			}
+		}
+		Aggregate template_settings{
+			Entity Template SettingsEntity {
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate template{
+			Entity TemplateEntity {
+				undefined string
+				undefined string
+				undefined boolean
+				Template Information object
+				Template Settings object
+				undefined string
+				undefined boolean
+				undefined array
+			}
+		}
+		Aggregate templates{
+			Entity TemplatesEntity {
+				undefined array
+				undefined string
+				undefined array
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate templates.create-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate templates.create-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate templates.get-403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate templates.update-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate templates.update-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate templates.delete-403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
 }
 
 BoundedContext OrdersContext implements OrdersDomain  {
-}
-
-BoundedContext OrdersContext implements OrdersDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate amount{
+			Entity AmountEntity {
+				undefined string
+				undefined string
+				Payment Amount Details object
+			}
+		}
+		Aggregate payee_display_metadata{
+			Entity Payee Display MetadataEntity {
+				undefined string
+				Display Phone object
+				undefined string
+			}
+		}
+		Aggregate payee{
+			Entity PayeeEntity {
+				undefined string
+				undefined string
+				Payee Display Metadata object
+			}
+		}
+		Aggregate item{
+			Entity ItemEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address{
+			Entity AddressEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate shipping_address{
+			Entity Shipping AddressEntity {
+			}
+		}
+		Aggregate currency{
+			Entity CurrencyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate partner_fee_details{
+			Entity Partner Fee DetailsEntity {
+				Payee object
+				Currency object
+			}
+		}
+		Aggregate name_value_pair{
+			Entity Name and Value PairEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate metadata{
+			Entity MetadataEntity {
+				undefined array
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate capture{
+			Entity CaptureEntity {
+				undefined string
+				Amount object
+				undefined string
+				undefined string
+				Currency object
+				undefined array
+			}
+		}
+		Aggregate refund{
+			Entity RefundEntity {
+				undefined string
+				Amount object
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate sale{
+			Entity SaleEntity {
+				undefined string
+				Amount object
+				Currency object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate payment_summary{
+			Entity Payment SummaryEntity {
+				undefined array
+				undefined array
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate purchase_unit{
+			Entity Purchase UnitEntity {
+				undefined string
+				Amount object
+				Payee object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				Shipping Address undefined
+				undefined string
+				Partner Fee Details object
+				undefined integer
+				Metadata object
+				Payment Summary object
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate payment_details{
+			Entity Payment DetailsEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate language{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate application_context{
+			Entity Application ContextEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate order{
+			Entity OrderEntity {
+				undefined string
+				undefined string
+				undefined array
+				Payment Details object
+				Currency object
+				Application Context object
+				Metadata object
+				undefined string
+				Redirect URLs object
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate credit_card{
+			Entity Credit CardEntity {
+				undefined string
+				undefined string
+				undefined integer
+				undefined integer
+				undefined string
+				undefined string
+				undefined string
+				Address object
+				undefined array
+			}
+		}
+		Aggregate credit_card_token{
+			Entity Credit Card TokenEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined integer
+				undefined integer
+			}
+		}
+		Aggregate funding_instrument{
+			Entity Funding InstrumentEntity {
+				Credit Card object
+				Credit Card Token object
+			}
+		}
+		Aggregate payer_info{
+			Entity Payer InformationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Address object
+				Shipping Address undefined
+			}
+		}
+		Aggregate payer{
+			Entity PayerEntity {
+				undefined string
+				undefined string
+				undefined array
+				Payer Information object
+			}
+		}
+		Aggregate pay_order_request{
+			Entity Execute OrderEntity {
+				undefined string
+				Payer object
+			}
+		}
+		Aggregate pay_order_response{
+			Entity Pay Order ResponseEntity {
+				undefined string
+				undefined string
+				undefined string
+				Payer Information object
+				undefined array
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
 }
 
 BoundedContext PartnerReferralsContext implements PartnerReferralsDomain  {
-}
-
-BoundedContext PartnerReferralsContext implements PartnerReferralsDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate email_address{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone_type{
+			Entity Phone TypeEntity {
+			}
+		}
+		Aggregate phone_details{
+			Entity Phone DetailsEntity {
+				Phone object
+				Phone Type string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address{
+			Entity Simple Postal Address (Coarse-Grained)Entity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate identity_document_type{
+			Entity Identity Document TypeEntity {
+			}
+		}
+		Aggregate identity_document{
+			Entity Identity DocumentEntity {
+				Identity Document Type string
+				undefined string
+				undefined boolean
+				undefined string
+			}
+		}
+		Aggregate account_owner_relationship{
+			Entity Seller Account RelationshipEntity {
+				Name object
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate person_details{
+			Entity Person DetailsEntity {
+				undefined string
+				Name object
+				undefined array
+				Simple Postal Address (Coarse-Grained) object
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate business_type_enum{
+			Entity Business TypesEntity {
+			}
+		}
+		Aggregate business_sub_type{
+			Entity Business sub-typeEntity {
+			}
+		}
+		Aggregate purpose_code_enum{
+			Entity Purpose CodeEntity {
+			}
+		}
+		Aggregate business_name{
+			Entity Business NameEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate events_type{
+			Entity Events TypeEntity {
+			}
+		}
+		Aggregate date_of_event{
+			Entity Date of EventEntity {
+				Events Type string
+				undefined string
+			}
+		}
+		Aggregate currency{
+			Entity CurrencyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate currency_range{
+			Entity Currency RangeEntity {
+				Currency object
+				Currency object
+			}
+		}
+		Aggregate email_contact{
+			Entity Email ContactEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate person{
+			Entity PersonEntity {
+				Name object
+				undefined array
+				Simple Postal Address (Coarse-Grained) object
+				undefined string
+			}
+		}
+		Aggregate individual_beneficial_owner{
+			Entity Individual_beneficial_ownerEntity {
+			}
+		}
+		Aggregate business{
+			Entity BusinessEntity {
+				undefined array
+				undefined array
+				Simple Postal Address (Coarse-Grained) object
+				undefined string
+				Business sub-type string
+				undefined string
+				undefined string
+				undefined string
+				undefined undefined
+				undefined array
+				Currency Range object
+				Currency Range object
+			}
+		}
+		Aggregate business_beneficial_owner{
+			Entity Business_beneficial_ownerEntity {
+			}
+		}
+		Aggregate beneficial_owners{
+			Entity Beneficial_ownersEntity {
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate office_bearer_role{
+			Entity Role typeEntity {
+			}
+		}
+		Aggregate office_bearer{
+			Entity Office_bearerEntity {
+			}
+		}
+		Aggregate business_details{
+			Entity Business DetailsEntity {
+				undefined array
+				Simple Postal Address (Coarse-Grained) object
+				undefined string
+				Business sub-type string
+				undefined string
+				undefined string
+				undefined string
+				undefined undefined
+				undefined array
+				undefined string
+				undefined array
+				undefined array
+				Currency Range object
+				Currency Range object
+				undefined array
+				undefined array
+				undefined string
+				Beneficial_owners object
+				undefined array
+			}
+		}
+		Aggregate identifier{
+			Entity IdentifierEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate bank_details{
+			Entity Bank DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				Simple Postal Address (Coarse-Grained) object
+				undefined boolean
+			}
+		}
+		Aggregate account_identifier{
+			Entity Account IdentifierEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate partner_specific_identifiers{
+			Entity Partner IdentifiersEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate user{
+			Entity UserEntity {
+				undefined string
+				Person Details object
+				Business Details object
+				Financial Instrument Data object
+				Preferred Language Code string
+				undefined undefined
+				Account Identifier object
+				undefined array
+			}
+		}
+		Aggregate rest_endpoint_features_enum{
+			Entity REST Endpoint FeaturesEntity {
+			}
+		}
+		Aggregate integration_details{
+			Entity Integration DetailsEntity {
+				undefined string
+				REST API Integration object
+				REST Third-Party Details object
+				REST First-Party Details object
+			}
+		}
+		Aggregate billing_experience_preference{
+			Entity Billing Experience PreferenceEntity {
+				undefined string
+				undefined boolean
+			}
+		}
+		Aggregate billing_agreement{
+			Entity Billing AgreementEntity {
+				undefined string
+				Billing Experience Preference object
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate capabilities{
+			Entity CapabilityEntity {
+				undefined string
+				Integration Details object
+				Billing Agreement object
+			}
+		}
+		Aggregate web_experience_preference{
+			Entity Web Experience PreferenceEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined boolean
+				undefined boolean
+				undefined boolean
+				undefined boolean
+			}
+		}
+		Aggregate legal_consent{
+			Entity Legal ConsentEntity {
+				undefined string
+				undefined boolean
+			}
+		}
+		Aggregate product_name{
+			Entity Product NameEntity {
+			}
+		}
+		Aggregate referral_data{
+			Entity Referral DataEntity {
+				User object
+				undefined array
+				Web Experience Preference object
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate create_referral_data_response{
+			Entity Create Referral Data ResponseEntity {
+				undefined array
+			}
+		}
+		Aggregate referral_data_response{
+			Entity Referral Data ResponseEntity {
+				undefined string
+				undefined string
+				Referral Data object
+				undefined array
+			}
+		}
+		Aggregate account_capability_names{
+			Entity Capability NameEntity {
+			}
+		}
+		Aggregate product{
+			Entity ProductEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate signature{
+			Entity SignatureEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate certificate{
+			Entity CertificateEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate credential{
+			Entity CredentialEntity {
+				Signature object
+				Certificate object
+			}
+		}
+		Aggregate oauth-third-party{
+			Entity OAuth Third PartyEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate oauth-integration{
+			Entity OAuth IntegrationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate limitation{
+			Entity LimitationEntity {
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate account_capability_status{
+			Entity Capability StatusEntity {
+			}
+		}
+		Aggregate capability_limit_types{
+			Entity Limit TypeEntity {
+			}
+		}
+		Aggregate capability_limit{
+			Entity Capability LimitEntity {
+				Limit Type string
+			}
+		}
+		Aggregate account_capability{
+			Entity Account CapabilityEntity {
+				Capability Name string
+				Capability Status string
+				undefined array
+			}
+		}
+		Aggregate merchant-integration{
+			Entity Seller IntegrationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined boolean
+				undefined string
+				undefined boolean
+				undefined string
+				undefined string
+				undefined array
+				Credential object
+				undefined array
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate merchant-integration.credentials{
+			Entity Seller CredentialsEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_details-3{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error-2{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate product-integration{
+			Entity Product IntegrationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate product-preferences{
+			Entity Product PreferencesEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate message{
+			Entity MessageEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate region-preferences{
+			Entity Region PreferencesEntity {
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate partner{
+			Entity PartnerEntity {
+				undefined string
+				undefined string
+				undefined boolean
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+				undefined array
+				undefined string
+			}
+		}
 }
 
 BoundedContext PaymentExperienceWebProfilesContext implements PaymentExperienceWebProfilesDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate web_profile{
+			Entity Web ProfileEntity {
+				undefined string
+				undefined string
+				undefined boolean
+				Flow Configuration object
+				Input Field Customization object
+				Style and Presentation object
+			}
+		}
+		Aggregate web_profile_list{
+			Entity Web Profile ListEntity {
+			}
+		}
+		Aggregate patch{
+			Entity PatchEntity {
+				undefined string
+				undefined string
+				Patch Value undefined
+				undefined string
+			}
+		}
+		Aggregate patch_request{
+			Entity Patch RequestEntity {
+			}
+		}
 }
 
 BoundedContext PaymentMethodTokensContext implements PaymentMethodTokensDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate merchant_partner_customer_id{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate customer{
+			Entity Customer RequestEntity {
+				undefined string
+			}
+		}
+		Aggregate vault_id{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate card_brand{
+			Entity Card BrandEntity {
+			}
+		}
+		Aggregate date_year_month{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address_entity{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate card_verification_status{
+			Entity Card Verification StatusEntity {
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate currency_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate money{
+			Entity MoneyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate processor_response{
+			Entity Processor ResponseEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate 3ds_result{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate card_verification_details{
+			Entity Card Verification DetailsEntity {
+				undefined string
+				undefined string
+				Money object
+				Processor Response object
+				undefined undefined
+			}
+		}
+		Aggregate card_response{
+			Entity Card ResponseEntity {
+				undefined string
+				undefined string
+				Card Brand string
+				undefined string
+				undefined undefined
+				Card Verification Status string
+				Card Verification Details object
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address_portable{
+			Entity Portable Postal Address (Medium-Grained)Entity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Address Details object
+			}
+		}
+		Aggregate shipping_detail{
+			Entity Shipping DetailsEntity {
+				Name object
+				undefined string
+				Portable Postal Address (Medium-Grained) object
+			}
+		}
+		Aggregate wallet_base{
+			Entity Vaulted Digital Wallet Common AttributesEntity {
+				undefined string
+				Shipping Details object
+				undefined boolean
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate email{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate account_id{
+			Entity PayPal Account IdentifierEntity {
+			}
+		}
+		Aggregate payer_base{
+			Entity Payer BaseEntity {
+				undefined string
+				PayPal Account Identifier string
+			}
+		}
+		Aggregate phone_type{
+			Entity Phone TypeEntity {
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone_with_type{
+			Entity Phone With TypeEntity {
+				Phone Type string
+				Phone object
+			}
+		}
+		Aggregate date_no_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate tax_info{
+			Entity Tax InformationEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate payer{
+			Entity CustomerEntity {
+			}
+		}
+		Aggregate paypal_wallet_response{
+			Entity PayPal Wallet ResponseEntity {
+			}
+		}
+		Aggregate venmo_response{
+			Entity Venmo ResponseEntity {
+			}
+		}
+		Aggregate instrument_id{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate card_type{
+			Entity Card TypeEntity {
+			}
+		}
+		Aggregate card{
+			Entity CardEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Card Brand string
+				Card Type string
+				Card Brand string
+				Portable Postal Address (Medium-Grained) object
+			}
+		}
+		Aggregate apple_pay_card{
+			Entity Apple Pay CardEntity {
+			}
+		}
+		Aggregate apple_pay_payment_token_response{
+			Entity Apple Pay ResponseEntity {
+				Apple Pay Card object
+			}
+		}
+		Aggregate ach_debit_response{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate ach_debit_verification_status{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate ach_debit_response-2{
+			Entity ACH Debit ResponseEntity {
+			}
+		}
+		Aggregate bank_response{
+			Entity Bank ResponseEntity {
+				ACH Debit Response undefined
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate payment_token_response{
+			Entity Payment Token ResponseEntity {
+				undefined string
+				Customer Request object
+				undefined object
+				undefined array
+			}
+		}
+		Aggregate customer_vault_payment_tokens_response{
+			Entity Vault of a customerEntity {
+				undefined integer
+				undefined integer
+				Customer Request object
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate card_verification_method{
+			Entity Card Verification MethodEntity {
+			}
+		}
+		Aggregate language{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate vault_instruction{
+			Entity Vault InstructionEntity {
+			}
+		}
+		Aggregate experience_context{
+			Entity Experience ContextEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Vault Instruction string
+			}
+		}
+		Aggregate card_request{
+			Entity Card RequestEntity {
+			}
+		}
+		Aggregate token_attributes{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate token_id_request{
+			Entity Token RequestEntity {
+				undefined string
+				undefined string
+				undefined undefined
+			}
+		}
+		Aggregate metadata{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate payment_token_request{
+			Entity Payment Token RequestEntity {
+				Customer Request object
+				Payment source request object
+				undefined undefined
+			}
+		}
+		Aggregate paypal_wallet_request{
+			Entity PayPal Wallet RequestEntity {
+			}
+		}
+		Aggregate venmo_request{
+			Entity Venmo RequestEntity {
+			}
+		}
+		Aggregate setup_token_request{
+			Entity Setup TokenEntity {
+				Customer Request object
+				undefined undefined
+				undefined undefined
+			}
+		}
+		Aggregate ordinal{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate payment_token_status{
+			Entity Payment Token StatusEntity {
+			}
+		}
+		Aggregate setup_token_response{
+			Entity Minimal Setup TokenEntity {
+				undefined string
+				undefined integer
+				Customer Request object
+				Payment Token Status string
+				undefined undefined
+				undefined array
+			}
+		}
 }
 
 BoundedContext PaymentsContext implements PaymentsDomain  {
+		Aggregate 400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 401{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 404{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 409{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_default{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate authorization_status_details{
+			Entity Auhorization Status DetailsEntity {
+				undefined string
+			}
+		}
+		Aggregate authorization_status{
+			Entity Authorization StatusEntity {
+				undefined string
+				Auhorization Status Details object
+			}
+		}
+		Aggregate currency_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate money{
+			Entity MoneyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate card_brand{
+			Entity Card BrandEntity {
+			}
+		}
+		Aggregate network_transaction_reference{
+			Entity Network Transaction ReferenceEntity {
+				undefined string
+				undefined string
+				Card Brand string
+				undefined string
+			}
+		}
+		Aggregate seller_protection{
+			Entity Seller ProtectionEntity {
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate activity_timestamps{
+			Entity Transaction Date and Time StampsEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate authorization{
+			Entity AuthorizationEntity {
+			}
+		}
+		Aggregate related_ids{
+			Entity Related IdentifiersEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate supplementary_data{
+			Entity Supplementary DataEntity {
+				Related Identifiers object
+			}
+		}
+		Aggregate email{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate account_id{
+			Entity PayPal Account IdentifierEntity {
+			}
+		}
+		Aggregate payee_base{
+			Entity Merchant BaseEntity {
+				undefined string
+				PayPal Account Identifier string
+			}
+		}
+		Aggregate authorization-2{
+			Entity AuthorizationEntity {
+			}
+		}
+		Aggregate supplementary_purchase_data{
+			Entity Capture IdentifierEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate platform_fee{
+			Entity Platform FeeEntity {
+				Money object
+				Merchant Base object
+			}
+		}
+		Aggregate disbursement_mode{
+			Entity Disbursement ModeEntity {
+			}
+		}
+		Aggregate payment_instruction{
+			Entity Payment InstructionEntity {
+				undefined array
+				Disbursement Mode string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate capture_request{
+			Entity Capture RequestEntity {
+			}
+		}
+		Aggregate capture_status_details{
+			Entity Capture Status DetailsEntity {
+				undefined string
+			}
+		}
+		Aggregate capture_status{
+			Entity Capture StatusEntity {
+				undefined string
+				Capture Status Details object
+			}
+		}
+		Aggregate exchange_rate{
+			Entity Exchange RateEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate seller_receivable_breakdown{
+			Entity Seller Receivable BreakdownEntity {
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Exchange Rate object
+				undefined array
+			}
+		}
+		Aggregate processor_response{
+			Entity Processor ResponseEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate capture{
+			Entity CaptureEntity {
+			}
+		}
+		Aggregate capture-2{
+			Entity CaptureEntity {
+			}
+		}
+		Aggregate reauthorize_request{
+			Entity Reauthorize RequestEntity {
+				Money object
+			}
+		}
+		Aggregate authorizations.reauthorize-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate authorizations.reauthorize-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate authorizations.void-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate payment_instruction-2{
+			Entity Payment InstructionEntity {
+				undefined array
+			}
+		}
+		Aggregate refund_request{
+			Entity Refund RequestEntity {
+				Money object
+				undefined string
+				undefined string
+				undefined string
+				Payment Instruction object
+			}
+		}
+		Aggregate refund_status_details{
+			Entity Refund Status DetailsEntity {
+				undefined string
+			}
+		}
+		Aggregate refund_status{
+			Entity Refund StatusEntity {
+				undefined string
+				Refund Status Details object
+			}
+		}
+		Aggregate net_amount_breakdown_item{
+			Entity Net Amount Breakdown ItemEntity {
+				Money object
+				Money object
+				Exchange Rate object
+			}
+		}
+		Aggregate refund{
+			Entity RefundEntity {
+			}
+		}
+		Aggregate captures.refund-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate captures.refund-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
 }
 
 BoundedContext PayoutsContext implements PayoutsDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate sender_batch_header{
+			Entity Sender Batch HeaderEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate currency{
+			Entity CurrencyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate alternate_notification_method{
+			Entity Alternate Notification MethodEntity {
+				Phone object
+			}
+		}
+		Aggregate language{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate application_context{
+			Entity Application ContextEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate purpose_enum{
+			Entity PurposeEntity {
+			}
+		}
+		Aggregate payout_item{
+			Entity Payout ItemEntity {
+				undefined string
+				Currency object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Alternate Notification Method object
+				undefined string
+				Application Context object
+				Purpose string
+			}
+		}
+		Aggregate create_payout_request{
+			Entity Create Payout RequestEntity {
+				Sender Batch Header object
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate batch_enum{
+			Entity Batch statusEntity {
+			}
+		}
+		Aggregate recipient_enum{
+			Entity Recipient typeEntity {
+			}
+		}
+		Aggregate payout_sender_batch_header{
+			Entity Payout Sender Batch HeaderEntity {
+				undefined string
+				Recipient type string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate payout_header{
+			Entity Payout HeaderEntity {
+				undefined string
+				Batch status string
+				undefined string
+				Payout Sender Batch Header object
+			}
+		}
+		Aggregate payout{
+			Entity Create Payout ResponseEntity {
+				Payout Header object
+				undefined array
+			}
+		}
+		Aggregate funding_source{
+			Entity Funding sourceEntity {
+			}
+		}
+		Aggregate payout_batch_header{
+			Entity Payout Batch HeaderEntity {
+				undefined string
+				Batch status string
+				undefined string
+				undefined string
+				undefined string
+				Payout Sender Batch Header object
+				Funding source string
+				Currency object
+				Currency object
+			}
+		}
+		Aggregate transaction_enum{
+			Entity Transaction statusEntity {
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate recipient_wallet_enum{
+			Entity Recipient walletEntity {
+			}
+		}
+		Aggregate payout_item_detail{
+			Entity Payout Item DetailEntity {
+				Recipient type string
+				Currency object
+				undefined string
+				undefined string
+				undefined string
+				Name object
+				Recipient wallet string
+				Purpose string
+			}
+		}
+		Aggregate payout_currency_conversion{
+			Entity Currency conversion resourceEntity {
+				Currency object
+				Currency object
+				undefined string
+			}
+		}
+		Aggregate payout_batch_items{
+			Entity Payout ItemEntity {
+				undefined string
+				undefined string
+				undefined string
+				Transaction status string
+				Currency object
+				undefined string
+				Payout Item Detail object
+				Currency conversion resource object
+				undefined string
+				Error object
+				undefined array
+			}
+		}
+		Aggregate payout_batch{
+			Entity Payout BatchEntity {
+				undefined integer
+				undefined integer
+				Payout Batch Header object
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate payout_item-2{
+			Entity Payout ItemEntity {
+				undefined string
+				undefined string
+				undefined string
+				Transaction status string
+				Currency object
+				undefined string
+				undefined string
+				Payout Item Detail object
+				Currency conversion resource object
+				undefined string
+				Error object
+				undefined array
+			}
+		}
 }
 
 BoundedContext ShipmentTrackingContext implements ShipmentTrackingDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate tracking_number_type{
+			Entity Tracking Number TypeEntity {
+			}
+		}
+		Aggregate tracking_status{
+			Entity Tracking StatusEntity {
+			}
+		}
+		Aggregate date_no_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate carrier{
+			Entity CarrierEntity {
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate tracker{
+			Entity TrackerEntity {
+				undefined string
+				undefined string
+				Tracking Number Type string
+				Tracking Status string
+				undefined string
+				Carrier string
+				undefined string
+				undefined string
+				undefined boolean
+				undefined integer
+				undefined boolean
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate tracker_collection{
+			Entity Tracker CollectionEntity {
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate link_description-2{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate tracker_identifier{
+			Entity Tracking IdentifierEntity {
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate batch_tracker_collection{
+			Entity Batch Tracker CollectionEntity {
+				undefined array
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate tracker_identifier_collection{
+			Entity Tracker Identifier CollectionEntity {
+				undefined array
+				undefined array
+			}
+		}
 }
 
 BoundedContext SubscriptionsContext implements SubscriptionsDomain  {
+		Aggregate 400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 401{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 403{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 404{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate 422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_default{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate currency_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate money{
+			Entity MoneyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate pricing_tier{
+			Entity Pricing TierEntity {
+				undefined string
+				undefined string
+				Money object
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate pricing_scheme{
+			Entity Pricing SchemeEntity {
+				undefined integer
+				Money object
+				undefined string
+				undefined array
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate frequency{
+			Entity Billing Cycle FrequencyEntity {
+				undefined string
+				undefined integer
+			}
+		}
+		Aggregate billing_cycle{
+			Entity Billing CycleEntity {
+				Pricing Scheme object
+				Billing Cycle Frequency object
+				undefined string
+				undefined integer
+				undefined integer
+			}
+		}
+		Aggregate payment_preferences{
+			Entity Payment PreferencesEntity {
+				undefined boolean
+				Money object
+				undefined string
+				undefined integer
+			}
+		}
+		Aggregate percentage{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate taxes{
+			Entity TaxesEntity {
+				undefined string
+				undefined boolean
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate plan{
+			Entity PlanEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				Payment Preferences object
+				Taxes object
+				undefined boolean
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate plan_collection{
+			Entity Plan CollectionEntity {
+				undefined array
+				undefined integer
+				undefined integer
+				undefined array
+			}
+		}
+		Aggregate plan_request_POST{
+			Entity Create Plan RequestEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				Payment Preferences object
+				Taxes object
+				undefined boolean
+			}
+		}
+		Aggregate plans.create-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate patch{
+			Entity PatchEntity {
+				undefined string
+				undefined string
+				Patch Value undefined
+				undefined string
+			}
+		}
+		Aggregate patch_request{
+			Entity Patch RequestEntity {
+			}
+		}
+		Aggregate plans.patch-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate plans.patch-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate plans.activate-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate plans.deactivate-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate update_pricing_scheme_request{
+			Entity Update Pricing SchemeEntity {
+				undefined integer
+				Pricing Scheme object
+			}
+		}
+		Aggregate update_pricing_schemes_list_request{
+			Entity Update Pricing Scheme RequestEntity {
+				undefined array
+			}
+		}
+		Aggregate plans.update-pricing-schemes-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate plans.update-pricing-schemes-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate email{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate account_id{
+			Entity PayPal Account IdentifierEntity {
+			}
+		}
+		Aggregate payer_base{
+			Entity Payer BaseEntity {
+				undefined string
+				PayPal Account Identifier string
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone_type{
+			Entity Phone TypeEntity {
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate phone_with_type{
+			Entity Phone With TypeEntity {
+				Phone Type string
+				Phone object
+			}
+		}
+		Aggregate date_no_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate tax_info{
+			Entity Tax InformationEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address_portable{
+			Entity Portable Postal Address (Medium-Grained)Entity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Address Details object
+			}
+		}
+		Aggregate payer{
+			Entity CustomerEntity {
+			}
+		}
+		Aggregate shipping_detail{
+			Entity Shipping DetailsEntity {
+				Name object
+				undefined string
+				Portable Postal Address (Medium-Grained) object
+			}
+		}
+		Aggregate date_year_month{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate card_brand{
+			Entity Card BrandEntity {
+			}
+		}
+		Aggregate card{
+			Entity CardEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Card Brand string
+				Portable Postal Address (Medium-Grained) object
+			}
+		}
+		Aggregate payment_source{
+			Entity Payment SourceEntity {
+				Card object
+			}
+		}
+		Aggregate subscriber_request{
+			Entity Subscriber Request InformationEntity {
+			}
+		}
+		Aggregate language{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate payee_payment_method_preference{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate payment_method{
+			Entity Payment MethodEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate application_context{
+			Entity Application ContextEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Payment Method object
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate billing_cycle_override{
+			Entity Billing Cycle OverrideEntity {
+				Pricing Scheme object
+				undefined integer
+				undefined integer
+			}
+		}
+		Aggregate payment_preferences_override{
+			Entity Payment Preferences OverrideEntity {
+				undefined boolean
+				Money object
+				undefined string
+				undefined integer
+			}
+		}
+		Aggregate taxes_override{
+			Entity Taxes OverrideEntity {
+				undefined string
+				undefined boolean
+			}
+		}
+		Aggregate plan_override{
+			Entity Plan OverrideEntity {
+				undefined array
+				Payment Preferences Override object
+				Taxes Override object
+			}
+		}
+		Aggregate subscription_request_post{
+			Entity Create Subscription RequestEntity {
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Subscriber Request Information object
+				undefined boolean
+				Application Context object
+				undefined string
+				Plan Override object
+			}
+		}
+		Aggregate subscription_status{
+			Entity Subscription StatusEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate liability_shift{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate pares_status{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate enrolled{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate three_d_secure_authentication_response{
+			Entity The 3D Secure Authentication ResponseEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate authentication_response{
+			Entity Authentication ResponseEntity {
+				undefined string
+				The 3D Secure Authentication Response object
+			}
+		}
+		Aggregate card_response{
+			Entity Card ResponseEntity {
+				undefined string
+				Card Brand string
+				undefined string
+				Authentication Response object
+			}
+		}
+		Aggregate card_response_with_billing_address{
+			Entity Card Response with billing address and nameEntity {
+			}
+		}
+		Aggregate payment_source_response{
+			Entity Payment Source ResponseEntity {
+				Card Response with billing address and name object
+			}
+		}
+		Aggregate subscriber{
+			Entity Subscriber Response InformationEntity {
+			}
+		}
+		Aggregate cycle_execution{
+			Entity Billing Cycle Execution DetailsEntity {
+				undefined string
+				undefined integer
+				undefined integer
+				undefined integer
+				undefined integer
+				undefined integer
+			}
+		}
+		Aggregate last_payment_details{
+			Entity Last Payment DetailsEntity {
+			}
+		}
+		Aggregate failed_payment_details{
+			Entity Failed Payment DetailsEntity {
+				Money object
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate subscription_billing_info{
+			Entity Subscription Billing InformationEntity {
+				Money object
+				undefined array
+				Last Payment Details object
+				undefined string
+				undefined string
+				undefined integer
+				Failed Payment Details object
+			}
+		}
+		Aggregate subscription{
+			Entity SubscriptionEntity {
+			}
+		}
+		Aggregate subscriptions.create-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.create-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.patch-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.patch-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscription_revise_request{
+			Entity Subscription Modify Plan RequestEntity {
+				undefined string
+				undefined string
+				Money object
+				Shipping Details object
+				Application Context object
+				Plan Override object
+			}
+		}
+		Aggregate subscription_revise_response{
+			Entity Update Product Quantity in Subscription ResponseEntity {
+			}
+		}
+		Aggregate subscriptions.revise-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.revise-404{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.revise-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscription_suspend_request{
+			Entity Suspend SubscriptionEntity {
+				undefined string
+			}
+		}
+		Aggregate subscriptions.suspend-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.suspend-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscription_cancel_request{
+			Entity Cancel Subscription RequestEntity {
+				undefined string
+			}
+		}
+		Aggregate subscriptions.cancel-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.cancel-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscription_activate_request{
+			Entity Activate Subscription RequestEntity {
+				undefined string
+			}
+		}
+		Aggregate subscriptions.activate-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.activate-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscription_capture_request{
+			Entity Charge Amount from SubscriberEntity {
+				undefined string
+				undefined string
+				Money object
+			}
+		}
+		Aggregate capture_status_details{
+			Entity Capture Status DetailsEntity {
+				undefined string
+			}
+		}
+		Aggregate capture_status{
+			Entity Capture StatusEntity {
+				undefined string
+				Capture Status Details object
+			}
+		}
+		Aggregate amount_with_breakdown{
+			Entity Amount with BreakdownEntity {
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+			}
+		}
+		Aggregate email_address{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate transaction{
+			Entity Transaction DetailsEntity {
+			}
+		}
+		Aggregate subscriptions.capture-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate subscriptions.capture-422{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
+		Aggregate transactions_list{
+			Entity List TransactionsEntity {
+				undefined array
+				undefined integer
+				undefined integer
+				undefined array
+			}
+		}
+		Aggregate subscriptions.transactions-400{
+			Entity undefinedEntity {
+				undefined array
+			}
+		}
 }
 
 BoundedContext TransactionSearchContext implements TransactionSearchDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_default{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate date_time{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate currency_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate money{
+			Entity MoneyEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate percentage{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate transaction_info{
+			Entity Transaction InformationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Money object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Money object
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate email_address{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate phone{
+			Entity PhoneEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate name{
+			Entity NameEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate country_code{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate address{
+			Entity Simple Postal Address (Coarse-Grained)Entity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate payer_info{
+			Entity Payer InformationEntity {
+				undefined string
+				undefined string
+				Phone object
+				undefined string
+				undefined string
+				Name object
+				undefined string
+				Simple Postal Address (Coarse-Grained) object
+			}
+		}
+		Aggregate shipping_info{
+			Entity Shipping InformationEntity {
+				undefined string
+				undefined string
+				Simple Postal Address (Coarse-Grained) object
+				Simple Postal Address (Coarse-Grained) object
+			}
+		}
+		Aggregate item_detail_tax_amount{
+			Entity Tax AmountEntity {
+				Money object
+			}
+		}
+		Aggregate checkout_option{
+			Entity Checkout OptionEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate item_detail{
+			Entity Item DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				undefined string
+				undefined array
+				Money object
+				Money object
+				Money object
+				Money object
+				Money object
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate cart_info{
+			Entity Cart InformationEntity {
+				undefined array
+				undefined boolean
+				undefined string
+			}
+		}
+		Aggregate store_info{
+			Entity Store InformationEntity {
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate auction_info{
+			Entity Auction InformationEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate incentive_detail{
+			Entity Incentive DetailsEntity {
+				undefined string
+				undefined string
+				Money object
+				undefined string
+			}
+		}
+		Aggregate incentive_info{
+			Entity Incentive InformationEntity {
+				undefined array
+			}
+		}
+		Aggregate transaction_detail{
+			Entity Transaction DetailsEntity {
+				Transaction Information object
+				Payer Information object
+				Shipping Information object
+				Cart Information object
+				Store Information object
+				Auction Information object
+				Incentive Information object
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate search_response{
+			Entity Search ResponseEntity {
+				undefined array
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined integer
+				undefined integer
+				undefined integer
+				undefined array
+			}
+		}
+		Aggregate balance_detail{
+			Entity Balance InformationEntity {
+				undefined string
+				undefined boolean
+				Money object
+				Money object
+				Money object
+			}
+		}
+		Aggregate account_id{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate balances_response{
+			Entity Balances ResponseEntity {
+				undefined array
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
 }
 
 BoundedContext WebhooksManagementContext implements WebhooksManagementDomain  {
+		Aggregate error_details{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_location{
+			Entity undefinedEntity {
+			}
+		}
+		Aggregate error_link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error_400{
+			Entity Bad Request ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_401{
+			Entity Unauthorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_403{
+			Entity Not Authorized ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_404{
+			Entity Not found ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_409{
+			Entity Resource Conflict ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_415{
+			Entity Unsupported Media Type ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_422{
+			Entity Unprocessable Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_500{
+			Entity Internal Server ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate error_503{
+			Entity Service Unavailable ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate EventTypeList{
+			Entity Event Type ListEntity {
+				undefined array
+			}
+		}
+		Aggregate WebhookList{
+			Entity Webhook ListEntity {
+				undefined array
+			}
+		}
+		Aggregate EventList{
+			Entity Event ListEntity {
+				undefined array
+				undefined integer
+				undefined array
+			}
+		}
+		Aggregate WebhookLookupList{
+			Entity Webhook Lookup ListEntity {
+				undefined array
+			}
+		}
+		Aggregate error_details-2{
+			Entity Error DetailsEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate link_description{
+			Entity Link DescriptionEntity {
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
+		Aggregate error{
+			Entity ErrorEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate event_type{
+			Entity Event TypeEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate webhook{
+			Entity WebhookEntity {
+				undefined string
+				undefined string
+				undefined array
+				undefined array
+			}
+		}
+		Aggregate patch{
+			Entity PatchEntity {
+				undefined string
+				undefined string
+				Patch Value undefined
+				undefined string
+			}
+		}
+		Aggregate patch_request{
+			Entity Patch RequestEntity {
+			}
+		}
+		Aggregate webhooks_lookup{
+			Entity Webhook LookupEntity {
+				undefined string
+				undefined string
+				undefined array
+			}
+		}
+		Aggregate event_version{
+			Entity Event VersionEntity {
+			}
+		}
+		Aggregate resource_version{
+			Entity Resource VersionEntity {
+			}
+		}
+		Aggregate event{
+			Entity EventEntity {
+				undefined string
+				undefined string
+				undefined string
+				Event Version string
+				undefined string
+				undefined string
+				Resource Version string
+				Resource object
+				undefined array
+			}
+		}
+		Aggregate verify_webhook_signature{
+			Entity Verify Webhook SignatureEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+				Event object
+			}
+		}
+		Aggregate verify_webhook_signature_response{
+			Entity Verify Webhook Signature ResponseEntity {
+				undefined string
+			}
+		}
+		Aggregate event_resend{
+			Entity Event ResendEntity {
+				undefined array
+			}
+		}
+		Aggregate simulate_event{
+			Entity Simulate EventEntity {
+				undefined string
+				undefined string
+				undefined string
+				undefined string
+			}
+		}
 }
 

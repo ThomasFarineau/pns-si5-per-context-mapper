@@ -7,6 +7,7 @@ import {Service} from "./Service";
 import * as path from "path";
 import {CMLCreator} from "./CMLCreator";
 import * as fs from "fs";
+import { Entity } from './Entities';
 
 dotenv.config();
 
@@ -92,12 +93,39 @@ export class SwaggerParserService {
         let dataModel: DataModel = new DataModel(projectName);
         for (let api of apis) {
             let service = new Service(api.info.title);
+            let components = service.components;
             for (const path in api.paths) {
                 const currentPath = api.paths[path];
                 for (const restMethod in currentPath) {
                     let currentRestMethod = currentPath[restMethod];
                     service.addRestMethod(restMethod, currentRestMethod);
                 }
+            }
+            if (api.components !== undefined) {
+                for (const schema in api.components.schemas) {
+                    const currentSchema = api.components.schemas[schema];
+                    components.addSchemas(schema, currentSchema);
+                    console.log("Schema added: " + schema , currentSchema);
+
+                    if (currentSchema.type === "object") {
+                        let properties = currentSchema.properties;
+                        for (let property in properties) {
+                            let currentProperty = properties[property];
+                            let entity = new Entity(property, service.name, currentProperty);
+                            dataModel.addEntity(entity);
+                        }
+                    }
+                }
+            }
+            /*for (const key in service.restMethods) {
+                for (const value of service.restMethods[key]) {
+                    console.log("VALUE", value.parameters);
+                    if (value.parameters === undefined)
+                        console.log(value)
+                }
+            }*/
+            for (const value of service.restMethods["post"]) {
+                console.log("VALUE", value.parameters);
             }
             dataModel.addService(service);
         }
