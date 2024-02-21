@@ -130,13 +130,15 @@ export class SwaggerParserService {
         dataModel.alphaNumeric();
         dataModel.sortServices();
 
-        for (let service of dataModel.services) {
+        for (let i = 0; i < dataModel.services.length - 1; i++) {
+            const service = dataModel.services[i];
             for (let restMethodsKey in service.restMethods) {
                 for (const restMethod of service.restMethods[restMethodsKey]) {
                     //console.log(JSON.stringify(restMethod, null, 2));
                     if (restMethod.requestBody) {
                         //console.log(restMethod.requestBody.content["application/json"].schema);
-                        for (let service2 of dataModel.services) {
+                        for (let j = i + 1; j < dataModel.services.length; j++) {
+                            const service2 = dataModel.services[j];
                             if (service.name !== service2.name) {
                                 for (let restMethodsKey2 in service2.restMethods) {
                                     for (const restMethod2 of service2.restMethods[restMethodsKey2]) {
