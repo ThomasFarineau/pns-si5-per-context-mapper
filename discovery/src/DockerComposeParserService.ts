@@ -33,12 +33,18 @@ export class DockerComposeParserService {
                         // Créer un tableau de promesses à partir des initialisations de DockerComposeParser pour chaque fichier
                         const initPromises = project.dockerComposeFiles.map(file => new DockerComposeParser(file).init());
 
-                        // Utiliser Promise.all pour attendre que toutes les promesses soient résolues
-                        const servicesArrays = Promise.all(initPromises);
-
                         // À ce stade, toutes les promesses sont résolues, et `servicesArrays` contient les résultats de chaque `init()`
-                        servicesArrays.then(servicesArrays => {
-                            console.log(servicesArrays)
+                        Promise.all(initPromises).then(servicesArrays => {
+                            servicesArrays.forEach(services => services.forEach(service => {
+                                if (service.depends_on !== undefined) {
+                                    service.depends_on.forEach(dep => {
+                                        let serviceDep = services.find(s => s.name === dep);
+                                        if (serviceDep !== undefined && serviceDep.context !== "") {
+                                            project.addLink(project.getByContext(service.context), project.getByContext(serviceDep.context))
+                                        }
+                                    })
+                                }
+                            }))
                             resolve(null);
                         });
                     });
