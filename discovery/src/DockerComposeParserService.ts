@@ -1,6 +1,9 @@
 import {DataModel} from "./DataModel";
 import {Project} from "./Project";
 import {DockerComposeParser} from "./DockerComposeParser";
+import fs from "fs";
+import yaml from "js-yaml";
+import path from "path";
 
 /**
  * Classe de parsing du docker-compose
@@ -20,7 +23,7 @@ export class DockerComposeParserService {
      * @example DockerComposeParserService.init()
      * @returns {Promise<DataModel[]>}
      */
-    async init(projects: Project[]): Promise<DataModel[]> {
+    async init(projects: Project[]): Promise<Project[]> {
         return new Promise((resolve, reject) => {
             // Créer un tableau pour stocker les promesses de parseDockerComposeFiles
             const parsePromises: Promise<any>[] = [];
@@ -45,16 +48,42 @@ export class DockerComposeParserService {
                                     })
                                 }
                             }))
-                            resolve(null);
+                            // -------- YAML --------
+                            let aggregatedArray = {};
+                            if (project.dataModel)
+                                aggregatedArray = this.aggregateArray(project.dataModel.links);
+                            fs.writeFile(path.join(project.context, 'dependencies.yaml'), yaml.dump(aggregatedArray), err => {
+                                if (err) {
+                                    reject(null);
+                                }
+                                else {
+                                    resolve(null);
+                                }
+                            });
                         });
                     });
                     parsePromises.push(parsePromise);
                 }
             });
             Promise.all(parsePromises).then(() => {
-                resolve(projects.map(project => project.dataModel!).filter(dm => dm !== undefined));
+                resolve(projects);
             })
         })
+    }
+
+    aggregateArray(arr: any[]): { [key: string]: string[] } {
+        const aggregated: { [key: string]: string[] } = {};
+
+        arr.forEach(obj => {
+            const { up, down } = obj;
+            if (!aggregated[up]) {
+                aggregated[up] = [down];
+            } else {
+                aggregated[up].push(down);
+            }
+        });
+
+        return aggregated;
     }
 
 }

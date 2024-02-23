@@ -22,14 +22,14 @@ const defaultPath: string = path.resolve(process.env.OUTPUT_FOLDER ? process.env
 export const main = async (url: string = "", skipNaming: boolean = false, outputFolder: string = defaultPath): Promise<void> => new Promise((resolve) => {
     scanner.init(url, skipNaming).then((projects) => {
         swaggerParser.init(projects).then((projects) => {
-            dockerComposeParser.init(projects).then((dataModels) => {
-                cmlCreator.createCMLFile(dataModels, outputFolder).then(() => resolve());
+            dockerComposeParser.init(projects).then((projects) => {
+                cmlCreator.createCMLFile(projects, outputFolder).then(() => resolve());
             });
         })
     })
 });
 
-if (process.env.APP_ENV === 'LOCAL') main().catch(err => {
+/*if (process.env.APP_ENV === 'LOCAL') main().catch(err => {
     console.error("Erreur lors de l'exécution de la fonction main:", err);
     process.exit(1);
-});
+});*/

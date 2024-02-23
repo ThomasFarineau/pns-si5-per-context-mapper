@@ -11,7 +11,7 @@ import {PotentialRelation} from "./PotentialRelation";
  */
 
 type Link = {
-    up: Service; down: Service;
+    up: string; down: string;
 }
 
 type Entity = {
@@ -96,7 +96,7 @@ export class DataModel {
      */
     addLink(up: Service, down: Service): void {
         this.links.push({
-            up: up, down: down
+            up: up.name, down: down.name
         });
     }
 
@@ -107,7 +107,7 @@ export class DataModel {
      */
     removeLink(up: Service, down: Service): void {
         this.links.splice(this.links.indexOf({
-            up: up, down: down
+            up: up.name, down: down.name
         }), 1);
     }
 

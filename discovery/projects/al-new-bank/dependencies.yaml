@@ -1,0 +1,18 @@
+NewBankAPIUserService:
+  - NewBankAPIProxy
+NewBankAPIFriendshipService:
+  - NewBankAPIProxy
+NewBankAPITransactionService:
+  - NewBankAPIProxy
+NewBankAPICardService:
+  - NewBankAPIProxy
+NewBankAPIAccountService:
+  - NewBankAPIProxy
+NewBankAPIFriendTransactionService:
+  - NewBankAPIProxy
+  - NewBankAPIFriendshipService
+  - NewBankAPITransactionService
+NewBankAPINFCTransactionService:
+  - NewBankAPIProxy
+NewBankAPIExternalTransactionService:
+  - NewBankAPIProxy

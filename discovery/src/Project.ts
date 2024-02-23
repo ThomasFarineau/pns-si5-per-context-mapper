@@ -5,6 +5,7 @@
  * @property {string} name - Le nom du projet
  */
 import {DataModel} from "./DataModel";
+import path from "path";
 
 /**
  * Représente un projet
@@ -21,6 +22,7 @@ export class Project {
     dockerComposeFiles: string[] = [];
     contexts: { [key: string]: string } = {};
     dataModel: DataModel | null = null;
+    context: string = "";
 
     constructor(public name: string) {
     }
@@ -124,5 +126,10 @@ export class Project {
         let serviceDep = this.dataModel.getServiceByKey(downKey);
         console.log("Adding link between " + service?.name + " and " + serviceDep?.name)
         this.dataModel.addLink(service!, serviceDep!);
+    }
+
+    setContext(folder: string) {
+        this.context = path.join("projects", folder);
+        console.log(this.context);
     }
 }
