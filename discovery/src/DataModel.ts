@@ -22,6 +22,7 @@ export class DataModel {
     services: Service[] = [];
     entities: Entity = {};
     links: Link[] = [];
+    potentialRelations: PotentialRelation[] = [];
 
     constructor(public name: string) {
     }
@@ -31,7 +32,7 @@ export class DataModel {
      * @param service
      */
     addService(service: Service): void {
-        if (!this.contains(service)) this.services.push(service);
+        if (!this.containsService(service)) this.services.push(service);
     }
 
     /**
