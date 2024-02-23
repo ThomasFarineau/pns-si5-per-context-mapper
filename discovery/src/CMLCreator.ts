@@ -99,14 +99,16 @@ export class CMLCreator {
             contextMap += "\t" + this.contextName(link.up) + " [U]->[D] " + this.contextName(link.down) + "\n";
         })*/
 
-        const dependencies = fs.readFileSync(path.join(dependenciesPath, "dependencies.yaml"), 'utf-8');
+        if (fs.existsSync(path.join(dependenciesPath, "dependencies.yaml"))) {
+            const dependencies = fs.readFileSync(path.join(dependenciesPath, "dependencies.yaml"), 'utf-8');
 
-        const dependYaml: any = yaml.load(dependencies);
+            const dependYaml: any = yaml.load(dependencies);
 
-        for (const key in dependYaml) {
-            for (const value of dependYaml[key]) {
-                //console.log(key, value);
-                contextMap += "\t" + this.contextName(key) + " [U]->[D] " + this.contextName(value) + "\n";
+            for (const key in dependYaml) {
+                for (const value of dependYaml[key]) {
+                    //console.log(key, value);
+                    contextMap += "\t" + this.contextName(key) + " [U]->[D] " + this.contextName(value) + "\n";
+                }
             }
         }
 
