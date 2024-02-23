@@ -1,4 +1,5 @@
 import {Service} from "./Service";
+import {PotentialRelation} from "./PotentialRelation";
 
 /**
  * Représente un modèle de données
@@ -21,6 +22,7 @@ export class DataModel {
     services: Service[] = [];
     entities: Entity = {};
     links: Link[] = [];
+    potentialRelations: PotentialRelation[] = [];
 
     constructor(public name: string) {
     }
@@ -30,7 +32,7 @@ export class DataModel {
      * @param service
      */
     addService(service: Service): void {
-        if (!this.contains(service)) this.services.push(service);
+        if (!this.containsService(service)) this.services.push(service);
     }
 
     /**
@@ -44,6 +46,11 @@ export class DataModel {
         this.entities[entity.service].push(entity);
     }
 
+    addPotentialRelation(relation: PotentialRelation): void {
+        if (!this.containsRelation(relation))
+            this.potentialRelations.push(relation);
+    }
+
     /**
      * Trie les services par ordre alphabétique
      */
@@ -51,12 +58,16 @@ export class DataModel {
         this.services.sort(this.compareServices);
     }
 
-    /**
-     * Vérifie si un service est déjà présent dans le modèle de données
-     * @param service - Le service à vérifier
-     */
-    contains(service: Service): boolean {
+    containsService(service: Service): boolean {
         return this.services.some((element) => element.name === service.name);
+    }
+
+    arraysEquals(a: any[], b: any[]) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    }
+
+    containsRelation(relation: PotentialRelation): boolean {
+        return !!this.potentialRelations.find(e => this.arraysEquals(e.services, relation.services));
     }
 
     /**
