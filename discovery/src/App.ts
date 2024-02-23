@@ -29,7 +29,7 @@ export const main = async (url: string = "", skipNaming: boolean = false, output
     })
 });
 
-/*if (process.env.APP_ENV === 'DEVELOPMENT') main().catch(err => {
+if (process.env.APP_ENV === 'LOCAL') main().catch(err => {
     console.error("Erreur lors de l'exécution de la fonction main:", err);
     process.exit(1);
-});*/
+});

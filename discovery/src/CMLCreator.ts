@@ -60,12 +60,25 @@ export class CMLCreator {
         return fileContent;
     }
 
+    /**
+     * Retourne le nom du contexte
+     * @param name - Le nom du contexte
+     * @private
+     */
+    private contextName(name: string): string {
+        return name + "Context";
+    }
+
     appendContextMap(fileContent: string, dataModel: DataModel): string {
         let contextMap: string = "";
         contextMap += "ContextMap " + dataModel.name + "ContextMap" + " {\n\n";
         for (let service of dataModel.services) {
-            contextMap += "\tcontains " + service.name + "Context" + " \n\n";
+            contextMap += "\tcontains " + this.contextName(service.name) + " \n\n";
         }
+
+        dataModel.links.forEach(link => {
+            contextMap += "\t" + this.contextName(link.up.name) + " [U]->[D] " + this.contextName(link.down.name) + "\n";
+        })
         contextMap += "}\n";
         fileContent += contextMap;
         return fileContent;

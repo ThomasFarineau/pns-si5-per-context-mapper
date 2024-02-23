@@ -7,10 +7,12 @@ import { Component } from "./Component";
  */
 
 export class Service {
+    key: string;
     restMethods: { [key: string]: any[] };
     components: Component;
 
-    constructor(public name: string) {
+    constructor(key: string, public name: string) {
+        this.key = key;
         this.restMethods = {
             "post": [],
             "get": []

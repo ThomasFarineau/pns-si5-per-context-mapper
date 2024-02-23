@@ -627,5 +627,10 @@
         }
       }
     }
+  },
+  "info": {
+    "description": "bff",
+    "title": "bff",
+    "version": "1.0.0"
   }
 }
