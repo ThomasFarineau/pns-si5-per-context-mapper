@@ -87,6 +87,7 @@ export class SwaggerParserService {
     }
 
     searchPotentialRelationsDiff(dataModel: DataModel) {
+        const threshold = process.env.DIFF_THRESHOLD ? parseFloat(process.env.DIFF_THRESHOLD) : 0.8;
         for (let i = 0; i < dataModel.services.length - 1; i++) {
             const service = dataModel.services[i];
             for (let restMethodsKey in service.restMethods) {
@@ -112,7 +113,7 @@ export class SwaggerParserService {
                                                         equalCount += part.count;
                                                     }
                                                 })
-                                                if (equalCount / totalCount >= 0.8) {
+                                                if (equalCount / totalCount >= threshold) {
                                                     console.log("Found potential relation for services " + service.name + " and " + service2.name, equalCount, totalCount);
                                                     dataModel.addPotentialRelation(new PotentialRelation([service.name, service2.name]));
                                                 }

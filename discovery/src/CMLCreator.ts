@@ -23,13 +23,21 @@ export class CMLCreator {
         return new Promise((resolve, reject) => {
             let promises = dataModels.map((dataModel) => {
                 return new Promise<void>((resolveFile, rejectFile) => {
-                    fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), this.getCMLFileContent(dataModel), err => {
+                    fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), this.getCMLFileContent(dataModel, false), err => {
                         if (err) {
                             console.error(err);
                             rejectFile();
                         } else {
-                            console.log("File written successfully");
-                            resolveFile();
+                            console.log("CML file written successfully");
+                            fs.writeFile(path.join(outputFolder, dataModel.name + "-potential.cml"), this.getCMLFileContent(dataModel, true), err => {
+                                if (err) {
+                                    console.error(err);
+                                    rejectFile();
+                                } else {
+                                    console.log("CML file with potential relations written successfully");
+                                    resolveFile();
+                                }
+                            });
                         }
                     });
                 })
@@ -48,10 +56,10 @@ export class CMLCreator {
      *
      * @returns {string}
      */
-    getCMLFileContent(dataModel: DataModel): string {
+    getCMLFileContent(dataModel: DataModel, addPotentialRelations: boolean): string {
         let fileContent = "";
 
-        fileContent = this.appendContextMap(fileContent, dataModel);
+        fileContent = this.appendContextMap(fileContent, dataModel, addPotentialRelations);
 
         fileContent = this.appendDomains(fileContent, dataModel);
 
@@ -69,7 +77,7 @@ export class CMLCreator {
         return name + "Context";
     }
 
-    appendContextMap(fileContent: string, dataModel: DataModel): string {
+    appendContextMap(fileContent: string, dataModel: DataModel, addPotentialRelations: boolean): string {
         let contextMap: string = "";
         contextMap += "ContextMap " + dataModel.name + "ContextMap" + " {\n\n";
         for (let service of dataModel.services) {
@@ -79,6 +87,11 @@ export class CMLCreator {
         dataModel.links.forEach(link => {
             contextMap += "\t" + this.contextName(link.up.name) + " [U]->[D] " + this.contextName(link.down.name) + "\n";
         })
+        if (addPotentialRelations) {
+            dataModel.potentialRelations.forEach(relation => {
+                contextMap += "\t" + this.contextName(relation.services[0]) + " <-> " + this.contextName(relation.services[1]) + "\n";
+            })
+        }
         contextMap += "}\n";
         fileContent += contextMap;
         return fileContent;
