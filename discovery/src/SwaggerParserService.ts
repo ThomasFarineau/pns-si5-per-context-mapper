@@ -5,6 +5,7 @@ import {Project} from "./Project";
 import {DataModel} from "./DataModel";
 import {Service} from "./Service";
 import { Entity } from './Entities';
+import {PotentialRelation} from "./PotentialRelation";
 const Diff = require('diff');
 
 dotenv.config();
@@ -80,6 +81,49 @@ export class SwaggerParserService {
         })
     }
 
+    searchPotentialRelationsDiff(dataModel: DataModel) {
+        for (let i = 0; i < dataModel.services.length - 1; i++) {
+            const service = dataModel.services[i];
+            for (let restMethodsKey in service.restMethods) {
+                for (const restMethod of service.restMethods[restMethodsKey]) {
+                    //console.log(JSON.stringify(restMethod, null, 2));
+                    if (restMethod.requestBody) {
+                        //console.log(restMethod.requestBody.content["application/json"].schema);
+                        for (let j = i + 1; j < dataModel.services.length; j++) {
+                            const service2 = dataModel.services[j];
+                            if (service.name !== service2.name) {
+                                for (let restMethodsKey2 in service2.restMethods) {
+                                    for (const restMethod2 of service2.restMethods[restMethodsKey2]) {
+                                        if (restMethod2.requestBody) {
+                                            //console.log(restMethod2.requestBody, restMethod.requestBody, "\n");
+                                            if (restMethod.requestBody.content["application/json"] && restMethod2.requestBody.content["application/json"]) {
+                                                const diff = Diff.diffJson(restMethod.requestBody.content["application/json"].schema, restMethod2.requestBody.content["application/json"].schema, {});
+                                                let totalCount = 0;
+                                                let equalCount = 0;
+                                                diff.forEach((part: any) => {
+                                                    //console.log(part, "\n");
+                                                    totalCount += part.count;
+                                                    if (!part.added && !part.removed) {
+                                                        equalCount += part.count;
+                                                    }
+                                                })
+                                                if (equalCount / totalCount >= 0.8) {
+                                                    console.log("Found potential relation for services " + service.name + " and " + service2.name, equalCount, totalCount);
+                                                    dataModel.addPotentialRelation(new PotentialRelation([service.name, service2.name]));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            console.log("End of diff for " + service.name);
+        }
+    }
+
     /**
      * Fonction construisant notre modèle de données à partir de l'objet parsable issu du fichier OpenAPI
      *
@@ -130,45 +174,9 @@ export class SwaggerParserService {
         dataModel.alphaNumeric();
         dataModel.sortServices();
 
-        for (let i = 0; i < dataModel.services.length - 1; i++) {
-            const service = dataModel.services[i];
-            for (let restMethodsKey in service.restMethods) {
-                for (const restMethod of service.restMethods[restMethodsKey]) {
-                    //console.log(JSON.stringify(restMethod, null, 2));
-                    if (restMethod.requestBody) {
-                        //console.log(restMethod.requestBody.content["application/json"].schema);
-                        for (let j = i + 1; j < dataModel.services.length; j++) {
-                            const service2 = dataModel.services[j];
-                            if (service.name !== service2.name) {
-                                for (let restMethodsKey2 in service2.restMethods) {
-                                    for (const restMethod2 of service2.restMethods[restMethodsKey2]) {
-                                        if (restMethod2.requestBody) {
-                                            //console.log(restMethod2.requestBody, restMethod.requestBody, "\n");
-                                            if (restMethod.requestBody.content["application/json"] && restMethod2.requestBody.content["application/json"]) {
-                                                const diff = Diff.diffJson(restMethod.requestBody.content["application/json"].schema, restMethod2.requestBody.content["application/json"].schema, {});
-                                                console.log("diff terminée :)");
-                                                let totalCount = 0;
-                                                let equalCount = 0;
-                                                diff.forEach((part: any) => {
-                                                    //console.log(part, "\n");
-                                                    totalCount += part.count;
-                                                    if (!part.added && !part.removed) {
-                                                        equalCount += part.count;
-                                                    }
-                                                })
-                                                if (equalCount / totalCount >= 0.8) {
-                                                    console.log("Service " + service.name + " to service " + service2.name, equalCount, totalCount);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        this.searchPotentialRelationsDiff(dataModel);
+
+        console.log(dataModel.potentialRelations);
 
         return dataModel;
     }
