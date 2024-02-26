@@ -105,9 +105,11 @@ export class CMLCreator {
             const dependYaml: any = yaml.load(dependencies);
 
             for (const key in dependYaml) {
-                for (const value of dependYaml[key]) {
-                    //console.log(key, value);
-                    contextMap += "\t" + this.contextName(key) + " [U]->[D] " + this.contextName(value) + "\n";
+                if (this.isIterable(dependYaml[key])) {
+                    for (const value of dependYaml[key]) {
+                        //console.log(key, value);
+                        contextMap += "\t" + this.contextName(key) + " [U]->[D] " + this.contextName(value) + "\n";
+                    }
                 }
             }
         }
@@ -120,6 +122,14 @@ export class CMLCreator {
         contextMap += "}\n";
         fileContent += contextMap;
         return fileContent;
+    }
+
+    isIterable(input: any) {
+        if (input === null || input === undefined) {
+            return false
+        }
+
+        return typeof input[Symbol.iterator] === 'function'
     }
 
     appendDomains(fileContent: string, dataModel: DataModel): string {

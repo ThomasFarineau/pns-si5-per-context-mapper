@@ -47,12 +47,12 @@ export class ScannerService {
         let excludesArray = excludes.split(',');
         let extensionsArray = extensions.split(',');
 
+        if (excludesArray.includes('')) excludesArray = [];
+        if (excludesArray.some(ignore => file.includes(ignore))) return false;
+
         if (this.skipNaming) {
             return extensionsArray.some(extension => file.endsWith(extension));
         }
-
-        if (excludesArray.includes('')) excludesArray = [];
-        if (excludesArray.some(ignore => file.includes(ignore))) return false;
 
         return includesArray.some(include => file.includes(include) && extensionsArray.some(extension => file.endsWith(extension)));
     }

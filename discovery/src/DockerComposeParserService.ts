@@ -52,6 +52,7 @@ export class DockerComposeParserService {
                             let aggregatedArray = {};
                             if (project.dataModel)
                                 aggregatedArray = this.aggregateArray(project.dataModel.links);
+                            console.log("Writing dependencies file for " + project.name);
                             fs.writeFile(path.join(project.context, 'dependencies.yaml'), yaml.dump(aggregatedArray), err => {
                                 if (err) {
                                     reject(null);

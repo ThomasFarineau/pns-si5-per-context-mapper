@@ -1,0 +1,11 @@
+AccountandTransactionAPISpecification:
+ConfirmationofFundsAPISpecification:
+  - AccountandTransactionAPISpecification
+EventNotificationAPISpecificationTPPEndpoints:
+  - EventsAPISpecificationASPSPEndpoints
+EventsAPISpecificationASPSPEndpoints:
+  - EventNotificationAPISpecificationTPPEndpoints
+OBIEVRPProfile:
+  - AccountandTransactionAPISpecification
+PaymentInitiationAPI:
+  - AccountandTransactionAPISpecification
