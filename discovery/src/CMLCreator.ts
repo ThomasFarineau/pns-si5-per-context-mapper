@@ -2,6 +2,8 @@ import {DataModel} from "./DataModel";
 import fs from "fs";
 import path from "path";
 import { Service } from "./Service";
+import yaml from 'js-yaml';
+import {Project} from "./Project";
 
 /**
  * Classe de création du fichier CML
@@ -19,19 +21,33 @@ export class CMLCreator {
      * @property {DataModel} dataModel - Le modèle de données à transformer en fichier CML
      * @returns {void}
      */
-    async createCMLFile(dataModels: DataModel[], outputFolder: string): Promise<void> {
+    async createCMLFile(projects: Project[], outputFolder: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            let promises = dataModels.map((dataModel) => {
+            let promises = projects.map((project) => {
                 return new Promise<void>((resolveFile, rejectFile) => {
-                    fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), this.getCMLFileContent(dataModel), err => {
-                        if (err) {
-                            console.error(err);
-                            rejectFile();
-                        } else {
-                            console.log("File written successfully");
-                            resolveFile();
-                        }
-                    });
+                    let dataModel = project.dataModel;
+                    if (dataModel) {
+                        fs.writeFile(path.join(outputFolder, dataModel.name + ".cml"), this.getCMLFileContent(project, false), err => {
+                            if (err) {
+                                console.error(err);
+                                rejectFile();
+                            } else {
+                                console.log("CML file written successfully");
+                                if (dataModel) {
+                                    fs.writeFile(path.join(outputFolder, dataModel.name + "-potential.cml"), this.getCMLFileContent(project, true), err => {
+                                        if (err) {
+                                            console.error(err);
+                                            rejectFile();
+                                        } else {
+                                            console.log("CML file with potential relations written successfully");
+                                            resolveFile();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else rejectFile();
                 })
             });
             Promise.all(promises).then(() => {
@@ -48,27 +64,72 @@ export class CMLCreator {
      *
      * @returns {string}
      */
-    getCMLFileContent(dataModel: DataModel): string {
+    getCMLFileContent(project: Project, addPotentialRelations: boolean): string {
+        const dataModel = project.dataModel;
         let fileContent = "";
 
-        fileContent = this.appendContextMap(fileContent, dataModel);
+        if (dataModel) {
+            fileContent = this.appendContextMap(fileContent, dataModel, addPotentialRelations, project.context);
 
-        fileContent = this.appendDomains(fileContent, dataModel);
+            fileContent = this.appendDomains(fileContent, dataModel);
 
-        fileContent = this.appendContexts(fileContent, dataModel);
+            fileContent = this.appendContexts(fileContent, dataModel);
+        }
 
         return fileContent;
     }
 
-    appendContextMap(fileContent: string, dataModel: DataModel): string {
+    /**
+     * Retourne le nom du contexte
+     * @param name - Le nom du contexte
+     * @private
+     */
+    private contextName(name: string): string {
+        return name + "Context";
+    }
+
+    appendContextMap(fileContent: string, dataModel: DataModel, addPotentialRelations: boolean, dependenciesPath: string): string {
         let contextMap: string = "";
         contextMap += "ContextMap " + dataModel.name + "ContextMap" + " {\n\n";
         for (let service of dataModel.services) {
-            contextMap += "\tcontains " + service.name + "Context" + " \n\n";
+            contextMap += "\tcontains " + this.contextName(service.name) + " \n\n";
+        }
+
+        /*dataModel.links.forEach(link => {
+            contextMap += "\t" + this.contextName(link.up) + " [U]->[D] " + this.contextName(link.down) + "\n";
+        })*/
+
+        if (fs.existsSync(path.join(dependenciesPath, "dependencies.yaml"))) {
+            const dependencies = fs.readFileSync(path.join(dependenciesPath, "dependencies.yaml"), 'utf-8');
+
+            const dependYaml: any = yaml.load(dependencies);
+
+            for (const key in dependYaml) {
+                if (this.isIterable(dependYaml[key])) {
+                    for (const value of dependYaml[key]) {
+                        //console.log(key, value);
+                        contextMap += "\t" + this.contextName(key) + " [U]->[D] " + this.contextName(value) + "\n";
+                    }
+                }
+            }
+        }
+
+        if (addPotentialRelations) {
+            dataModel.potentialRelations.forEach(relation => {
+                contextMap += "\t" + this.contextName(relation.services[0]) + " <-> " + this.contextName(relation.services[1]) + "\n";
+            })
         }
         contextMap += "}\n";
         fileContent += contextMap;
         return fileContent;
+    }
+
+    isIterable(input: any) {
+        if (input === null || input === undefined) {
+            return false
+        }
+
+        return typeof input[Symbol.iterator] === 'function'
     }
 
     appendDomains(fileContent: string, dataModel: DataModel): string {
@@ -100,19 +161,19 @@ export class CMLCreator {
         contexts += "\tAggregate {\n";
         for (let key in service.components.schemas) {
             let schemaActuel = service.components.schemas[key];
-            
+
             contexts += "\t\tEntity " + key + "Entity {\n";
             if (schemaActuel.properties !== undefined){
                 for (let property in schemaActuel.properties) {
                     if (schemaActuel.properties[property].type === "array"){
                         contexts += "\t\t\t" + property + " " + schemaActuel.properties[property].items.type + "[]\n";
-                    } 
+                    }
                     else {
                         contexts += "\t\t\t" + property + " " + schemaActuel.properties[property].type + "\n";
                     }
                 }
             }
-            contexts += "\t\t}\n";    
+            contexts += "\t\t}\n";
         }
         contexts += "\t}\n";
         return contexts;

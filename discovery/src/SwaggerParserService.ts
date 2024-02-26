@@ -4,12 +4,16 @@ import SwaggerParser from "@apidevtools/swagger-parser";
 import {Project} from "./Project";
 import {DataModel} from "./DataModel";
 import {Service} from "./Service";
-import * as path from "path";
-import {CMLCreator} from "./CMLCreator";
-import * as fs from "fs";
-import { Entity } from './Entities';
+import {Entity} from './Entities';
+import {PotentialRelation} from "./PotentialRelation";
+const Diff = require('diff');
 
 dotenv.config();
+
+type KeyedApi = {
+    key: string;
+    api: any;
+}
 
 /**
  * Classe de parsing des swaggers
@@ -46,7 +50,6 @@ export class SwaggerParserService {
         });
     }
 
-
     /**
      * Fonction transformant les fichiers OpenAPI en objets
      *
@@ -56,25 +59,26 @@ export class SwaggerParserService {
     async parseSwaggerFiles(project: Project): Promise<DataModel> {
         return new Promise((resolve, reject) => {
             let swaggerFiles = project.swaggerFiles;
-            let apis: any[] = [];
+            let apis: KeyedApi[] = [];
             let promises = swaggerFiles.map(async swaggerFile => {
                 try {
                     //console.log("Parsing " + swaggerFile + "...");
                     const api = await SwaggerParser.validate(swaggerFile);
                     if (project.dockerComposeFiles.includes(swaggerFile)) {
-                        project.dockerComposeFiles.splice(project.dockerComposeFiles.indexOf(swaggerFile), 1);
+                        project.removeDockerComposeFile(swaggerFile);
                     }
-                    apis.push(api);
+                    apis.push({
+                        key: swaggerFile,
+                        api: api
+                    });
                 } catch (err: any) {
                     console.error(swaggerFile, err.message);
-                    project.swaggerFiles.splice(project.swaggerFiles.indexOf(swaggerFile), 1);
+                    project.removeSwaggerFile(swaggerFile);
                 }
             });
             Promise.all(promises).then(() => {
-                console.log("Building model...");
-                let dataModel = this.buildDataModel(apis, project.name);
-                resolve(dataModel);
-                //this.createCMLFile(dataModel, outputFolder).then(() => resolve()).catch(() => reject());
+                console.log("Building model for " + project.name + "...");
+                resolve(this.buildDataModel(apis, project.name));
             }).catch(err => {
                 console.error(err);
                 reject(err);
@@ -82,28 +86,72 @@ export class SwaggerParserService {
         })
     }
 
+    searchPotentialRelationsDiff(dataModel: DataModel) {
+        const threshold = process.env.DIFF_THRESHOLD ? parseFloat(process.env.DIFF_THRESHOLD) : 0.8;
+        for (let i = 0; i < dataModel.services.length - 1; i++) {
+            const service = dataModel.services[i];
+            for (let restMethodsKey in service.restMethods) {
+                for (const restMethod of service.restMethods[restMethodsKey]) {
+                    //console.log(JSON.stringify(restMethod, null, 2));
+                    if (restMethod.requestBody) {
+                        //console.log(restMethod.requestBody.content["application/json"].schema);
+                        for (let j = i + 1; j < dataModel.services.length; j++) {
+                            const service2 = dataModel.services[j];
+                            if (service.name !== service2.name) {
+                                for (let restMethodsKey2 in service2.restMethods) {
+                                    for (const restMethod2 of service2.restMethods[restMethodsKey2]) {
+                                        if (restMethod2.requestBody) {
+                                            //console.log(restMethod2.requestBody, restMethod.requestBody, "\n");
+                                            if (restMethod.requestBody.content["application/json"] && restMethod2.requestBody.content["application/json"]) {
+                                                const diff = Diff.diffJson(restMethod.requestBody.content["application/json"].schema, restMethod2.requestBody.content["application/json"].schema, {});
+                                                let totalCount = 0;
+                                                let equalCount = 0;
+                                                diff.forEach((part: any) => {
+                                                    //console.log(part, "\n");
+                                                    totalCount += part.count;
+                                                    if (!part.added && !part.removed) {
+                                                        equalCount += part.count;
+                                                    }
+                                                })
+                                                if (equalCount / totalCount >= threshold) {
+                                                    console.log("Found potential relation for services " + service.name + " and " + service2.name, equalCount, totalCount);
+                                                    dataModel.addPotentialRelation(new PotentialRelation([service.name, service2.name]));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            console.log("End of diff for " + service.name);
+        }
+    }
+
     /**
      * Fonction construisant notre modèle de données à partir de l'objet parsable issu du fichier OpenAPI
      *
      * @property {string} projectName - Le nom du projet
-     * @property {any[]} apis - Les objets d'api parsables
+     * @property {KeyedApi[]} keyedApis - Les objets d'api parsables
      * @returns {DataModel}
      */
-    buildDataModel(apis: any[], projectName: string): DataModel {
+    buildDataModel(keyedApis: KeyedApi[], projectName: string): DataModel {
         let dataModel: DataModel = new DataModel(projectName);
-        for (let api of apis) {
-            let service = new Service(api.info.title);
+        for (let keyedApi of keyedApis) {
+            let service = new Service(keyedApi.key, keyedApi.api.info.title);
             let components = service.components;
-            for (const path in api.paths) {
-                const currentPath = api.paths[path];
+            for (const path in keyedApi.api.paths) {
+                const currentPath = keyedApi.api.paths[path];
                 for (const restMethod in currentPath) {
                     let currentRestMethod = currentPath[restMethod];
                     service.addRestMethod(restMethod, currentRestMethod);
                 }
             }
-            if (api.components !== undefined) {
-                for (const schema in api.components.schemas) {
-                    const currentSchema = api.components.schemas[schema];
+            if (keyedApi.api.components !== undefined) {
+                for (const schema in keyedApi.api.components.schemas) {
+                    const currentSchema = keyedApi.api.components.schemas[schema];
                     components.addSchemas(schema, currentSchema);
                     //console.log("Schema added: " + schema , currentSchema);
 
@@ -131,6 +179,11 @@ export class SwaggerParserService {
         }
         dataModel.alphaNumeric();
         dataModel.sortServices();
+
+        this.searchPotentialRelationsDiff(dataModel);
+
+        console.log(dataModel.potentialRelations);
+
         return dataModel;
     }
 }

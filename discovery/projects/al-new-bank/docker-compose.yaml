@@ -113,6 +113,8 @@ services:
     depends_on:
       - proxy
       - app-database
+      - friendship-service
+      - transaction-service
     networks:
       - app
 

@@ -47,12 +47,12 @@ export class ScannerService {
         let excludesArray = excludes.split(',');
         let extensionsArray = extensions.split(',');
 
+        if (excludesArray.includes('')) excludesArray = [];
+        if (excludesArray.some(ignore => file.includes(ignore))) return false;
+
         if (this.skipNaming) {
             return extensionsArray.some(extension => file.endsWith(extension));
         }
-
-        if (excludesArray.includes('')) excludesArray = [];
-        if (excludesArray.some(ignore => file.includes(ignore))) return false;
 
         return includesArray.some(include => file.includes(include) && extensionsArray.some(extension => file.endsWith(extension)));
     }
@@ -75,19 +75,20 @@ export class ScannerService {
      * @param path {string} - Le chemin du dossier à parcourir
      * @param project {Project} - Le projet auquel ajouter les fichiers swagger
      *
+     * @param context {string} - Le contexte du projet (optionnel, utilisé si le projet utilise un docker-compose)
      * @returns {Promise<void>}
      */
-    private async fileScanner(path: string, project: Project): Promise<void> {
+    private async fileScanner(path: string, project: Project, context: string = ""): Promise<void> {
         const entries = await readdir(path);
         for (const entry of entries) {
             if (this.shouldIgnoreFile(entry)) continue;
             const fullPath = path + Path.sep + entry;
             const entryStats = fs.statSync(fullPath);
             if (entryStats.isDirectory()) {
-                await this.fileScanner(fullPath, project);
+                await this.fileScanner(fullPath, project, entry);
             }
             if (this.isSwaggerFile(entry)) {
-                project.addSwaggerFile(fullPath);
+                project.addSwaggerFile(fullPath, context);
             }
             if (this.isDockerComposeFile(entry)) {
                 project.addDockerComposeFile(fullPath);
@@ -103,7 +104,7 @@ export class ScannerService {
      * @returns {Promise<Project[]>} - Les projets initialisés (un tableau pour LOCAL, un seul objet pour DISTANT)
      */
     private initProjects(mode: 'LOCAL' | 'DISTANT', url: string = ""): Promise<Project[]> {
-        let scanDir = mode === 'LOCAL' ? './projects' : '..';
+        let scanDir = mode === 'LOCAL' ? '.' + Path.sep + 'projects' : '..';
         if (mode === 'DISTANT' && url !== "") {
             scanDir = url;
         }
@@ -114,8 +115,9 @@ export class ScannerService {
                     try {
                         await readdir(scanDir + Path.sep + directory);
                         let project = new Project(mode === 'LOCAL' ? directory : 'project');
+                        project.setContext(directory);
                         project.alphaNumericName();
-                        await this.fileScanner(scanDir + Path.sep + directory, project);
+                        await this.fileScanner(scanDir + Path.sep + directory, project, mode === 'LOCAL' ? directory : '');
                         if (mode === 'DISTANT') {
                             return resolve([project]);
                         } else {
